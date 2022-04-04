@@ -341,3 +341,31 @@ TEST(VectorAlgebra3D, CrossProduct) {
     EXPECT_EQ(math::normalized(math::cross(math::vector3d(0.0, 0.0, 1.0), math::vector3d(0.5, 0.0, 10.0))), math::vector3d::Y);
     EXPECT_EQ(math::normalized(math::cross(math::vector3d(0.5, 0.0, 10.0), math::vector3d(0.0, 0.0, 1.0))), -math::vector3d::Y);
 }
+
+TEST(VectorAlgebra3D, Parts)
+{
+    EXPECT_EQ(math::vector3f(math::vector2f(1.f, 2.f), 3.f), math::vector3f(1.f, math::vector2f(2.f, 3.f)));
+    EXPECT_EQ(math::vector3f(math::vector2f(1.f, 2.f), 3.f).xy(), math::vector2f(1.f, 2.f));
+    EXPECT_EQ(math::vector3f(math::vector2f(1.f, 2.f), 3.f).rg(), math::vector2f(1.f, 2.f));
+
+    EXPECT_EQ(math::vector3f(1.f, 2.f, 3.f).rg(), math::vector3f(1.f, 2.f, 3.f).xy());
+    EXPECT_EQ(math::vector3f(1.f, 2.f, 3.f).gb(), math::vector3f(1.f, 2.f, 3.f).yz());
+
+    EXPECT_EQ(math::vector3f().xy(math::vector2f(1.f, 2.f)), math::vector3f(1.f, 2.f, 0.f));
+    EXPECT_EQ(math::vector3f().xy(math::vector2f(1.f, 2.f)), math::vector3f().rg(math::vector2f(1.f, 2.f)));
+    EXPECT_EQ(math::vector3f().yz(math::vector2f(1.f, 2.f)), math::vector3f(0.f, 1.f, 2.f));
+    EXPECT_EQ(math::vector3f().yz(math::vector2f(1.f, 2.f)), math::vector3f().gb(math::vector2f(1.f, 2.f)));
+
+
+    EXPECT_EQ(math::vector3d(math::vector2d(1.0, 2.0), 3.0), math::vector3d(1.0, math::vector2d(2.0, 3.0)));
+    EXPECT_EQ(math::vector3d(math::vector2d(1.0, 2.0), 3.0).xy(), math::vector2d(1.0, 2.0));
+    EXPECT_EQ(math::vector3d(math::vector2d(1.0, 2.0), 3.0).rg(), math::vector2d(1.0, 2.0));
+
+    EXPECT_EQ(math::vector3d(1.0, 2.0, 3.0).rg(), math::vector3d(1.0, 2.0, 3.0).xy());
+    EXPECT_EQ(math::vector3d(1.0, 2.0, 3.0).gb(), math::vector3d(1.0, 2.0, 3.0).yz());
+
+    EXPECT_EQ(math::vector3d().xy(math::vector2d(1.0, 2.0)), math::vector3d(1.0, 2.0, 0.0));
+    EXPECT_EQ(math::vector3d().xy(math::vector2d(1.0, 2.0)), math::vector3d().rg(math::vector2d(1.0, 2.0)));
+    EXPECT_EQ(math::vector3d().yz(math::vector2d(1.0, 2.0)), math::vector3d(0.0, 1.0, 2.0));
+    EXPECT_EQ(math::vector3d().yz(math::vector2d(1.0, 2.0)), math::vector3d().gb(math::vector2d(1.0, 2.0)));
+}

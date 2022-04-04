@@ -68,6 +68,7 @@
     </ClCompile>
     <ClCompile Include="VectorAlgebra2D.cpp" />
     <ClCompile Include="VectorAlgebra3D.cpp" />
+    <ClCompile Include="VectorAlgebra4D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

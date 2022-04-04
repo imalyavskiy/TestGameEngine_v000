@@ -12,36 +12,40 @@ namespace math
         vector3()
             : Super()
             , _2()
-        {
-
-        }
+        { }
 
         vector3(_base_t v)
             : Super(v)
             , _2(v)
-        {
-
-        }
+        { }
 
         vector3(_base_t v0, _base_t v1, _base_t v2)
             : Super(v0, v1)
             , _2(v2)
-        {
-
-        }
+        { }
 
         vector3(const vector3& other)
             : Super(other)
             , _2(other._2)
-        {
-
-        }
+        { }
 
         _base_t z() const { return _2; }
         void z(_base_t z) { _2 = z; }
 
         _base_t b() const { return _2; }
         void b(_base_t b) { _2 = b; }
+
+        vector2<_base_t> xy() const { return { Super::_0, Super::_1 }; }
+        const vector3<_base_t>& xy(const vector2<_base_t>& xy) { Super::_0 = xy.x(); Super::_1 = xy.y(); return (*this); }
+
+        vector2<_base_t> rg() const { return { Super::_0, Super::_1 }; }
+        const vector3<_base_t>& rg(const vector2<_base_t>& rg) { Super::_0 = rg.r(); Super::_1 = rg.g(); return (*this); }
+
+        vector2<_base_t> yz() const { return { Super::_1, _2 }; }
+        const vector3<_base_t>& yz(const vector2<_base_t>& yz) { Super::_1 = yz.x(); _2 = yz.y();  return (*this); }
+
+        vector2<_base_t> gb() const { return { Super::_1, _2 }; }
+        const vector3<_base_t>& gb(const vector2<_base_t>& gb) { Super::_1 = gb.r(); _2 = gb.g();  return (*this); }
 
         bool operator==(const vector3& other) const {
             return _2 == other._2 && Super::operator==(other);
@@ -151,9 +155,13 @@ namespace math
         }
     };
 
+    float length(const vector3f& v);
+
     float dot(const vector3f& left, const vector3f& right);
 
     vector3f cross(const vector3f& _l, const vector3f& _r);
+
+    bool isUnit(const vector3f& v);
 
     class vector3d
         : public vector3<double>
@@ -205,7 +213,7 @@ namespace math
 
         bool isUnit() const {
             const auto len = length();
-            return 0.99999999f <= len && len <= 1.00000001;
+            return 0.99999999 <= len && len <= 1.00000001;
         }
 
         vector3d cross(const vector3d& _r) const {
@@ -220,8 +228,12 @@ namespace math
         }
     };
 
+    double length(const vector3d& v);
+
     double dot(const vector3d& left, const vector3d& right);
 
     vector3d cross(const vector3d& _l, const vector3d& _r);
+
+    bool isUnit(const vector3d& v);
 }
 #endif // __VECTOR3_H_B208B79E_B311_11EC_B909_0242AC120002__

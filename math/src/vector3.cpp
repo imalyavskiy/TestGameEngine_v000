@@ -13,6 +13,10 @@ namespace math
     const vector3d vector3d::Y = vector3d(0.0, 1.0, 0.0);
     const vector3d vector3d::Z = vector3d(0.0, 0.0, 1.0);
 
+    float length(const vector3f& v) {
+        return v.length();
+    }
+
     float dot(const vector3f& left, const vector3f& right) {
         return left.dot(right);
     }
@@ -21,11 +25,23 @@ namespace math
         return _l.cross(_r);
     }
 
+    bool isUnit(const vector3f& v) {
+        return v.isUnit();
+    }
+
+    double length(const vector3d& v) {
+        return v.length();
+    }
+
     double dot(const vector3d& left, const vector3d& right) {
         return left.dot(right);
     }
 
     vector3d cross(const vector3d& _l, const vector3d& _r) {
         return _l.cross(_r);
+    }
+
+    bool isUnit(const vector3d& v) {
+        return v.isUnit();
     }
 }

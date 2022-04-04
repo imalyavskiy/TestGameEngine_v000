@@ -122,7 +122,11 @@ namespace math
         }
     };
 
+    float length(const vector2f& v);
+
     float dot(const vector2f& left, const vector2f& right);
+
+    bool isUnit(const vector2f& v);
 
     class vector2d
         : public vector2<double>
@@ -163,6 +167,11 @@ namespace math
         }
     };
 
+    double length(const vector2d& v);
+
     double dot(const vector2d& left, const vector2d& right);
+
+    bool isUnit(const vector2d& v);
+
 }
 #endif // __VECTOR2_H_93FC91F8_B311_11EC_B909_0242AC120002__
