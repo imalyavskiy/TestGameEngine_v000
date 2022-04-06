@@ -71,7 +71,7 @@ namespace math
         { }
 
         // construct by rows
-        matrix2impl(const vector2f & row0, const vector2f & row1)
+        matrix2impl(const vector2<_item_t>& row0, const vector2<_item_t>& row1)
             : data_(std::make_unique<data_t>(row0.x(), row0.y(), row1.x(), row1.y()))
         { }
 
@@ -253,19 +253,6 @@ namespace math
             return matrix2impl((item_t)0, (item_t)0, (item_t)0, (item_t)0);
         }
     };
-
-
-    template<typename container_t>
-    container_t transposed(const container_t& m)
-    {
-        return container_t(m).transpose();
-    }
-
-    template<typename container_t>
-    container_t inverted(const container_t& m)
-    {
-        return container_t(m).invert();
-    }
 
     using matrix2f = matrix2impl<float>;
     using matrix2d = matrix2impl<double>;

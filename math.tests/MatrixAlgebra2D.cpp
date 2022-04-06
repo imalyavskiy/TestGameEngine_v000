@@ -18,6 +18,8 @@ TEST(MatrixAlgebra2D, DefaultConstruction)
 
         EXPECT_EQ(math::matrix2f::identity(), math::matrix2f(1.f, 0.f, 0.f, 1.f));
         EXPECT_EQ(math::matrix2f::zero(), math::matrix2f(0.f, 0.f, 0.f, 0.f));
+
+        EXPECT_EQ(math::matrix2f(5.f), math::matrix2f(5.f, 5.f, 5.f, 5.f));
     }
     {
         const math::matrix2d matrix;
@@ -32,6 +34,8 @@ TEST(MatrixAlgebra2D, DefaultConstruction)
 
         EXPECT_EQ(math::matrix2d::identity(), math::matrix2d(1.0, 0.0, 0.0, 1.0));
         EXPECT_EQ(math::matrix2d::zero(), math::matrix2d(0.0, 0.0, 0.0, 0.0));
+
+        EXPECT_EQ(math::matrix2d(5.0), math::matrix2d(5.0, 5.0, 5.0, 5.0));
     }
 }
 
@@ -190,25 +194,29 @@ TEST(MatrixAlgebra2D, Multiplication)
     }
 }
 
-TEST(MatrixAlgebra2D, Inversion)
+TEST(MatrixAlgebra2D, Determinant)
 {
     {
         const math::matrix2f matrix1(2.f, 1.f, 4.f, 3.f);
-        math::matrix2f matrix2(matrix1);
-        matrix2.invert();
-        EXPECT_EQ(matrix2, math::inverted(matrix1));
-        EXPECT_EQ(matrix2 * matrix1, math::matrix2f::identity());
-        EXPECT_EQ(matrix1 * matrix2, math::matrix2f::identity());
-        EXPECT_EQ(math::inverted(matrix2), matrix1);
+
+        EXPECT_EQ(matrix1.det(), math::det(matrix1));
+        EXPECT_EQ(math::det(math::matrix2f::identity()), 1.f);
+        EXPECT_EQ(math::matrix2f::identity().det(), 1.f);
+        EXPECT_EQ(math::det(math::matrix2f::zero()), 0.f);
+        EXPECT_EQ(math::matrix2f::zero().det(), 0.f);
+        EXPECT_EQ(math::det(-matrix1), std::pow(-1.f, 2.f) * math::det(matrix1));
+        EXPECT_EQ(math::det(3.f * matrix1), std::pow(3.f, 2.f) * math::det(matrix1));
     }
     {
         const math::matrix2d matrix1(2.0, 1.0, 4.0, 3.0);
-        math::matrix2d matrix2(matrix1);
-        matrix2.invert();
-        EXPECT_EQ(matrix2, math::inverted(matrix1));
-        EXPECT_EQ(matrix2 * matrix1, math::matrix2d::identity());
-        EXPECT_EQ(matrix1 * matrix2, math::matrix2d::identity());
-        EXPECT_EQ(math::inverted(matrix2), matrix1);
+
+        EXPECT_EQ(matrix1.det(), math::det(matrix1));
+        EXPECT_EQ(math::det(math::matrix2d::identity()), 1.0);
+        EXPECT_EQ(math::matrix2d::identity().det(), 1.0);
+        EXPECT_EQ(math::det(math::matrix2d::zero()), 0.0);
+        EXPECT_EQ(math::matrix2d::zero().det(), 0.0);
+        EXPECT_EQ(math::det(-matrix1), std::pow(-1.0, 2.0) * math::det(matrix1));
+        EXPECT_EQ(math::det(3.0 * matrix1), std::pow(3.0, 2.0) * math::det(matrix1));
     }
 }
 
@@ -254,29 +262,28 @@ TEST(MatrixAlgebra2D, Transposition)
     }
 }
 
-TEST(MatrixAlgebra2D, Determinant)
+TEST(MatrixAlgebra2D, Inversion)
 {
     {
         const math::matrix2f matrix1(2.f, 1.f, 4.f, 3.f);
+        EXPECT_NE(matrix1.det(), 0.f);
 
-        EXPECT_EQ(matrix1.det(), math::det(matrix1));
-        EXPECT_EQ(math::det(math::matrix2f::identity()), 1.f);
-        EXPECT_EQ(math::matrix2f::identity().det(), 1.f);
-        EXPECT_EQ(math::det(math::matrix2f::zero()), 0.f);
-        EXPECT_EQ(math::matrix2f::zero().det(), 0.f);
-        EXPECT_EQ(math::det(-matrix1), std::pow(-1.f, 2.f) * math::det(matrix1));
-        EXPECT_EQ(math::det(3.f * matrix1), std::pow(3.f, 2.f) * math::det(matrix1));
+        math::matrix2f matrix2(matrix1);
+        matrix2.invert();
+        EXPECT_EQ(matrix2, math::inverted(matrix1));
+        EXPECT_EQ(matrix2 * matrix1, math::matrix2f::identity());
+        EXPECT_EQ(matrix1 * matrix2, math::matrix2f::identity());
+        EXPECT_EQ(math::inverted(matrix2), matrix1);
     }
     {
         const math::matrix2d matrix1(2.0, 1.0, 4.0, 3.0);
+        EXPECT_NE(matrix1.det(), 0.0);
 
-        EXPECT_EQ(matrix1.det(), math::det(matrix1));
-        EXPECT_EQ(math::det(math::matrix2d::identity()), 1.0);
-        EXPECT_EQ(math::matrix2d::identity().det(), 1.0);
-        EXPECT_EQ(math::det(math::matrix2d::zero()), 0.0);
-        EXPECT_EQ(math::matrix2d::zero().det(), 0.0);
-        EXPECT_EQ(math::det(-matrix1), std::pow(-1.0, 2.0) * math::det(matrix1));
-        EXPECT_EQ(math::det(3.0 * matrix1), std::pow(3.0, 2.0) * math::det(matrix1));
+        math::matrix2d matrix2(matrix1);
+        matrix2.invert();
+        EXPECT_EQ(matrix2, math::inverted(matrix1));
+        EXPECT_EQ(matrix2 * matrix1, math::matrix2d::identity());
+        EXPECT_EQ(matrix1 * matrix2, math::matrix2d::identity());
+        EXPECT_EQ(math::inverted(matrix2), matrix1);
     }
 }
-
