@@ -2,6 +2,7 @@
 #define __MATRIX2_H_30433216_B311_11EC_B909_0242AC120002__
 
 #include <memory>
+#include "utils.h"
 #include "vector2.h"
 
 namespace math
@@ -47,61 +48,63 @@ namespace math
     {
         using item_t = _item_t;
         using data_t = matrix2<_item_t>;
-        std::unique_ptr<data_t> data_;
+        std::unique_ptr<data_t> d_;
     public:
 
         matrix2impl()
-            : data_(std::make_unique<data_t>((item_t)1, (item_t)0, (item_t)0, (item_t)1))
+            : d_(std::make_unique<data_t>((item_t)1, (item_t)0, (item_t)0, (item_t)1))
         { }
 
         matrix2impl(const matrix2impl& other)
-            : data_(std::make_unique<data_t>(*other.data_))
+            : d_(std::make_unique<data_t>(*other.d_))
         { }
 
-        matrix2impl(matrix2impl&& other)
-            : data_(std::move(other.data_))
+        matrix2impl(matrix2impl&& other) noexcept
+            : d_(std::move(other.d_))
         { }
 
         matrix2impl(_item_t v)
-            : data_(std::make_unique<data_t>(v, v, v, v))
+            : d_(std::make_unique<data_t>(v, v, v, v))
         { }
 
         matrix2impl(_item_t i00, _item_t i01, _item_t i10, _item_t i11)
-            : data_(std::make_unique<data_t>(i00, i01, i10, i11))
+            : d_(std::make_unique<data_t>(i00, i01, i10, i11))
         { }
 
         // construct by rows
         matrix2impl(const vector2<_item_t>& row0, const vector2<_item_t>& row1)
-            : data_(std::make_unique<data_t>(row0.x(), row0.y(), row1.x(), row1.y()))
+            : d_(std::make_unique<data_t>(row0.x(), row0.y(), row1.x(), row1.y()))
         { }
 
         matrix2impl& operator=(const matrix2impl& other)
         {
-            data_ = std::make_unique<data_t>(*other.data_);
+            d_ = std::make_unique<data_t>(*other.d_);
             return (*this);
         }
 
         matrix2impl& operator=(matrix2impl&& other) noexcept
         {
-            data_ = std::move(other.data_);
+            d_ = std::move(other.d_);
             return (*this);
         }
 
         matrix2impl operator*(const matrix2impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            return { data_l._00 * data_r._00 + data_l._01 * data_r._10
-                     , data_l._00 * data_r._01 + data_l._01 * data_r._11
-                     , data_l._10 * data_r._00 + data_l._11 * data_r._10
-                     , data_l._10 * data_r._01 + data_l._11 * data_r._11 };
+            return {
+                l._00 * r._00 + l._01 * r._10,
+                l._00 * r._01 + l._01 * r._11,
+                l._10 * r._00 + l._11 * r._10,
+                l._10 * r._01 + l._11 * r._11,
+            };
         }
 
         matrix2impl& operator*=(const matrix2impl& m)
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& data_l = *d_;
+            const data_t& data_r = *m.d_;
 
             auto data_new = std::make_unique<data_t>
                 ( data_l._00 * data_r._00 + data_l._01 * data_r._10
@@ -109,92 +112,95 @@ namespace math
                 , data_l._10 * data_r._00 + data_l._11 * data_r._10
                 , data_l._10 * data_r._01 + data_l._11 * data_r._11 );
 
-            data_ = std::move(data_new);
+            d_ = std::move(data_new);
 
             return (*this);
         }
 
         matrix2impl operator+(const matrix2impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            return { data_l._00 + data_r._00
-                     , data_l._01 + data_r._01
-                     , data_l._10 + data_r._10
-                     , data_l._11 + data_r._11 };
+            return {
+                l._00 + r._00, l._01 + r._01,
+                l._10 + r._10, l._11 + r._11
+            };
         }
 
         matrix2impl& operator+=(const matrix2impl& m)
         {
-            data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            data_l._00 += data_r._00;
-            data_l._01 += data_r._01;
-            data_l._10 += data_r._10;
-            data_l._11 += data_r._11;
+            l._00 += r._00; l._01 += r._01;
+            l._10 += r._10; l._11 += r._11;
 
             return (*this);
         }
 
         matrix2impl operator-(const matrix2impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            return { data_l._00 - data_r._00
-                   , data_l._01 - data_r._01
-                   , data_l._10 - data_r._10
-                   , data_l._11 - data_r._11 };
+            return {
+                l._00 - r._00, l._01 - r._01,
+                l._10 - r._10, l._11 - r._11,
+            };
         }
 
         matrix2impl& operator-=(const matrix2impl& m)
         {
-            data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            data_l._00 -= data_r._00;
-            data_l._01 -= data_r._01;
-            data_l._10 -= data_r._10;
-            data_l._11 -= data_r._11;
+            l._00 -= r._00; l._01 -= r._01;
+            l._10 -= r._10; l._11 -= r._11;
 
             return (*this);
         }
 
-        matrix2impl operator*(item_t val) const
+        matrix2impl operator*(item_t v) const
         {
-            const data_t& data_l = *data_;
-            return { val * data_l._00, val * data_l._01, val * data_l._10, val * data_l._11 };
+            const data_t& d = *d_;
+            return {
+                v * d._00, v * d._01,
+                v * d._10, v * d._11,
+            };
         }
 
-        matrix2impl operator/(item_t val) const
+        matrix2impl operator/(item_t v) const
         {
-            const data_t& data_l = *data_;
-            return { data_l._00 / val, data_l._01 / val, data_l._10 / val, data_l._11 / val };
+            const data_t& d = *d_;
+            return {
+                d._00 / v, d._01 / v,
+                d._10 / v, d._11 / v,
+            };
         }
 
-        matrix2impl& operator*=(item_t val)
+        matrix2impl& operator*=(item_t v)
         {
-            data_t& data_l = *data_;
+            data_t& d = *d_;
 
-            data_l._00 *= val;
-            data_l._01 *= val;
-            data_l._10 *= val;
-            data_l._11 *= val;
+            d._00 *= v; d._01 *= v;
+            d._10 *= v; d._11 *= v;
 
             return (*this);
         }
 
         matrix2impl operator-() const
         {
-            const data_t& data_l = *data_;
-            return { -data_l._00, -data_l._01, -data_l._10, -data_l._11 };
+            const data_t& d = *d_;
+            return {
+                -d._00, -d._01,
+                -d._10, -d._11
+            };
         }
 
         bool operator==(const matrix2impl& other) const
         {
-            return *data_ == *other.data_;
+            return *d_ == *other.d_;
         }
 
         bool operator!=(const matrix2impl& other) const
@@ -204,53 +210,61 @@ namespace math
 
         [[nodiscard]]
         item_t det() const {
-            const data_t& data_l = *data_;
-            return data_l._00 * data_l._11 - data_l._01 * data_l._10;
+            const data_t& d = *d_;
+            return det2x2(d._00, d._01, d._10, d._11);
         }
 
         [[nodiscard]]
         matrix2impl alg_complement_matrix() const
         {
-            const data_t& data_l = *data_;
-            return { data_l._11, -data_l._10, -data_l._01, data_l._00 };
+            const data_t& d = *d_;
+            return { d._11, -d._10, -d._01, d._00 };
         }
 
         matrix2impl& invert()
         {
-            data_ = std::move((alg_complement_matrix().transpose() * ((item_t)1 / det())).data_);
+            d_ = std::move((alg_complement_matrix().transpose() / det()).d_);
             return (*this);
         }
 
         matrix2impl& transpose()
         {
-            data_t& data_l = *data_;
-            const auto t = data_l._10;
-            data_l._10 = data_l._01;
-            data_l._01 = t;
-
+            data_t& d = *d_;
+            const auto tmp = d._10; d._10 = d._01; d._01 = tmp;
             return (*this);
         }
 
+        [[nodiscard]]
         std::tuple<vector2<item_t>, vector2<item_t>> rows() const
         {
-            const data_t& data_l = *data_;
-            return { {data_l._00, data_l._01}, {data_l._10, data_l._11} };
+            const data_t& d = *d_;
+            return { {d._00, d._01}, {d._10, d._11} };
         }
 
+        [[nodiscard]]
         std::tuple<vector2<item_t>, vector2<item_t>> columns() const
         {
-            const data_t& data_l = *data_;
-            return { {data_l._00, data_l._10}, {data_l._01, data_l._11} };
+            const data_t& d = *d_;
+            return { {d._00, d._10}, {d._01, d._11} };
         }
 
         static matrix2impl identity()
         {
-            return matrix2impl((item_t)1, (item_t)0, (item_t)0, (item_t)1);
+            const item_t zero = 0;
+            const item_t unit = 1;
+            return {
+                unit, zero,
+                zero, unit
+            };
         }
 
         static matrix2impl zero()
         {
-            return matrix2impl((item_t)0, (item_t)0, (item_t)0, (item_t)0);
+            const item_t zero = 0;
+            return {
+                zero, zero,
+                zero, zero
+            };
         }
     };
 

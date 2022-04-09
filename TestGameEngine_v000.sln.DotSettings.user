@@ -2,5 +2,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=10c37515_002Ddf78_002D46ef_002D8408_002D844434d99c85/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CopyConstruction" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra2D.CopyConstruction&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra3D.DeterminantFloat&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra3D.DeterminantDouble&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra3D.InversionFloat&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra3D.InversionDouble&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::61553B1A-8B61-40B0-91AD-181E4A523251::.NETFramework,Version=v4.0::MatrixAlgebra4D.DeterminantFloat&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

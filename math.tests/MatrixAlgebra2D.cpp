@@ -267,6 +267,7 @@ TEST(MatrixAlgebra2D, Inversion)
     {
         const math::matrix2f matrix1(2.f, 1.f, 4.f, 3.f);
         EXPECT_NE(matrix1.det(), 0.f);
+        EXPECT_EQ(math::inverted(math::matrix2f::identity()), math::matrix2f::identity());
 
         math::matrix2f matrix2(matrix1);
         matrix2.invert();
@@ -278,6 +279,7 @@ TEST(MatrixAlgebra2D, Inversion)
     {
         const math::matrix2d matrix1(2.0, 1.0, 4.0, 3.0);
         EXPECT_NE(matrix1.det(), 0.0);
+        EXPECT_EQ(math::inverted(math::matrix2d::identity()), math::matrix2d::identity());
 
         math::matrix2d matrix2(matrix1);
         matrix2.invert();

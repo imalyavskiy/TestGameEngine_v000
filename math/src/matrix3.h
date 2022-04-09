@@ -1,6 +1,7 @@
 #ifndef __MATRIX3_H_5230485A_B311_11EC_B909_0242AC120002__
 #define __MATRIX3_H_5230485A_B311_11EC_B909_0242AC120002__
 #include <memory>
+#include "utils.h"
 #include "vector3.h"
 
 namespace math
@@ -65,185 +66,185 @@ namespace math
     {
         using item_t = _item_t;
         using data_t = matrix3<_item_t>;
-        std::unique_ptr<data_t> data_;
+        std::unique_ptr<data_t> d_;
     public:
 
         matrix3impl()
-            : data_(std::make_unique<data_t>((item_t)1, (item_t)0, (item_t)0, (item_t)0, (item_t)1, (item_t)0, (item_t)0, (item_t)0, (item_t)1))
+            : d_(std::make_unique<data_t>((item_t)1, (item_t)0, (item_t)0, (item_t)0, (item_t)1, (item_t)0, (item_t)0, (item_t)0, (item_t)1))
         { }
 
         matrix3impl(const matrix3impl& other)
-            : data_(std::make_unique<data_t>(*other.data_))
+            : d_(std::make_unique<data_t>(*other.d_))
         { }
 
         matrix3impl(matrix3impl&& other)
-            : data_(std::move(other.data_))
+            : d_(std::move(other.d_))
         { }
 
         matrix3impl(_item_t v)
-            : data_(std::make_unique<data_t>(v, v, v, v, v, v, v, v, v))
+            : d_(std::make_unique<data_t>(v, v, v, v, v, v, v, v, v))
         { }
 
         matrix3impl(_item_t i00, _item_t i01, _item_t i02, _item_t i10, _item_t i11, _item_t i12, _item_t i20, _item_t i21, _item_t i22)
-            : data_(std::make_unique<data_t>(i00, i01, i02, i10, i11, i12, i20, i21, i22))
+            : d_(std::make_unique<data_t>(i00, i01, i02, i10, i11, i12, i20, i21, i22))
         { }
 
         // construct by rows
         matrix3impl(const vector3<_item_t>& row0, const vector3<_item_t>& row1, const vector3<_item_t>& row2)
-            : data_(std::make_unique<data_t>(row0.x(), row0.y(), row0.z(), row1.x(), row1.y(), row1.z(), row2.x(), row2.y(), row2.z()))
+            : d_(std::make_unique<data_t>(row0.x(), row0.y(), row0.z(), row1.x(), row1.y(), row1.z(), row2.x(), row2.y(), row2.z()))
         { }
 
         matrix3impl& operator=(const matrix3impl& other)
         {
-            data_ = std::make_unique<data_t>(*other.data_);
+            d_ = std::make_unique<data_t>(*other.d_);
             return (*this);
         }
 
         matrix3impl& operator=(matrix3impl&& other) noexcept
         {
-            data_ = std::move(other.data_);
+            d_ = std::move(other.d_);
             return (*this);
         }
 
         matrix3impl operator*(const matrix3impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
                     // 00 01 02     00 01 02     00*00 + 01*10 + 02*20  00*01 + 01*11 + 02*21  00*02 + 01*12 + 02*22
                     // 10 11 12  *  10 11 12  =  10*00 + 11*10 + 12*20  10*01 + 11*11 + 12*21  10*02 + 11*12 + 12*22
                     // 20 21 22     20 21 22     20*00 + 21*10 + 22*20  20*01 + 21*11 + 22*21  20*02 + 21*12 + 22*22
 
-            return { data_l._00 * data_r._00 + data_l._01 * data_r._10 + data_l._02 * data_r._20,
-                     data_l._00 * data_r._01 + data_l._01 * data_r._11 + data_l._02 * data_r._21,
-                     data_l._00 * data_r._02 + data_l._01 * data_r._12 + data_l._02 * data_r._22,
+            return { l._00 * r._00 + l._01 * r._10 + l._02 * r._20,
+                     l._00 * r._01 + l._01 * r._11 + l._02 * r._21,
+                     l._00 * r._02 + l._01 * r._12 + l._02 * r._22,
 
-                     data_l._10 * data_r._00 + data_l._11 * data_r._10 + data_l._12 * data_r._20,
-                     data_l._10 * data_r._01 + data_l._11 * data_r._11 + data_l._12 * data_r._21,
-                     data_l._10 * data_r._02 + data_l._11 * data_r._12 + data_l._12 * data_r._22,
+                     l._10 * r._00 + l._11 * r._10 + l._12 * r._20,
+                     l._10 * r._01 + l._11 * r._11 + l._12 * r._21,
+                     l._10 * r._02 + l._11 * r._12 + l._12 * r._22,
 
-                     data_l._20 * data_r._00 + data_l._21 * data_r._10 + data_l._22 * data_r._20,
-                     data_l._20 * data_r._01 + data_l._21 * data_r._11 + data_l._22 * data_r._21,
-                     data_l._20 * data_r._02 + data_l._21 * data_r._12 + data_l._22 * data_r._22 };
+                     l._20 * r._00 + l._21 * r._10 + l._22 * r._20,
+                     l._20 * r._01 + l._21 * r._11 + l._22 * r._21,
+                     l._20 * r._02 + l._21 * r._12 + l._22 * r._22 };
         }
 
         matrix3impl& operator*=(const matrix3impl& m)
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
             auto data_new = std::make_unique<data_t>(
-                    data_l._00 * data_r._00 + data_l._01 * data_r._10 + data_l._02 * data_r._20,
-                    data_l._00 * data_r._01 + data_l._01 * data_r._11 + data_l._02 * data_r._21,
-                    data_l._00 * data_r._02 + data_l._01 * data_r._12 + data_l._02 * data_r._22,
+                    l._00 * r._00 + l._01 * r._10 + l._02 * r._20,
+                    l._00 * r._01 + l._01 * r._11 + l._02 * r._21,
+                    l._00 * r._02 + l._01 * r._12 + l._02 * r._22,
                     
-                    data_l._10 * data_r._00 + data_l._11 * data_r._10 + data_l._12 * data_r._20,
-                    data_l._10 * data_r._01 + data_l._11 * data_r._11 + data_l._12 * data_r._21,
-                    data_l._10 * data_r._02 + data_l._11 * data_r._12 + data_l._12 * data_r._22,
+                    l._10 * r._00 + l._11 * r._10 + l._12 * r._20,
+                    l._10 * r._01 + l._11 * r._11 + l._12 * r._21,
+                    l._10 * r._02 + l._11 * r._12 + l._12 * r._22,
                     
-                    data_l._20 * data_r._00 + data_l._21 * data_r._10 + data_l._22 * data_r._20,
-                    data_l._20 * data_r._01 + data_l._21 * data_r._11 + data_l._22 * data_r._21,
-                    data_l._20 * data_r._02 + data_l._21 * data_r._12 + data_l._22 * data_r._22 );
+                    l._20 * r._00 + l._21 * r._10 + l._22 * r._20,
+                    l._20 * r._01 + l._21 * r._11 + l._22 * r._21,
+                    l._20 * r._02 + l._21 * r._12 + l._22 * r._22 );
 
-            data_ = std::move(data_new);
+            d_ = std::move(data_new);
 
             return (*this);
         }
 
         matrix3impl operator+(const matrix3impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            return { data_l._00 + data_r._00, data_l._01 + data_r._01, data_l._02 + data_r._02,
-                     data_l._10 + data_r._10, data_l._11 + data_r._11, data_l._12 + data_r._12,
-                     data_l._20 + data_r._20, data_l._21 + data_r._21, data_l._22 + data_r._22 };
+            return { l._00 + r._00, l._01 + r._01, l._02 + r._02,
+                     l._10 + r._10, l._11 + r._11, l._12 + r._12,
+                     l._20 + r._20, l._21 + r._21, l._22 + r._22 };
         }
 
         matrix3impl& operator+=(const matrix3impl& m)
         {
-            data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            data_l._00 += data_r._00;
-            data_l._01 += data_r._01;
-            data_l._02 += data_r._02;
-            data_l._10 += data_r._10;
-            data_l._11 += data_r._11;
-            data_l._12 += data_r._12;
-            data_l._20 += data_r._20;
-            data_l._21 += data_r._21;
-            data_l._22 += data_r._22;
+            l._00 += r._00;
+            l._01 += r._01;
+            l._02 += r._02;
+            l._10 += r._10;
+            l._11 += r._11;
+            l._12 += r._12;
+            l._20 += r._20;
+            l._21 += r._21;
+            l._22 += r._22;
 
             return (*this);
         }
 
         matrix3impl operator-(const matrix3impl& m) const
         {
-            const data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            const data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            return { data_l._00 - data_r._00
-                   , data_l._01 - data_r._01
-                   , data_l._02 - data_r._02
-                   , data_l._10 - data_r._10
-                   , data_l._11 - data_r._11
-                   , data_l._12 - data_r._12
-                   , data_l._20 - data_r._20
-                   , data_l._21 - data_r._21
-                   , data_l._22 - data_r._22 };
+            return { l._00 - r._00
+                   , l._01 - r._01
+                   , l._02 - r._02
+                   , l._10 - r._10
+                   , l._11 - r._11
+                   , l._12 - r._12
+                   , l._20 - r._20
+                   , l._21 - r._21
+                   , l._22 - r._22 };
         }
 
         matrix3impl& operator-=(const matrix3impl& m)
         {
-            data_t& data_l = *data_;
-            const data_t& data_r = *m.data_;
+            data_t& l = *d_;
+            const data_t& r = *m.d_;
 
-            data_l._00 -= data_r._00; data_l._01 -= data_r._01; data_l._02 -= data_r._02;
-            data_l._10 -= data_r._10; data_l._11 -= data_r._11; data_l._12 -= data_r._12;
-            data_l._20 -= data_r._20; data_l._21 -= data_r._21; data_l._22 -= data_r._22;
+            l._00 -= r._00; l._01 -= r._01; l._02 -= r._02;
+            l._10 -= r._10; l._11 -= r._11; l._12 -= r._12;
+            l._20 -= r._20; l._21 -= r._21; l._22 -= r._22;
 
             return (*this);
         }
 
         matrix3impl operator*(item_t val) const
         {
-            const data_t& data_l = *data_;
-            return { val * data_l._00, val * data_l._01, val * data_l._02,
-                     val * data_l._10, val * data_l._11, val * data_l._12,
-                     val * data_l._20, val * data_l._21, val * data_l._22 };
+            const data_t& d = *d_;
+            return { val * d._00, val * d._01, val * d._02,
+                     val * d._10, val * d._11, val * d._12,
+                     val * d._20, val * d._21, val * d._22 };
         }
 
         matrix3impl operator/(item_t val) const
         {
-            const data_t& data_l = *data_;
-            return { data_l._00 / val, data_l._01 / val, data_l._02 / val,
-                     data_l._10 / val, data_l._11 / val, data_l._12 / val,
-                     data_l._20 / val, data_l._21 / val, data_l._22 / val };
+            const data_t& d = *d_;
+            return { d._00 / val, d._01 / val, d._02 / val,
+                     d._10 / val, d._11 / val, d._12 / val,
+                     d._20 / val, d._21 / val, d._22 / val };
         }
 
         matrix3impl& operator*=(item_t val)
         {
-            data_t& data_l = *data_;
+            data_t& d = *d_;
 
-            data_l._00 *= val; data_l._01 *= val; data_l._02 *= val;
-            data_l._10 *= val; data_l._11 *= val; data_l._12 *= val;
-            data_l._20 *= val; data_l._21 *= val; data_l._22 *= val;
+            d._00 *= val; d._01 *= val; d._02 *= val;
+            d._10 *= val; d._11 *= val; d._12 *= val;
+            d._20 *= val; d._21 *= val; d._22 *= val;
 
             return (*this);
         }
 
         matrix3impl operator-() const
         {
-            const data_t& data_l = *data_;
-            return { -data_l._00, -data_l._01, -data_l._02,
-                     -data_l._10, -data_l._11, -data_l._12,
-                     -data_l._20, -data_l._21, -data_l._22 };
+            const data_t& d = *d_;
+            return { -d._00, -d._01, -d._02,
+                     -d._10, -d._11, -d._12,
+                     -d._20, -d._21, -d._22 };
         }
 
         bool operator==(const matrix3impl& other) const
         {
-            return *data_ == *other.data_;
+            return *d_ == *other.d_;
         }
 
         bool operator!=(const matrix3impl& other) const
@@ -253,63 +254,57 @@ namespace math
 
         [[nodiscard]]
         item_t det() const {
-            const data_t& data_l = *data_;
-            return data_l._00 * data_l._11 * data_l._22 + data_l._01 * data_l._12 * data_l._20 + data_l._02 * data_l._10 * data_l._21 - 
-                   data_l._02 * data_l._11 * data_l._20 - data_l._01 * data_l._10 * data_l._22 - data_l._00 * data_l._12 * data_l._21;
+            const data_t& data_l = *d_;
+            return det3x3(data_l._00, data_l._01, data_l._02, data_l._10, data_l._11, data_l._12, data_l._20, data_l._21, data_l._22);
         }
 
         [[nodiscard]]
         matrix3impl alg_complement_matrix() const
         {
-            const data_t& data_l = *data_;
-                // 00 01 02    +(11*22-21*12) -(10*22-20*12) +(10*21-20*11)
-                // 10 11 12 == -(01*22-21*02) +(00*22-20*02) -(00*21-20*01)
-                // 20 21 22    +(01*12-11*02) -(00*12-10*02) +(00*11-10*01)
-
+            const data_t& data_l = *d_;
             return {
-                +(data_l._11*data_l._22 - data_l._12*data_l._21), -(data_l._10*data_l._22 - data_l._12*data_l._20), +(data_l._10*data_l._21 - data_l._11*data_l._20),
-                -(data_l._01*data_l._22 - data_l._02*data_l._21), +(data_l._00*data_l._22 - data_l._02*data_l._20), -(data_l._00*data_l._21 - data_l._01*data_l._20),
-                +(data_l._01*data_l._12 - data_l._02*data_l._11), -(data_l._00*data_l._12 - data_l._02*data_l._10), +(data_l._00*data_l._11 - data_l._01*data_l._10)
+                +det2x2(data_l._11, data_l._12, data_l._21, data_l._22),
+                -det2x2(data_l._10, data_l._12, data_l._20, data_l._22),
+                +det2x2(data_l._10, data_l._11, data_l._20, data_l._21),
+
+                -det2x2(data_l._01, data_l._02, data_l._21, data_l._22),
+                +det2x2(data_l._00, data_l._02, data_l._20, data_l._22),
+                -det2x2(data_l._00, data_l._01, data_l._20, data_l._21),
+
+                +det2x2(data_l._01, data_l._02, data_l._11, data_l._12),
+                -det2x2(data_l._00, data_l._02, data_l._10, data_l._12),
+                +det2x2(data_l._00, data_l._01, data_l._10, data_l._11)
             };
         }
 
         matrix3impl& transpose()
         {
-            data_t& data_l = *data_;
-
-            const auto t10 = data_l._10;
-            const auto t20 = data_l._20;
-            const auto t21 = data_l._21;
-
-            data_l._10 = data_l._01;
-            data_l._20 = data_l._02;
-            data_l._21 = data_l._12;
-
-            data_l._01 = t10;
-            data_l._02 = t20;
-            data_l._12 = t21;
+            data_t& d = *d_;
+            item_t tmp = d._10; d._10 = d._01; d._01 = tmp;
+                   tmp = d._20; d._20 = d._02; d._02 = tmp;
+                   tmp = d._21; d._21 = d._12; d._12 = tmp;
 
             return (*this);
         }
 
         matrix3impl& invert()
         {
-            data_ = std::move((alg_complement_matrix().transpose() * ((item_t)1 / det())).data_);
+            d_ = std::move((alg_complement_matrix().transpose() / det()).d_);
             return (*this);
         }
 
         [[nodiscard]]
         std::tuple<vector3<item_t>, vector3<item_t>, vector3<item_t>> rows() const
         {
-            const data_t& data_l = *data_;
-            return { {data_l._00, data_l._01, data_l._02}, {data_l._10, data_l._11, data_l._12}, {data_l._20, data_l._21, data_l._22} };
+            const data_t& d = *d_;
+            return { {d._00, d._01, d._02}, {d._10, d._11, d._12}, {d._20, d._21, d._22} };
         }
 
         [[nodiscard]]
         std::tuple<vector3<item_t>, vector3<item_t>, vector3<item_t>> columns() const
         {
-            const data_t& data_l = *data_;
-            return { {data_l._00, data_l._10, data_l._20}, {data_l._01, data_l._11, data_l._21}, {data_l._02, data_l._12, data_l._22} };
+            const data_t& d = *d_;
+            return { {d._00, d._10, d._20}, {d._01, d._11, d._21}, {d._02, d._12, d._22} };
         }
 
         static matrix3impl identity()

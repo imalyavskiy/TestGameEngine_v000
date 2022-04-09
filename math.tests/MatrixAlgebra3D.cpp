@@ -282,6 +282,7 @@ TEST(MatrixAlgebra3D, InversionFloat)
 {
     const math::matrix3f matrix1(3.f, 2.f, 1.f, 6.f, 7.f, 4.f, 8.f, 8.f, 7.f);
     EXPECT_NE(matrix1.det(), 0.f);
+    EXPECT_EQ(math::inverted(math::matrix3f::identity()), math::matrix3f::identity());
 
     math::matrix3f matrix2(matrix1);
     matrix2.invert();
@@ -296,6 +297,7 @@ TEST(MatrixAlgebra3D, InversionDouble)
 {
     const math::matrix3d matrix1(3.0, 2.0, 1.0, 6.0, 7.0, 4.0, 8.0, 8.0, 7.0);
     EXPECT_NE(matrix1.det(), 0.0);
+    EXPECT_EQ(math::inverted(math::matrix3d::identity()), math::matrix3d::identity());
 
     math::matrix3d matrix2(matrix1);
     matrix2.invert();
