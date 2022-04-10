@@ -72,7 +72,7 @@ namespace math
         { }
 
         // construct by rows
-        matrix2impl(const vector2<_item_t>& row0, const vector2<_item_t>& row1)
+        matrix2impl(const vector2_impl<_item_t>& row0, const vector2_impl<_item_t>& row1)
             : d_(std::make_unique<data_t>(row0.x(), row0.y(), row1.x(), row1.y()))
         { }
 
@@ -211,7 +211,7 @@ namespace math
         [[nodiscard]]
         item_t det() const {
             const data_t& d = *d_;
-            return det2x2(d._00, d._01, d._10, d._11);
+            return DET2(d._00, d._01, d._10, d._11);
         }
 
         [[nodiscard]]
@@ -235,14 +235,14 @@ namespace math
         }
 
         [[nodiscard]]
-        std::tuple<vector2<item_t>, vector2<item_t>> rows() const
+        std::tuple<vector2_impl<item_t>, vector2_impl<item_t>> rows() const
         {
             const data_t& d = *d_;
             return { {d._00, d._01}, {d._10, d._11} };
         }
 
         [[nodiscard]]
-        std::tuple<vector2<item_t>, vector2<item_t>> columns() const
+        std::tuple<vector2_impl<item_t>, vector2_impl<item_t>> columns() const
         {
             const data_t& d = *d_;
             return { {d._00, d._10}, {d._01, d._11} };

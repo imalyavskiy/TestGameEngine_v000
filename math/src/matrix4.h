@@ -89,10 +89,10 @@ namespace math
         { }
 
         // construct by rows
-        matrix4impl(const vector4<_item_t>& row0, 
-                    const vector4<_item_t>& row1, 
-                    const vector4<_item_t>& row2, 
-                    const vector4<_item_t>& row3)
+        matrix4impl(const vector4_impl<_item_t>& row0, 
+                    const vector4_impl<_item_t>& row1, 
+                    const vector4_impl<_item_t>& row2, 
+                    const vector4_impl<_item_t>& row3)
             : d_(std::make_unique<data_t>(row0.x(), row0.y(), row0.z(), row0.w(), 
                                              row1.x(), row1.y(), row1.z(), row1.w(), 
                                              row2.x(), row2.y(), row2.z(), row2.w(),
@@ -286,10 +286,10 @@ namespace math
         [[nodiscard]]
         item_t det() const {
             const data_t& d = *d_;
-            return + d._00 * det3x3(d._11, d._12, d._13, d._21, d._22, d._23, d._31, d._32, d._33)
-                   - d._01 * det3x3(d._10, d._12, d._13, d._20, d._22, d._23, d._30, d._32, d._33)
-                   + d._02 * det3x3(d._10, d._11, d._13, d._20, d._21, d._23, d._30, d._31, d._33)
-                   - d._03 * det3x3(d._10, d._11, d._12, d._20, d._21, d._22, d._30, d._31, d._32);
+            return + d._00 * DET3(d._11, d._12, d._13, d._21, d._22, d._23, d._31, d._32, d._33)
+                   - d._01 * DET3(d._10, d._12, d._13, d._20, d._22, d._23, d._30, d._32, d._33)
+                   + d._02 * DET3(d._10, d._11, d._13, d._20, d._21, d._23, d._30, d._31, d._33)
+                   - d._03 * DET3(d._10, d._11, d._12, d._20, d._21, d._22, d._30, d._31, d._32);
         }
 
         [[nodiscard]]
@@ -314,22 +314,22 @@ namespace math
             //  |21 22 23|   |20 22 23|   |20 21 23|   |20 21 22|
 
             return {
-                +det3x3(d._11, d._12, d._13, d._21, d._22, d._23, d._31, d._32, d._33), 
-                    -det3x3(d._10, d._12, d._13, d._20, d._22, d._23, d._30, d._32, d._33),
-                        +det3x3(d._10, d._11, d._13, d._20, d._21, d._23, d._30, d._31, d._33),
-                            -det3x3(d._10, d._11, d._12, d._20, d._21, d._22, d._30, d._31, d._32),
-                -det3x3(d._01, d._02, d._03, d._21, d._22, d._23, d._31, d._32, d._33), 
-                    +det3x3(d._00, d._02, d._03, d._20, d._22, d._23, d._30, d._32, d._33),
-                        -det3x3(d._00, d._01, d._03, d._20, d._21, d._23, d._30, d._31, d._33),
-                            +det3x3(d._00, d._01, d._02, d._20, d._21, d._22, d._30, d._31, d._32),
-                +det3x3(d._01, d._02, d._03, d._11, d._12, d._13, d._31, d._32, d._33), 
-                    -det3x3(d._00, d._02, d._03, d._10, d._12, d._13, d._30, d._32, d._33),
-                        +det3x3(d._00, d._01, d._03, d._10, d._11, d._13, d._30, d._31, d._33),
-                            -det3x3(d._00, d._01, d._02, d._10, d._11, d._12, d._30, d._31, d._32),
-                -det3x3(d._01, d._02, d._03, d._11, d._12, d._13, d._21, d._22, d._23), 
-                    +det3x3(d._00, d._02, d._03, d._10, d._12, d._13, d._20, d._22, d._23),
-                        -det3x3(d._00, d._01, d._03, d._10, d._11, d._13, d._20, d._21, d._23),
-                            +det3x3(d._00, d._01, d._02, d._10, d._11, d._12, d._20, d._21, d._22)
+                +DET3(d._11, d._12, d._13, d._21, d._22, d._23, d._31, d._32, d._33), 
+                    -DET3(d._10, d._12, d._13, d._20, d._22, d._23, d._30, d._32, d._33),
+                        +DET3(d._10, d._11, d._13, d._20, d._21, d._23, d._30, d._31, d._33),
+                            -DET3(d._10, d._11, d._12, d._20, d._21, d._22, d._30, d._31, d._32),
+                -DET3(d._01, d._02, d._03, d._21, d._22, d._23, d._31, d._32, d._33), 
+                    +DET3(d._00, d._02, d._03, d._20, d._22, d._23, d._30, d._32, d._33),
+                        -DET3(d._00, d._01, d._03, d._20, d._21, d._23, d._30, d._31, d._33),
+                            +DET3(d._00, d._01, d._02, d._20, d._21, d._22, d._30, d._31, d._32),
+                +DET3(d._01, d._02, d._03, d._11, d._12, d._13, d._31, d._32, d._33), 
+                    -DET3(d._00, d._02, d._03, d._10, d._12, d._13, d._30, d._32, d._33),
+                        +DET3(d._00, d._01, d._03, d._10, d._11, d._13, d._30, d._31, d._33),
+                            -DET3(d._00, d._01, d._02, d._10, d._11, d._12, d._30, d._31, d._32),
+                -DET3(d._01, d._02, d._03, d._11, d._12, d._13, d._21, d._22, d._23), 
+                    +DET3(d._00, d._02, d._03, d._10, d._12, d._13, d._20, d._22, d._23),
+                        -DET3(d._00, d._01, d._03, d._10, d._11, d._13, d._20, d._21, d._23),
+                            +DET3(d._00, d._01, d._02, d._10, d._11, d._12, d._20, d._21, d._22)
             };
         }
 
@@ -355,7 +355,7 @@ namespace math
         }
 
         [[nodiscard]]
-        std::tuple<vector4<item_t>, vector4<item_t>, vector4<item_t>, vector4<item_t>> rows() const
+        std::tuple<vector4_impl<item_t>, vector4_impl<item_t>, vector4_impl<item_t>, vector4_impl<item_t>> rows() const
         {
             const data_t& d = *d_;
             return {
@@ -367,7 +367,7 @@ namespace math
         }
 
         [[nodiscard]]
-        std::tuple<vector4<item_t>, vector4<item_t>, vector4<item_t>, vector4<item_t>> columns() const
+        std::tuple<vector4_impl<item_t>, vector4_impl<item_t>, vector4_impl<item_t>, vector4_impl<item_t>> columns() const
         {
             const data_t& d = *d_;
             return {

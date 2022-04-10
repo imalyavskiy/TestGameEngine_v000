@@ -90,7 +90,7 @@ namespace math
         { }
 
         // construct by rows
-        matrix3impl(const vector3<_item_t>& row0, const vector3<_item_t>& row1, const vector3<_item_t>& row2)
+        matrix3impl(const vector3_impl<_item_t>& row0, const vector3_impl<_item_t>& row1, const vector3_impl<_item_t>& row2)
             : d_(std::make_unique<data_t>(row0.x(), row0.y(), row0.z(), row1.x(), row1.y(), row1.z(), row2.x(), row2.y(), row2.z()))
         { }
 
@@ -255,7 +255,7 @@ namespace math
         [[nodiscard]]
         item_t det() const {
             const data_t& data_l = *d_;
-            return det3x3(data_l._00, data_l._01, data_l._02, data_l._10, data_l._11, data_l._12, data_l._20, data_l._21, data_l._22);
+            return DET3(data_l._00, data_l._01, data_l._02, data_l._10, data_l._11, data_l._12, data_l._20, data_l._21, data_l._22);
         }
 
         [[nodiscard]]
@@ -263,17 +263,17 @@ namespace math
         {
             const data_t& data_l = *d_;
             return {
-                +det2x2(data_l._11, data_l._12, data_l._21, data_l._22),
-                -det2x2(data_l._10, data_l._12, data_l._20, data_l._22),
-                +det2x2(data_l._10, data_l._11, data_l._20, data_l._21),
+                +DET2(data_l._11, data_l._12, data_l._21, data_l._22),
+                -DET2(data_l._10, data_l._12, data_l._20, data_l._22),
+                +DET2(data_l._10, data_l._11, data_l._20, data_l._21),
 
-                -det2x2(data_l._01, data_l._02, data_l._21, data_l._22),
-                +det2x2(data_l._00, data_l._02, data_l._20, data_l._22),
-                -det2x2(data_l._00, data_l._01, data_l._20, data_l._21),
+                -DET2(data_l._01, data_l._02, data_l._21, data_l._22),
+                +DET2(data_l._00, data_l._02, data_l._20, data_l._22),
+                -DET2(data_l._00, data_l._01, data_l._20, data_l._21),
 
-                +det2x2(data_l._01, data_l._02, data_l._11, data_l._12),
-                -det2x2(data_l._00, data_l._02, data_l._10, data_l._12),
-                +det2x2(data_l._00, data_l._01, data_l._10, data_l._11)
+                +DET2(data_l._01, data_l._02, data_l._11, data_l._12),
+                -DET2(data_l._00, data_l._02, data_l._10, data_l._12),
+                +DET2(data_l._00, data_l._01, data_l._10, data_l._11)
             };
         }
 
@@ -294,14 +294,14 @@ namespace math
         }
 
         [[nodiscard]]
-        std::tuple<vector3<item_t>, vector3<item_t>, vector3<item_t>> rows() const
+        std::tuple<vector3_impl<item_t>, vector3_impl<item_t>, vector3_impl<item_t>> rows() const
         {
             const data_t& d = *d_;
             return { {d._00, d._01, d._02}, {d._10, d._11, d._12}, {d._20, d._21, d._22} };
         }
 
         [[nodiscard]]
-        std::tuple<vector3<item_t>, vector3<item_t>, vector3<item_t>> columns() const
+        std::tuple<vector3_impl<item_t>, vector3_impl<item_t>, vector3_impl<item_t>> columns() const
         {
             const data_t& d = *d_;
             return { {d._00, d._10, d._20}, {d._01, d._11, d._21}, {d._02, d._12, d._22} };

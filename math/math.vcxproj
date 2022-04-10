@@ -28,14 +28,6 @@
     <ClInclude Include="src\vector3.h" />
     <ClInclude Include="src\vector4.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\matrix2.cpp" />
-    <ClCompile Include="src\matrix3.cpp" />
-    <ClCompile Include="src\matrix4.cpp" />
-    <ClCompile Include="src\vector2.cpp" />
-    <ClCompile Include="src\vector3.cpp" />
-    <ClCompile Include="src\vector4.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

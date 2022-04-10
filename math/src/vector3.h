@@ -1,239 +1,222 @@
 #ifndef __VECTOR3_H_B208B79E_B311_11EC_B909_0242AC120002__
 #define __VECTOR3_H_B208B79E_B311_11EC_B909_0242AC120002__
 
+#include "vector2.h"
+
 namespace math
 {
-    template<typename _base_t>
-    class vector3
-        : public vector2<_base_t>
+    template<typename _item_t>
+    struct vector3 {
+        vector3() = default;
+        ~vector3() = default;
+        vector3(const vector3&) = default;
+        vector3(vector3&&) = default;
+        vector3& operator=(const vector3&) = default;
+        vector3& operator=(vector3&&) = default;
+
+        vector3(_item_t i0, _item_t i1, _item_t i2)
+            : _0(i0)
+            , _1(i1)
+            , _2(i2)
+        { }
+
+        _item_t _0 = _item_t();
+        _item_t _1 = _item_t();
+        _item_t _2 = _item_t();
+    };
+
+    template<typename ItemT>
+    class vector3_impl
     {
-        using Super = vector2<_base_t>;
-    public:
-        vector3()
-            : Super()
-            , _2()
-        { }
-
-        vector3(_base_t v)
-            : Super(v)
-            , _2(v)
-        { }
-
-        vector3(_base_t v0, _base_t v1, _base_t v2)
-            : Super(v0, v1)
-            , _2(v2)
-        { }
-
-        vector3(const vector3& other)
-            : Super(other)
-            , _2(other._2)
-        { }
-
-        _base_t z() const { return _2; }
-        void z(_base_t z) { _2 = z; }
-
-        _base_t b() const { return _2; }
-        void b(_base_t b) { _2 = b; }
-
-        vector2<_base_t> xy() const { return { Super::_0, Super::_1 }; }
-        const vector3<_base_t>& xy(const vector2<_base_t>& xy) { Super::_0 = xy.x(); Super::_1 = xy.y(); return (*this); }
-
-        vector2<_base_t> rg() const { return { Super::_0, Super::_1 }; }
-        const vector3<_base_t>& rg(const vector2<_base_t>& rg) { Super::_0 = rg.r(); Super::_1 = rg.g(); return (*this); }
-
-        vector2<_base_t> yz() const { return { Super::_1, _2 }; }
-        const vector3<_base_t>& yz(const vector2<_base_t>& yz) { Super::_1 = yz.x(); _2 = yz.y();  return (*this); }
-
-        vector2<_base_t> gb() const { return { Super::_1, _2 }; }
-        const vector3<_base_t>& gb(const vector2<_base_t>& gb) { Super::_1 = gb.r(); _2 = gb.g();  return (*this); }
-
-        bool operator==(const vector3& other) const {
-            return _2 == other._2 && Super::operator==(other);
-        }
-
-        bool operator!=(const vector3& other) const {
-            return !operator==(other);
-        }
-
-        vector3 operator+(const vector3& other) {
-            return vector3{ Super::_0 + other._0, Super::_1 + other._1, _2 + other._2 };
-        }
-
-        vector3 operator-(const vector3& other) {
-            return vector3{ Super::_0 - other._0, Super::_1 - other._1, _2 - other._2 };
-        }
-
-        vector3 operator*(_base_t v) {
-            return vector3{ Super::_0 * v, Super::_1 * v, _2 * v };
-        }
-
-        const vector3& operator*=(_base_t v) {
-            Super::operator*=(v);
-            _2 *= v;
-            return (*this);
-        }
-
-        vector3 operator/(_base_t v) {
-            return vector3{ Super::_0 / v, Super::_1 / v, _2 / v };
-        }
-
-        const vector3& operator/=(_base_t v) {
-            Super::operator/=(v);
-            _2 /= v;
-            return (*this);
-        }
-
-        vector3 operator-() const{
-            return vector3(-Super::_0, -Super::_1, -_2);
-        }
+        using data_t = vector3<ItemT>;
 
     protected:
-        _base_t _2;
-    };
+        std::unique_ptr<data_t> d_;
 
-    class vector3f
-        : public vector3<float>
-    {
     public:
-        static const vector3f X;
-        static const vector3f Y;
-        static const vector3f Z;
+        using item_t = ItemT;
 
-        vector3f() : vector3()
+        static const vector3_impl X;
+        static const vector3_impl Y;
+        static const vector3_impl Z;
+
+        vector3_impl()
+            : d_(std::make_unique<data_t>(static_cast<item_t>(0), static_cast<item_t>(0), static_cast<item_t>(0)))
         { }
 
-        vector3f(float v) : vector3(v)
+        ~vector3_impl() = default;
+
+        explicit vector3_impl(ItemT v)
+            : d_(std::make_unique<data_t>(v, v, v))
         { }
 
-        vector3f(float v0, float v1, float v2) : vector3(v0, v1, v2)
+        vector3_impl(ItemT v0, ItemT v1, ItemT v2)
+            : d_(std::make_unique<data_t>(v0, v1, v2))
         { }
 
-        vector3f(const vector2& v01, float v2) : vector3(v01.x(), v01.y(), v2)
+        vector3_impl(const vector3_impl& other)
+            : d_(std::make_unique<data_t>(other.d_->_0, other.d_->_1, other.d_->_2))
         { }
 
-        vector3f(float v0, const vector2& v12) : vector3(v0, v12.x(), v12.y())
+        vector3_impl(vector3_impl&& other) noexcept
+            : d_(std::move(other.d_))
         { }
 
-        vector3f(const vector3f& other) : vector3(other)
+        vector3_impl(const vector2_impl<ItemT>& v01, const ItemT v2)
+            : vector3_impl(v01.x(), v01.y(), v2)
         { }
 
-        vector3f(const vector3<float>& other) : vector3(other)
+        vector3_impl(const ItemT v0, const vector2_impl<ItemT>& v12)
+            : vector3_impl(v0, v12.x(), v12.y())
         { }
 
-        float length() const {
-            return std::sqrtf(_0*_0 + _1*_1 + _2*_2);
+        vector3_impl& operator=(const vector3_impl& other)
+        {
+            d_ = std::make_unique<data_t>(*other.d_);
+            return (*this);
         }
 
-        float dot(const vector3f& _r) const {
-            return _0*_r._0 + _1*_r._1 + _2*_r._2;
+        vector3_impl& operator=(vector3_impl&& other) noexcept
+        {
+            d_ = std::move(other.d_);
+            return (*this);
         }
 
-        const vector3f& normalize() {
+        bool operator==(const vector3_impl& other) const
+        {
+            const auto& l = *d_, & r = *other.d_;
+            return l._0 == r._0 && l._1 == r._1 && l._2 == r._2;
+        }
+
+        bool operator!=(const vector3_impl& other) const { return !operator==(other); }
+
+        [[nodiscard]]
+        ItemT x() const { return d_->_0; }
+        void x(ItemT x) { d_->_0 = x; }
+
+        [[nodiscard]]
+        ItemT r() const { return d_->_0; }
+        void r(const ItemT r) { d_->_0 = r; }
+
+        [[nodiscard]]
+        ItemT y() const { return d_->_1; }
+        void y(const ItemT y) { d_->_1 = y; }
+
+        [[nodiscard]]
+        ItemT g() const { return d_->_1; }
+        void g(const ItemT g) { d_->_1 = g; }
+
+        [[nodiscard]]
+        ItemT z() const { return d_->_2; }
+        void z(const ItemT z) { d_->_2 = z; }
+
+        [[nodiscard]]
+        ItemT b() const { return d_->_2; }
+        void b(const ItemT b) { d_->_2 = b; }
+
+        [[nodiscard]]
+        vector2_impl<ItemT> xy() const { return { d_->_0, d_->_1 }; }
+        vector3_impl& xy(const vector2_impl<ItemT>& v01) { d_->_0 = v01.x(); d_->_1 = v01.y(); return (*this); }
+
+        [[nodiscard]]
+        vector2_impl<ItemT> rg() const { return { d_->_0, d_->_1 }; }
+        vector3_impl& rg(const vector2_impl<ItemT>& v01) { d_->_0 = v01.x(); d_->_1 = v01.y(); return (*this); }
+
+        [[nodiscard]]
+        vector2_impl<ItemT> yz() const { return { d_->_1, d_->_2 }; }
+        vector3_impl& yz(const vector2_impl<ItemT>& v12) { d_->_1 = v12.x(); d_->_2 = v12.y(); return (*this); }
+
+        [[nodiscard]]
+        vector2_impl<ItemT> gb() const { return { d_->_1, d_->_2 }; }
+        vector3_impl& gb(const vector2_impl<ItemT>& v12) { d_->_1 = v12.x(); d_->_2 = v12.y(); return (*this); }
+
+        vector3_impl operator+(const vector3_impl& other) {
+            const auto &l = *d_, &r = *other.d_;
+            return { l._0 + r._0, l._1 + r._1, l._2 + r._2 };
+        }
+
+        vector3_impl operator-(const vector3_impl& other) {
+            const auto &l = *d_, &r = *other.d_;
+            return { l._0 - r._0, l._1 - r._1, l._2 - r._2 };
+        }
+
+        vector3_impl operator*(ItemT v) {
+            auto &d = *d_;
+            return { d._0 * v, d._1 * v, d._2 * v };
+        }
+
+        const vector3_impl& operator*=(ItemT v) {
+            const auto &d = *d_;
+            d._0 *= v; d._1 *= v; d._2 *= v;
+            return (*this);
+        }
+
+        vector3_impl operator/(ItemT v) {
+            const auto &d = *d_;
+            return { d._0 / v, d._1 / v, d._2 / v };
+        }
+
+        const vector3_impl& operator/=(ItemT v) {
+            const auto &d = *d_;
+            d._0 /= v;
+            d._1 /= v;
+            d._2 /= v;
+            return (*this);
+        }
+
+        vector3_impl operator -() const {
+            const auto &d = *d_;
+            return { -d._0, -d._1, -d._2 };
+        }
+
+        [[nodiscard]]
+        ItemT length() const {
+            const auto &d = *d_;
+            return std::sqrt(d._0 * d._0 + d._1 * d._1 + d._2 * d._2);
+        }
+
+        [[nodiscard]]
+        ItemT dot(const vector3_impl& r) const {
+            return x() * r.x() + y() * r.y() + z() * r.z();
+        }
+
+        const vector3_impl& normalize() {
             const auto len = length();
-            
-            _0 = _0 / len;
-            _1 = _1 / len;
-            _2 = _2 / len;
+            auto &d = *d_;
+            d._0 = d._0 / len;
+            d._1 = d._1 / len;
+            d._2 = d._2 / len;
 
             return (*this);
         }
 
-        bool isUnit() const {
-            const auto len = length();
-            return 0.9999999f <= len && len <= 1.0000001;
-        }
-
-        vector3f cross(const vector3f& _r) const {
-            return 
-#ifdef USE_RIGH_HAND_BASIS
-            // RH basis: +1.f * (a.z*b.y - a.y*b.z, a.x*b.z - a.z*b.x, a.y*b.x - a.x*b.y)
-            vector3f(_2 * _r._1 - _1 * _r._2, _0 * _r._2 - _2 * _r._0, _1 * _r._0 - _0 * _r._1) * +1.f;
-#else
-            // LH basis: -1.f * (a.z*b.y - a.y*b.z, a.x*b.z - a.z*b.x, a.y*b.x - a.x*b.y)
-            vector3f(_2 * _r._1 - _1 * _r._2, _0 * _r._2 - _2 * _r._0, _1 * _r._0 - _0 * _r._1) * -1.f;
-#endif
-        }
-    };
-
-    float length(const vector3f& v);
-
-    float dot(const vector3f& left, const vector3f& right);
-
-    vector3f cross(const vector3f& _l, const vector3f& _r);
-
-    bool isUnit(const vector3f& v);
-
-    class vector3d
-        : public vector3<double>
-    {
-    public:
-
-        static const vector3d X;
-        static const vector3d Y;
-        static const vector3d Z;
-
-        vector3d() : vector3()
-        { }
-
-        vector3d(double v) : vector3(v)
-        { }
-
-        vector3d(double v0, double v1, double v2) : vector3(v0, v1, v2)
-        { }
-
-        vector3d(const vector2& v01, double v2) : vector3(v01.x(), v01.y(), v2)
-        { }
-
-        vector3d(double v0, const vector2& v12) : vector3(v0, v12.x(), v12.y())
-        { }
-
-        vector3d(const vector3d& other) : vector3(other)
-        { }
-
-        vector3d(const vector3<double>& other) : vector3(other)
-        { }
-
-        double length() const {
-            return std::sqrt(_0 * _0 + _1 * _1 + _2 * _2);
-        }
-
-        double dot(const vector3d& _r) const {
-            return _0 * _r._0 + _1 * _r._1 + _2 * _r._2;
-        }
-
-        const vector3d& normalize() {
-            const auto len = length();
-            
-            _0 = _0 / len;
-            _1 = _1 / len;
-            _2 = _2 / len;
-
-            return (*this);
-        }
-
-        bool isUnit() const {
-            const auto len = length();
-            return 0.99999999 <= len && len <= 1.00000001;
-        }
-
-        vector3d cross(const vector3d& _r) const {
-            return
+        [[nodiscard]]
+        vector3_impl cross(const vector3_impl& other) const {
+            const auto &l = *d_, &r = *other.d_;
 #ifdef USE_RIGH_HAND_BASIS
                 // RH basis: +1.f * (a.z*b.y - a.y*b.z, a.x*b.z - a.z*b.x, a.y*b.x - a.x*b.y)
-                vector3d(_2 * _r._1 - _1 * _r._2, _0 * _r._2 - _2 * _r._0, _1 * _r._0 - _0 * _r._1) * +1.f;
+            return vector3_impl(l._2 * r._1 - l._1 * r._2, l._0 * r._2 - l._2 * r._0, l._1 * r._0 - l._0 * r._1) * +static_cast<ItemT>(1);
 #else
                 // LH basis: -1.f * (a.z*b.y - a.y*b.z, a.x*b.z - a.z*b.x, a.y*b.x - a.x*b.y)
-                vector3d(_2 * _r._1 - _1 * _r._2, _0 * _r._2 - _2 * _r._0, _1 * _r._0 - _0 * _r._1) * -1.f;
+            return vector3_impl(l._2 * r._1 - l._1 * r._2, l._0 * r._2 - l._2 * r._0, l._1 * r._0 - l._0 * r._1) * -static_cast<ItemT>(1);
 #endif
+        }
+
+        [[nodiscard]]
+        bool is_unit() const {
+            const auto len = length();
+            return static_cast<ItemT>(0.999999) <= len && len <= static_cast<ItemT>(1.000001);
         }
     };
 
-    double length(const vector3d& v);
+    template<typename ItemT>
+    const vector3_impl<ItemT> vector3_impl<ItemT>::X = vector3_impl<ItemT>(static_cast<ItemT>(1), static_cast<ItemT>(0), static_cast<ItemT>(0));
+    template<typename ItemT>
+    const vector3_impl<ItemT> vector3_impl<ItemT>::Y = vector3_impl<ItemT>(static_cast<ItemT>(0), static_cast<ItemT>(1), static_cast<ItemT>(0));
+    template<typename ItemT>
+    const vector3_impl<ItemT> vector3_impl<ItemT>::Z = vector3_impl<ItemT>(static_cast<ItemT>(0), static_cast<ItemT>(0), static_cast<ItemT>(1));
 
-    double dot(const vector3d& left, const vector3d& right);
-
-    vector3d cross(const vector3d& _l, const vector3d& _r);
-
-    bool isUnit(const vector3d& v);
+    using vector3f = vector3_impl<float>;
+    using vector3d = vector3_impl<double>;
 }
 #endif // __VECTOR3_H_B208B79E_B311_11EC_B909_0242AC120002__

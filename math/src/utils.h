@@ -19,11 +19,31 @@ namespace math
         return matrix_t(m).invert();
     }
 
-#define det2x2(_00, _01, _10, _11)\
+    template<typename ContainerT>
+    typename ContainerT::item_t length(const ContainerT& v) {
+        return v.length();
+    }
+
+    template<typename ContainerT>
+    typename ContainerT::item_t dot(const ContainerT& l, const ContainerT& r) {
+        return l.dot(r);
+    }
+
+    template<typename ContainerT>
+    bool is_unit(const ContainerT& v) {
+        return v.is_unit();
+    }
+
+    template<typename ContainerT>
+    ContainerT cross(const ContainerT& l, const ContainerT& r) {
+        return l.cross(r);
+    }
+
+#define DET2(_00, _01, _10, _11)\
 (((_00)*(_11))\
 -((_10)*(_01)))
 
-#define det3x3(_00, _01, _02, _10, _11, _12, _20, _21, _22)\
+#define DET3(_00, _01, _02, _10, _11, _12, _20, _21, _22)\
 (((_00)*(_11)*(_22))\
 +((_10)*(_21)*(_02))\
 +((_20)*(_01)*(_12))\
@@ -31,7 +51,7 @@ namespace math
 -((_21)*(_12)*(_00))\
 -((_22)*(_10)*(_01)))
 
-#define det4x4(_00, _01, _02, _03, _10, _11, _12, _13, _20, _21, _22, _23, _30, _31, _32, _33)\
+#define DET4(_00, _01, _02, _03, _10, _11, _12, _13, _20, _21, _22, _23, _30, _31, _32, _33)\
 (-((_00)*(_11)*(_22)*(_33))\
 +((_10)*(_21)*(_32)*(_03))\
 -((_20)*(_31)*(_02)*(_13))\

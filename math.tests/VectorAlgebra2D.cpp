@@ -110,15 +110,15 @@ TEST(VectorAlgebra2D, Length) {
 
 TEST(VectorAlgebra2D, Normalization) {
     {
-        const float x = -3.f, y = -5.f;
-        EXPECT_TRUE(math::vector2f(x, y).normalize().isUnit());
-        EXPECT_TRUE(math::isUnit(math::vector2f(x, y).normalize()));
+        constexpr float x = -3.f, y = -5.f;
+        EXPECT_TRUE(math::vector2f(x, y).normalize().is_unit());
+        EXPECT_TRUE(math::is_unit(math::vector2f(x, y).normalize()));
         EXPECT_EQ(math::normalized(math::vector2f(x, y)), math::vector2f(x, y).normalize());
     }
     {
-        const double x = -3.f, y = -5.f;
-        EXPECT_TRUE(math::vector2d(x, y).normalize().isUnit());
-        EXPECT_TRUE(math::isUnit(math::vector2d(x, y).normalize()));
+        constexpr double x = -3.f, y = -5.f;
+        EXPECT_TRUE(math::vector2d(x, y).normalize().is_unit());
+        EXPECT_TRUE(math::is_unit(math::vector2d(x, y).normalize()));
         EXPECT_EQ(math::normalized(math::vector2d(x, y)), math::vector2d(x, y).normalize());
     }
 }
@@ -175,14 +175,6 @@ TEST(VectorAlgebra2D, PlusMinusVector) {
 
     EXPECT_EQ(math::vector2d(0.0) + math::vector2d(1.0), math::vector2d(1.0));
     EXPECT_EQ(math::vector2d(1.0, 2.0) + math::vector2d(2.0, 1.0), math::vector2d(3.0));
-}
-
-TEST(VectorAlgebra2D, PlusMinusScalar) {
-    EXPECT_EQ(math::vector2f(0.f) + 1.f, math::vector2f(1.f));
-    EXPECT_EQ(math::vector2f(1.f, 2.f) - 2.f, math::vector2f(-1.f, 0.f));
-
-    EXPECT_EQ(math::vector2f(0.0) + 1.0, math::vector2f(1.0));
-    EXPECT_EQ(math::vector2f(1.0, 2.0) - 2.0, math::vector2f(-1.0, 0.0));
 }
 
 TEST(VectorAlgebra2D, MultiplyScalar) {

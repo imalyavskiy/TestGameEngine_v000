@@ -1,177 +1,165 @@
 #ifndef __VECTOR2_H_93FC91F8_B311_11EC_B909_0242AC120002__
 #define __VECTOR2_H_93FC91F8_B311_11EC_B909_0242AC120002__
+
+#include <memory>
+#include "utils.h"
+#include "vector2.h"
+
 namespace math
 {
-    template<typename _base_t>
+    template<typename _item_t>
     class vector2 {
-        friend vector2<_base_t> dot(const vector2<_base_t>&, const vector2<_base_t>&);
     public:
-        vector2()
-            : _0()
-            , _1()
+        vector2() = default;
+        ~vector2() = default;
+        vector2(const vector2&) = default;
+        vector2(vector2&&) = default;
+        vector2& operator=(const vector2&) = default;
+        vector2& operator=(vector2&&) = default;
+
+        vector2(_item_t i0, _item_t i1)
+            : _0(i0)
+            , _1(i1)
         { }
 
-        vector2(_base_t v)
-            : _0(v)
-            , _1(v)
-        { }
+        _item_t _0 = _item_t();
+        _item_t _1 = _item_t();
+    };
 
-        vector2(_base_t v0, _base_t v1)
-            : _0(v0)
-            , _1(v1)
-        { }
-
-        vector2(const vector2& other)
-            : _0(other._0)
-            , _1(other._1)
-        { }
-
-        _base_t x() const { return _0; }
-        void x(_base_t x) { _0 = x; }
-
-        _base_t r() const { return _0; }
-        void r(_base_t r) { _0 = r; }
-
-        _base_t y() const { return _1; }
-        void y(_base_t y) { _1 = y; }
-
-        _base_t g() const { return _1; }
-        void g(_base_t g) { _1 = g; }
-
-        bool operator==(const vector2& other) const {
-            return _0 == other._0 && _1 == other._1;
-        }
-
-        bool operator!=(const vector2& other) const {
-            return !operator==(other);
-        }
-
-        vector2 operator+(const vector2& other) {
-            return vector2{ _0 + other._0, _1 + other._1 };
-        }
-
-        vector2 operator-(const vector2& other) {
-            return vector2{ _0 - other._0, _1 - other._1 };
-        }
-
-        vector2 operator*(_base_t v) {
-            return vector2{ _0 * v, _1 * v };
-        }
-
-        const vector2& operator*=(_base_t v) {
-            _0 *= v;
-            _1 *= v;
-            return (*this);
-        }
-
-        vector2 operator/(_base_t v) {
-            return vector2{ _0 / v, _1 / v };
-        }
-
-        const vector2& operator/=(_base_t v) {
-            _0 /= v;
-            _1 /= v;
-            return (*this);
-        }
-
-        vector2 operator -() const{
-            return vector2(-_0, -_1);
-        }
-
+    template<typename _item_t>
+    class vector2_impl
+    {
+        using data_t = vector2<_item_t>;
     protected:
-        _base_t _0;
-        _base_t _1;
-    };
+        std::unique_ptr<data_t> d_;
 
-    class vector2f
-        : public vector2<float>
-    {
     public:
-        vector2f() : vector2() 
+        using item_t = _item_t;
+
+        vector2_impl()
+            : d_(std::make_unique<data_t>(static_cast<_item_t>(0), static_cast<_item_t>(0)))
         { }
 
-        vector2f(float v) : vector2(v) 
+        ~vector2_impl() = default;
+
+        explicit vector2_impl(_item_t v)
+            : d_(std::make_unique<data_t>(v, v))
         { }
 
-        vector2f(float v0, float v1) : vector2(v0, v1) 
+        vector2_impl(_item_t v0, _item_t v1)
+            : d_(std::make_unique<data_t>(v0, v1))
         { }
 
-        vector2f(const vector2f& other) : vector2(other) 
+        vector2_impl(const vector2_impl& other)
+            : d_(std::make_unique<data_t>(other.d_->_0, other.d_->_1))
         { }
 
-        float length() const {
-            return std::sqrtf((float)_0 * (float)_0 + (float)_1 * (float)_1);
-        }
+        vector2_impl(vector2_impl&& other) noexcept
+            : d_(std::move(other.d_))
+        { }
 
-        float dot(const vector2f& _r) const {
-            return _0 * _r._0 + _1 * _r._1;
-        }
-
-        const vector2f& normalize() {
-            const auto len = length();
-            
-            _0 = _0 / len;
-            _1 = _1 / len;
-            
+        vector2_impl& operator=(const vector2_impl& other)
+        {
+            d_ = std::make_unique<data_t>(*other.d_);
             return (*this);
         }
 
-        bool isUnit() const {
+        vector2_impl& operator=(vector2_impl&& other) noexcept
+        {
+            d_ = std::move(other.d_);
+            return (*this);
+        }
+
+        bool operator==(const vector2_impl& other) const
+        {
+            const auto &l = *d_, &r = *other.d_;
+            return l._0 == r._0 && l._1 == r._1;
+        }
+
+        bool operator!=(const vector2_impl& other) const { return !operator==(other); }
+
+        [[nodiscard]]
+        _item_t x() const { return d_->_0; }
+        void x(const _item_t x) { d_->_0 = x; }
+
+        [[nodiscard]]
+        _item_t r() const { return d_->_0; }
+        void r(const _item_t r) { d_->_0 = r; }
+
+        [[nodiscard]]
+        _item_t y() const { return d_->_1; }
+        void y(const _item_t y) { d_->_1 = y; }
+
+        [[nodiscard]]
+        _item_t g() const { return d_->_1; }
+        void g(const _item_t g) { d_->_1 = g; }
+
+
+        vector2_impl operator+(const vector2_impl& other) {
+            const auto &l = *d_, &r = *other.d_;
+            return { l._0 + r._0, l._1 + r._1 };
+        }
+
+        vector2_impl operator-(const vector2_impl& other) {
+            const auto &l = *d_, &r = *other.d_;
+            return { l._0 - r._0, l._1 - r._1 };
+        }
+
+        vector2_impl operator*(_item_t v) {
+            const auto &d = *d_;
+            return { d._0 * v, d._1 * v };
+        }
+
+        const vector2_impl& operator*=(_item_t v) {
+            auto &d = *d_;
+            d._0 *= v; d._1 *= v;
+            return (*this);
+        }
+
+        vector2_impl operator/(_item_t v) {
+            const auto& d = *d_;
+            return vector2_impl{ d._0 / v, d._1 / v };
+        }
+
+        const vector2_impl& operator/=(_item_t v) {
+            auto& d = *d_;
+            d._0 /= v; d._1 /= v;
+            return (*this);
+        }
+
+        vector2_impl operator -() const{
+            const auto &d = *d_;
+            return { -d._0, -d._1 };
+        }
+
+        [[nodiscard]]
+        _item_t length() const {
+            const auto &d = *d_;
+            return std::sqrt(d._0 * d._0 + d._1 * d._1);
+        }
+
+        [[nodiscard]]
+        _item_t dot(const vector2_impl& r) const {
+            return x() * r.x() + y() * r.y();
+        }
+
+        const vector2_impl& normalize() {
             const auto len = length();
-            return 0.99999999f <= len && len <= 1.00000001;
-        }
-    };
-
-    float length(const vector2f& v);
-
-    float dot(const vector2f& left, const vector2f& right);
-
-    bool isUnit(const vector2f& v);
-
-    class vector2d
-        : public vector2<double>
-    {
-    public:
-        vector2d() : vector2() 
-        { }
-        
-        vector2d(double v) : vector2(v) 
-        { }
-        
-        vector2d(double v0, double v1) : vector2(v0, v1) 
-        { }
-        
-        vector2d(const vector2d& other) : vector2(other) 
-        { }
-
-        double length() const {
-            return std::sqrt((double)_0 * (double)_0 + (double)_1 * (double)_1);
-        }
-
-        double dot(const vector2d& _r) const {
-            return _0 * _r._0 + _1 * _r._1;
-        }
-
-        const vector2d& normalize() {
-            const auto len = length();
-
-            _0 = _0 / len;
-            _1 = _1 / len;
+            auto &d = *d_;
+            d._0 = d._0 / len;
+            d._1 = d._1 / len;
 
             return (*this);
         }
 
-        bool isUnit() const {
+        [[nodiscard]]
+        bool is_unit() const {
             const auto len = length();
-            return 0.99999999 <= len && len <= 1.00000001;
+            return static_cast<_item_t>(0.999999) <= len && len <= static_cast<_item_t>(1.000001);
         }
     };
 
-    double length(const vector2d& v);
-
-    double dot(const vector2d& left, const vector2d& right);
-
-    bool isUnit(const vector2d& v);
-
+    using vector2f = vector2_impl<float>;
+    using vector2d = vector2_impl<double>;
 }
 #endif // __VECTOR2_H_93FC91F8_B311_11EC_B909_0242AC120002__

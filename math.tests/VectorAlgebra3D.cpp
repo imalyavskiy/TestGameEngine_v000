@@ -147,12 +147,12 @@ TEST(VectorAlgebra3D, Length) {
 TEST(VectorAlgebra3D, Normalization) {
     {
         constexpr float x = -3.f, y = -5.f, z = -1.f;
-        EXPECT_TRUE(math::vector3f(x, y, z).normalize().isUnit());
+        EXPECT_TRUE(math::vector3f(x, y, z).normalize().is_unit());
         EXPECT_EQ(math::normalized(math::vector3f(x, y, z)), math::vector3f(x, y, z).normalize());
     }
     {
         constexpr double x = -3.0, y = -5.0, z = -1.0;
-        EXPECT_TRUE(math::vector3d(x, y, z).normalize().isUnit());
+        EXPECT_TRUE(math::vector3d(x, y, z).normalize().is_unit());
         EXPECT_EQ(math::normalized(math::vector3d(x, y, z)), math::vector3d(x, y, z).normalize());
     }
 }
@@ -263,14 +263,6 @@ TEST(VectorAlgebra3D, PlusMinusVector) {
 
     EXPECT_EQ(math::vector3d(0.0) + math::vector3d(1.0), math::vector3d(1.0));
     EXPECT_EQ(math::vector3d(1.0, 2.0, 3.0) + math::vector3d(3.0, 2.0, 1.0), math::vector3d(4.0));
-}
-
-TEST(VectorAlgebra3D, PlusMinusScalar) {
-    EXPECT_EQ(math::vector3f(0.f) + 1.f, math::vector3f(1.f));
-    EXPECT_EQ(math::vector3f(1.f, 2.f, 3.f) - 2.f, math::vector3f(-1.f, 0.f, 1.f));
-
-    EXPECT_EQ(math::vector3d(0.0) + 1.0, math::vector3d(1.0));
-    EXPECT_EQ(math::vector3d(1.0, 2.0, 3.0) - 2.0, math::vector3d(-1.0, 0.0, 1.0));
 }
 
 TEST(VectorAlgebra3D, MultiplyScalar) {

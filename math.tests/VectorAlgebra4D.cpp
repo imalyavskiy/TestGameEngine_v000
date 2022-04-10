@@ -165,14 +165,14 @@ TEST(VectorAlgebra4D, Length) {
 TEST(VectorAlgebra4D, Normalization) {
     {
         constexpr float x = -3.f, y = -5.f, z = -1.f;
-        EXPECT_TRUE(math::vector4f(x, y, z).normalize().isUnit());
-        EXPECT_TRUE(math::isUnit(math::vector4f(x, y, z).normalize()));
+        EXPECT_TRUE(math::vector4f(x, y, z).normalize().is_unit());
+        EXPECT_TRUE(math::is_unit(math::vector4f(x, y, z).normalize()));
         EXPECT_EQ(math::normalized(math::vector4f(x, y, z)), math::vector4f(x, y, z).normalize());
     }
     {
         constexpr double x = -3.0, y = -5.0, z = -1.0;
-        EXPECT_TRUE(math::vector4d(x, y, z).normalize().isUnit());
-        EXPECT_TRUE(math::isUnit(math::vector4d(x, y, z).normalize()));
+        EXPECT_TRUE(math::vector4d(x, y, z).normalize().is_unit());
+        EXPECT_TRUE(math::is_unit(math::vector4d(x, y, z).normalize()));
         EXPECT_EQ(math::normalized(math::vector4d(x, y, z)), math::vector4d(x, y, z).normalize());
     }
 }
@@ -279,20 +279,12 @@ TEST(VectorAlgebra4D, DotProduct) {
 
 TEST(VectorAlgebra4D, PlusMinusVector) {
     EXPECT_EQ(math::vector4f(0.f) + math::vector4f(1.f), math::vector4f(1.f));
-    EXPECT_EQ(math::vector4f(1.f, 2.f, 3.f) + math::vector4f(3.f, 2.f, 1.f), math::vector4f(4.f));
+    EXPECT_EQ(math::vector4f(1.f, 2.f, 3.f) + math::vector4f(3.f, 2.f, 1.f), math::vector4f(4.f, 4.f, 4.f));
 
     EXPECT_EQ(math::vector4d(0.0) + math::vector4d(1.0), math::vector4d(1.0));
-    EXPECT_EQ(math::vector4d(1.0, 2.0, 3.0) + math::vector4d(3.0, 2.0, 1.0), math::vector4d(4.0));
+    EXPECT_EQ(math::vector4d(1.0, 2.0, 3.0) + math::vector4d(3.0, 2.0, 1.0), math::vector4d(4.0, 4.0, 4.0));
 }
 
-
-TEST(VectorAlgebra4D, PlusMinusScalar) {
-    EXPECT_EQ(math::vector4f(0.f) + 1.f, math::vector4f(1.f));
-    EXPECT_EQ(math::vector4f(1.f, 2.f, 3.f) - 2.f, math::vector4f(-1.f, 0.f, 1.f));
-
-    EXPECT_EQ(math::vector4d(0.0) + 1.0, math::vector4d(1.0));
-    EXPECT_EQ(math::vector4d(1.0, 2.0, 3.0) - 2.0, math::vector4d(-1.0, 0.0, 1.0));
-}
 
 TEST(VectorAlgebra4D, MultiplyScalar) {
     EXPECT_EQ(math::vector4f(0.f) * 1.f, math::vector4f(0.f));
