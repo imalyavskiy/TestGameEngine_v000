@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>$(SolutionDir)deps\exports\glew.2.0.0\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)deps\exports\glew.2.0.0\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>glew32d.lib</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist $(OutDir)glew32d.dll (copy $(SolutionDir)deps\exports\glew.2.0.0\bin\x86\glew32d.dll $(OutDir)glew32d.dll) else (echo "glew32d.dll already exists in output dir")
+%(Command)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
