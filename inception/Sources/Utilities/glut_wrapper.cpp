@@ -1,10 +1,8 @@
-#include "glut_wrapper.h"
 #include <GL/freeglut.h>
 
-#ifdef CreateWindow
-#undef CreateWindow
-#endif
-namespace glut 
+#include "glut_wrapper.hpp"
+
+namespace GLUT 
 {
 	void SwapBuffers() 
 	{

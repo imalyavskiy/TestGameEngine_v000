@@ -18,6 +18,38 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Sources\BaseClasses\BaseObject.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseScene.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseSceneObject.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseSceneObjectComponent.cpp" />
+    <ClCompile Include="Sources\Learning\DeafultScene.cpp" />
+    <ClCompile Include="Sources\Learning\DotSceneObject.cpp" />
+    <ClCompile Include="Sources\Learning\DotSceneObjectComponent.cpp" />
+    <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\pch.cpp" />
+    <ClCompile Include="Sources\Utilities\glew_wrapper.cpp" />
+    <ClCompile Include="Sources\Utilities\glut_wrapper.cpp" />
+    <ClCompile Include="Sources\Utilities\gl_wrapper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseObject.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseScene.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseSceneObjectComponent.hpp" />
+    <ClInclude Include="Sources\BaseClasses\Interfaces.hpp" />
+    <ClInclude Include="Sources\Learning\DeafultScene.hpp" />
+    <ClInclude Include="Sources\Learning\DotSceneObject.hpp" />
+    <ClInclude Include="Sources\Learning\DotSceneObjectComponent.hpp" />
+    <ClInclude Include="Sources\Learning\Learning.hpp" />
+    <ClInclude Include="Sources\main.hpp" />
+    <ClInclude Include="Sources\Math3D\Math3d.hpp" />
+    <ClInclude Include="Sources\pch.hpp" />
+    <ClInclude Include="Sources\Utilities\glew_wrapper.hpp" />
+    <ClInclude Include="Sources\Utilities\glut_wrapper.hpp" />
+    <ClInclude Include="Sources\Utilities\gl_wrapper.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -60,8 +92,8 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\freeglut.3.0.0.x86.Debug.props" />
-    <Import Project="..\props\glew.2.0.0.x86.Debug.props" />
     <Import Project="..\props\binary.output.paths.props.props" />
+    <Import Project="..\props\glew.2.0.0.x86.Release.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -80,9 +112,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)Sources;$(SolutionDir)deps\exports\glew.2.0.0\inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)Sources;$(SolutionDir)deps\exports\glew.2.0.0\inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -100,6 +134,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,16 +181,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="glut_wrapper.cpp" />
-    <ClCompile Include="gl_wrapper.cpp" />
-    <ClCompile Include="inception.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="glut_wrapper.h" />
-    <ClInclude Include="gl_wrapper.h" />
-    <ClInclude Include="inception.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

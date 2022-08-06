@@ -3,7 +3,11 @@
 
 #include <initializer_list>
 
-namespace glut {
+#ifdef CreateWindow
+#undef CreateWindow
+#endif
+
+namespace GLUT {
 	enum class DisplayMode : unsigned int
 	{
 		RGB         = 0x0000,

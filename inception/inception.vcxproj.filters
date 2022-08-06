@@ -13,27 +13,123 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Sources">
+      <UniqueIdentifier>{d1f61466-5e48-4d58-ab0e-c992de779ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sources\BaseClasses">
+      <UniqueIdentifier>{c4c18bde-f480-4276-b896-d1c4c66c026f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sources\Utilities">
+      <UniqueIdentifier>{c492af37-e0c0-459c-b6e2-609bf6847af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sources\Math3D">
+      <UniqueIdentifier>{d6fb35fa-6bee-4f2b-a74d-e63707338a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources">
+      <UniqueIdentifier>{48fc34f3-ff84-45c4-b7e2-96ceaf2f2d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources\BaseClasses">
+      <UniqueIdentifier>{a23f33d0-0806-4246-8179-9506d4b00039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources\Math3D">
+      <UniqueIdentifier>{838f5989-8840-4c4b-bf7c-fcb5abe448f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources\Utilities">
+      <UniqueIdentifier>{78acc9be-ebd9-4ebb-91c3-7af77a473108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sources\Learning">
+      <UniqueIdentifier>{06d4d577-aac7-4bab-8097-ae438f7fc125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources\Learning">
+      <UniqueIdentifier>{e8d527a0-ce66-47f8-9797-401ffcb3fa54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="inception.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sources\main.cpp">
+      <Filter>Source Files\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="glut_wrapper.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sources\pch.cpp">
+      <Filter>Source Files\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="gl_wrapper.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sources\BaseClasses\BaseObject.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseScene.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseSceneObject.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseSceneObjectComponent.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Utilities\gl_wrapper.cpp">
+      <Filter>Source Files\Sources\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Utilities\glut_wrapper.cpp">
+      <Filter>Source Files\Sources\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Learning\DeafultScene.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Learning\DotSceneObject.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Learning\DotSceneObjectComponent.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Utilities\glew_wrapper.cpp">
+      <Filter>Source Files\Sources\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="glut_wrapper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sources\main.hpp">
+      <Filter>Header Files\Sources</Filter>
     </ClInclude>
-    <ClInclude Include="inception.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sources\pch.hpp">
+      <Filter>Header Files\Sources</Filter>
     </ClInclude>
-    <ClInclude Include="gl_wrapper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sources\BaseClasses\BaseObject.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseScene.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseSceneObjectComponent.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\Interfaces.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Math3D\Math3d.hpp">
+      <Filter>Header Files\Sources\Math3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Utilities\gl_wrapper.hpp">
+      <Filter>Header Files\Sources\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Utilities\glut_wrapper.hpp">
+      <Filter>Header Files\Sources\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\DeafultScene.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\DotSceneObject.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\DotSceneObjectComponent.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\Learning.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Utilities\glew_wrapper.hpp">
+      <Filter>Header Files\Sources\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
