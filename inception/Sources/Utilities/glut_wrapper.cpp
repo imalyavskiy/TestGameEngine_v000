@@ -35,12 +35,12 @@ namespace GLUT
 
 	void InitWindowSize(int width, int height)
 	{
-		glutInitWindowSize(1024, 768);
+		glutInitWindowSize(width, height);
 	}
 
 	void InitWindowPosition(int x, int y)
 	{
-		glutInitWindowPosition(100, 100);
+		glutInitWindowPosition(x, y);
 	}
 
 	void MainLoop()

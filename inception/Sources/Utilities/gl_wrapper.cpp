@@ -25,12 +25,12 @@ namespace GL
 	
 	void BindBuffer(BufferType targetBufferType, unsigned int bufferId)
 	{
-		glBindBuffer((unsigned int)targetBufferType, bufferId);
+		glBindBuffer((GLenum)targetBufferType, bufferId);
 	}
 	
 	void BufferData(BufferType targetBufferType, unsigned int dataSize, void* data, Action action)
 	{
-		glBufferData((unsigned int)targetBufferType, dataSize, data, (unsigned int)action);
+		glBufferData((unsigned int)targetBufferType, dataSize, data, (GLenum)action);
 	}
 
 	void EnableVertexAttribArray(unsigned int index)
@@ -40,12 +40,12 @@ namespace GL
 
 	void VertexAttribPointer(unsigned int index, int size, Type type, bool normalized, int stride, const void* pointer)
 	{
-		glVertexAttribPointer(index, size, (unsigned int)type, normalized, stride, pointer);
+		glVertexAttribPointer(index, size, (GLenum)type, normalized, stride, pointer);
 	}
 
 	void DrawArrays(DataType dataType, int first, int count)
 	{
-		glDrawArrays(GL_POINTS, first, count);
+		glDrawArrays((GLenum)dataType, first, count);
 	}
 
 	void DisableVertexAttribArray(unsigned int index)
