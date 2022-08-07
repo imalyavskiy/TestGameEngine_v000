@@ -72,10 +72,10 @@
     <ClCompile Include="Sources\Learning\DeafultScene.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Learning\DotSceneObject.cpp">
+    <ClCompile Include="Sources\Learning\SceneObject.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Learning\DotSceneObjectComponent.cpp">
+    <ClCompile Include="Sources\Learning\SceneObjectComponent.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Utilities\glew_wrapper.cpp">
@@ -119,16 +119,19 @@
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Learning\DotSceneObject.hpp">
+    <ClInclude Include="Sources\Learning\SceneObject.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Learning\DotSceneObjectComponent.hpp">
+    <ClInclude Include="Sources\Learning\SceneObjectComponent.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Learning\Learning.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Utilities\glew_wrapper.hpp">
+      <Filter>Header Files\Sources\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Utilities\Utilities.hpp">
       <Filter>Header Files\Sources\Utilities</Filter>
     </ClInclude>
   </ItemGroup>

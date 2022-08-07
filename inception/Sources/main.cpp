@@ -22,8 +22,8 @@ static void InitializeScene()
 {
     scene = std::make_shared<Learning::DefaultScene>("DefaultScene");
 
-    auto sceneObject = std::make_shared<Learning::DotSceneObject>("dot scene object");
-    sceneObject->SetRootComponent(std::make_shared<Learning::DotRootSceneObjectComponent>("dot component"));
+    auto sceneObject = std::make_shared<Learning::SceneObject>("dot scene object");
+    sceneObject->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
     
     scene->AddObject(sceneObject);
 }

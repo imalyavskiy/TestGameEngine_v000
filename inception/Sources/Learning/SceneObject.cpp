@@ -3,18 +3,18 @@
 
 namespace Learning
 {
-    DotSceneObject::DotSceneObject(const std::string& name)
+    SceneObject::SceneObject(const std::string& name)
         : BaseSceneObject(name)
     {
     }
 
-    void DotSceneObject::Update(float dt)
+    void SceneObject::Update(float dt)
     {
         if (auto root = GetRootComponent())
             root->Update(dt);
     }
 
-    void DotSceneObject::Draw()
+    void SceneObject::Draw()
     {
         if (auto root = GetRootComponent())
             root->Draw();

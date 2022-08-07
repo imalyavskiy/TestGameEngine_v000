@@ -6,10 +6,10 @@
 
 namespace Learning
 {
-	class DotRootSceneObjectComponent : public BaseSceneObjectComponent
+	class RootSceneObjectComponent : public BaseSceneObjectComponent
 	{
 	public:
-		DotRootSceneObjectComponent(const std::string& name);
+		RootSceneObjectComponent(const std::string& name);
 
 		void Draw() override;
 	

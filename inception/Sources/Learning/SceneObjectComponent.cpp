@@ -1,11 +1,10 @@
-#include <Math3D/Math3d.hpp>
-#include <Utilities/gl_wrapper.hpp>
-
-#include "DotSceneObjectComponent.hpp"
+#include <pch.hpp>
+#include <Utilities/Utilities.hpp>
+#include <Learning/Learning.hpp>
 
 namespace Learning
 {
-    DotRootSceneObjectComponent::DotRootSceneObjectComponent(const std::string& name)
+    RootSceneObjectComponent::RootSceneObjectComponent(const std::string& name)
         : BaseSceneObjectComponent(name)
     {
         vertices_[0] = Math3D::Vector3f(0.0f, 0.0f, 0.0f);
@@ -17,7 +16,7 @@ namespace Learning
         GL::BufferData(GL::BufferType::ARRAY_BUFFER, sizeof(vertices_), vertices_, GL::Action::STATIC_DRAW);
     }
 
-    void DotRootSceneObjectComponent::Draw()
+    void RootSceneObjectComponent::Draw()
     {
         GL::EnableVertexAttribArray(0);
 

@@ -1,9 +1,7 @@
 #include <pch.hpp>
 #include <Windows.h>
 #include <GL/glew.h>
-
-#include "gl_wrapper.hpp"
-#include "glew_wrapper.hpp"
+#include "Utilities.hpp"
 
 namespace GLEW
 {

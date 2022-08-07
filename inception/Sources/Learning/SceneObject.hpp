@@ -2,10 +2,10 @@
 #include <BaseClasses/BaseClasses.hpp>
 namespace Learning
 {
-	class DotSceneObject : public BaseSceneObject
+	class SceneObject : public BaseSceneObject
 	{
 	public:
-		DotSceneObject(const std::string& name);
+		SceneObject(const std::string& name);
 
 		void Update(float dt) override;
 

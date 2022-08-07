@@ -1,7 +1,7 @@
-#include "gl_wrapper.hpp"
+#include <pch.hpp>
 #include <Windows.h>
 #include <GL/glew.h>
-
+#include "Utilities.hpp"
 namespace GL 
 {
 	void Clear(std::initializer_list<AttribMask> mask)
