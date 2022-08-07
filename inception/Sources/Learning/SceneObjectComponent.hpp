@@ -16,7 +16,7 @@ namespace Learning
 	private:
 		unsigned int vertexBufferObject_ = _UI32_MAX;
 
-		Math3D::Vector3f vertices_[1];
+		std::array<Math3D::Vector3f, 3> vertices_;
 	};
 }
 

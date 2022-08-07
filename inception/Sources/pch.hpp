@@ -4,5 +4,6 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <array>
 
 #endif // __PCH_HPP__

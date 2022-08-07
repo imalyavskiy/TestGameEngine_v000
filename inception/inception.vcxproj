@@ -92,9 +92,9 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\props\freeglut.3.0.0.x86.Debug.props" />
     <Import Project="..\props\binary.output.paths.props.props" />
-    <Import Project="..\props\glew.2.0.0.x86.Debug.props" />
+    <Import Project="..\props\freeglut.3.0.0.x86.Debug.props" />
+    <Import Project="..\props\glew.2.0.0.x86.Release.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
