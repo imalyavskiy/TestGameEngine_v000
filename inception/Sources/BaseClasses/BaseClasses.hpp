@@ -6,5 +6,7 @@
 #include "BaseSceneObjectComponent.hpp"
 #include "BaseSceneObject.hpp"
 #include "BaseScene.hpp"
+#include "BaseShaderObject.hpp"
+#include "BaseShaderProgram.hpp"
 
 #endif // __BASE_CLASSES_HPP__

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseShaderProgram.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseScene.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseSceneObject.cpp" />
@@ -34,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseShaderProgram.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseScene.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp" />

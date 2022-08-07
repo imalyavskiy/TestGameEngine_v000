@@ -12,6 +12,6 @@ namespace GLEW
 
 	std::string GetErrorString(Error error)
 	{
-		return { (char*)glewGetErrorString((unsigned int)error) };
+		return { (char*)glewGetErrorString((GLenum)error) };
 	}
 }

@@ -1,14 +1,17 @@
-#pragma once
-class BaseScene : public BaseObject, public Updatable, public Drawable
-{
-public:
-	using ptr = std::shared_ptr<BaseScene>;
+#ifndef __BASE_SCENE_HPP__
+#define __BASE_SCENE_HPP__
+namespace Base {
+	class Scene : public Object, public Updatable, public Drawable
+	{
+	public:
+		using ptr = std::shared_ptr<Scene>;
 
-	explicit BaseScene(const std::string& name);
+		explicit Scene(const std::string& name);
 
-	void AddObject(BaseSceneObject::ptr sceneObject);
+		void AddObject(SceneObject::ptr sceneObject);
 
-protected:
-	std::vector<BaseSceneObject::ptr> objects_;
-};
-
+	protected:
+		std::vector<SceneObject::ptr> objects_;
+	};
+}
+#endif // __BASE_SCENE_HPP__

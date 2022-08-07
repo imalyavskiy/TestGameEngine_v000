@@ -1,17 +1,19 @@
 #ifndef __SCENE_OBJECT_H__
 #define __SCENE_OBJECT_H__
-class BaseSceneObject : public BaseObject, public Updatable, public Drawable
-{
-public:
-	using ptr = std::shared_ptr<BaseSceneObject>;
+namespace Base {
+	class SceneObject : public Object, public Updatable, public Drawable
+	{
+	public:
+		using ptr = std::shared_ptr<SceneObject>;
 
-	explicit BaseSceneObject(const std::string name);
+		explicit SceneObject(const std::string name);
 
-	void SetRootComponent(BaseSceneObjectComponent::ptr p);
+		void SetRootComponent(SceneObjectComponent::ptr p);
 
-	BaseSceneObjectComponent::ptr GetRootComponent();
+		SceneObjectComponent::ptr GetRootComponent();
 
-private:
-	BaseSceneObjectComponent::ptr root_;
-};
+	private:
+		SceneObjectComponent::ptr root_;
+	};
+}
 #endif // __SCENE_OBJECT_H__

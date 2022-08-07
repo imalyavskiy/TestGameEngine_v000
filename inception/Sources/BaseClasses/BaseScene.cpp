@@ -1,13 +1,15 @@
 #include <pch.hpp>
+#include <Utilities/Utilities.hpp>
 #include "BaseClasses.hpp"
-#include "BaseScene.hpp"
 
-BaseScene::BaseScene(const std::string& name)
-	: BaseObject(name)
-{
-}
+namespace Base {
+	Scene::Scene(const std::string& name)
+		: Object(name)
+	{
+	}
 
-void BaseScene::AddObject(BaseSceneObject::ptr sceneObject)
-{
-	objects_.push_back(sceneObject);
+	void Scene::AddObject(SceneObject::ptr sceneObject)
+	{
+		objects_.push_back(sceneObject);
+	}
 }

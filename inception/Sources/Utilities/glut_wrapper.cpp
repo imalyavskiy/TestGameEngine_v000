@@ -14,16 +14,16 @@ namespace GLUT
 		glutDisplayFunc(callback);
 	}
 
-	void Init(int argc, char** argv)
+	void Init(int32_t argc, char** argv)
 	{
 		glutInit(&argc, argv);
 	}
 
 	void InitDisplayMode(std::initializer_list<DisplayMode> flags)
 	{
-		unsigned int arg = 0;
+		uint32_t arg = 0;
 		for (auto flag : flags)
-			arg |= (unsigned int)flag;
+			arg |= (uint32_t)flag;
 
 		glutInitDisplayMode(arg);
 	}
@@ -33,12 +33,12 @@ namespace GLUT
 		glutCreateWindow(title);
 	}
 
-	void InitWindowSize(int width, int height)
+	void InitWindowSize(int32_t width, int32_t height)
 	{
 		glutInitWindowSize(width, height);
 	}
 
-	void InitWindowPosition(int x, int y)
+	void InitWindowPosition(int32_t x, int32_t y)
 	{
 		glutInitWindowPosition(x, y);
 	}

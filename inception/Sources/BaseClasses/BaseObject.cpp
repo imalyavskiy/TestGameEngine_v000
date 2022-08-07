@@ -1,12 +1,13 @@
 #include <pch.hpp>
 #include "BaseObject.hpp"
+namespace Base {
+	Object::Object(const std::string& name)
+		: name_(name)
+	{
+	}
 
-BaseObject::BaseObject(const std::string& name)
-	: name_(name)
-{
-}
-
-const std::string& BaseObject::GetName() const
-{
-	return name_;
+	const std::string& Object::GetName() const
+	{
+		return name_;
+	}
 }

@@ -1,32 +1,32 @@
 #include <pch.hpp>
-
 #include "BaseClasses.hpp"
+namespace Base {
+	SceneObjectComponent::SceneObjectComponent(const std::string& name)
+		: Object(name)
+	{
 
-BaseSceneObjectComponent::BaseSceneObjectComponent(const std::string& name)
-	: BaseObject(name)
-{
+	}
 
-}
+	void SceneObjectComponent::AddChild(ptr child)
+	{
+		childList_.push_back(child);
+	}
 
-void BaseSceneObjectComponent::AddChild(ptr child)
-{
-	childList_.push_back(child);
-}
+	SceneObjectComponent::ChildList&
+		SceneObjectComponent::GetChildList()
+	{
+		return childList_;
+	}
 
-BaseSceneObjectComponent::ChildList& 
-BaseSceneObjectComponent::GetChildList()
-{
-	return childList_;
-}
+	void SceneObjectComponent::Update(float dt)
+	{
+		for (auto child : childList_)
+			child->Update(dt);
+	}
 
-void BaseSceneObjectComponent::Update(float dt)
-{
-	for (auto child : childList_)
-		child->Update(dt);
-}
-
-void BaseSceneObjectComponent::Draw()
-{
-	for (auto child : childList_)
-		child->Draw();
+	void SceneObjectComponent::Draw()
+	{
+		for (auto child : childList_)
+			child->Draw();
+	}
 }

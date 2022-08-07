@@ -6,17 +6,25 @@
 
 namespace Learning
 {
-	class RootSceneObjectComponent : public BaseSceneObjectComponent
+	///
+	class RootSceneObjectComponent : public Base::SceneObjectComponent
 	{
 	public:
+		///
 		RootSceneObjectComponent(const std::string& name);
 
+		///
 		void Draw() override;
 	
 	private:
-		unsigned int vertexBufferObject_ = _UI32_MAX;
+		///
+		uint32_t vertexBufferObject_ = _UI32_MAX;
 
+		///
 		std::array<Math3D::Vector3f, 3> vertices_;
+
+		///
+		Base::ShaderProgram::ptr shaderProgram_;
 	};
 }
 

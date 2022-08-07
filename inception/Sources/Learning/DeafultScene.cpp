@@ -1,11 +1,12 @@
 #include <pch.hpp>
+#include <Utilities/Utilities.hpp>
 #include <BaseClasses/BaseClasses.hpp>
 #include "Learning.hpp"
 
 namespace Learning
 {
 	DefaultScene::DefaultScene(const std::string& name)
-		: BaseScene(name)
+		: Base::Scene(name)
 	{
 	}
 

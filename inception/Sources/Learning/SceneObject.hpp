@@ -1,8 +1,6 @@
-#include <pch.hpp>
-#include <BaseClasses/BaseClasses.hpp>
 namespace Learning
 {
-	class SceneObject : public BaseSceneObject
+	class SceneObject : public Base::SceneObject
 	{
 	public:
 		SceneObject(const std::string& name);

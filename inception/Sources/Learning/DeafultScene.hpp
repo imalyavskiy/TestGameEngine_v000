@@ -2,7 +2,7 @@
 #define __LEARNING_DEAFULT_SCENE_H__
 namespace Learning
 {
-	class DefaultScene final : public BaseScene
+	class DefaultScene final : public Base::Scene
 	{
 	public:
 		explicit DefaultScene(const std::string& name);

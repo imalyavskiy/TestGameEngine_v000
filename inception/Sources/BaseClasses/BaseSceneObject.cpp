@@ -1,18 +1,20 @@
 #include <pch.hpp>
-
+#include <Utilities/Utilities.hpp>
 #include "BaseClasses.hpp"
 
-BaseSceneObject::BaseSceneObject(const std::string name)
-	: BaseObject(name)
-{
-}
+namespace Base {
+	SceneObject::SceneObject(const std::string name)
+		: Object(name)
+	{
+	}
 
-void BaseSceneObject::SetRootComponent(BaseSceneObjectComponent::ptr p)
-{
-	root_ = p;
-}
+	void SceneObject::SetRootComponent(SceneObjectComponent::ptr p)
+	{
+		root_ = p;
+	}
 
-BaseSceneObjectComponent::ptr BaseSceneObject::GetRootComponent()
-{
-	return root_;
+	SceneObjectComponent::ptr SceneObject::GetRootComponent()
+	{
+		return root_;
+	}
 }

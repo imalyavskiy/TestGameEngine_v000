@@ -81,6 +81,12 @@
     <ClCompile Include="Sources\Utilities\glew_wrapper.cpp">
       <Filter>Source Files\Sources\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseShaderProgram.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\main.hpp">
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="Sources\Utilities\Utilities.hpp">
       <Filter>Header Files\Sources\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseShaderProgram.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

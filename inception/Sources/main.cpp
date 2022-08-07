@@ -1,7 +1,7 @@
 ﻿#include "main.hpp"
 #include "Learning/Learning.hpp"
 
-BaseScene::ptr scene;
+Base::Scene::ptr scene;
 
 
 static void RenderSceneCB()
