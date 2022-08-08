@@ -115,4 +115,33 @@ namespace Base {
 	{
 		return shaderProgramID_ != _UI32_MAX;
 	}
+	
+	bool ShaderProgram::AttachToUniform(const std::string& uniformVariableName)
+	{
+		if(shaderProgramID_ == _UI32_MAX)
+			return false;
+
+		GL::UseProgram(shaderProgramID_);
+
+		auto location = GL::GetUniformLocation(shaderProgramID_, uniformVariableName);
+		
+		// TODO: There are other error values can be returned
+		if (location != -1)
+		{
+			uniformVariables_[uniformVariableName] = location;
+		}
+	}
+	
+	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, float value)
+	{
+		auto it = uniformVariables_.find(uniformVariableName);
+		if(it == uniformVariables_.end())
+		{ 
+			return false;
+		}
+
+		GL::Uniform1f(it->second, value);
+
+		return true;
+	}
 }

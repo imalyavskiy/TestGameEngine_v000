@@ -15,6 +15,9 @@ namespace Learning
 
 		///
 		void Draw() override;
+
+		///
+		void Update(float dt) override;
 	
 	private:
 		///
@@ -25,6 +28,9 @@ namespace Learning
 
 		///
 		Base::ShaderProgram::ptr shaderProgram_;
+
+		///
+		float scale_ = 0.f;
 	};
 }
 

@@ -219,5 +219,11 @@ namespace GL
 
     /// Installs a program object as part of current rendering state(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml).
     void UseProgram(uint32_t shaderProgramID);
+
+    /// Returns the location of a uniform variable(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml).
+    int32_t GetUniformLocation(uint32_t shaderProgramID, const std::string& uniformVariableName);
+
+    /// Specify the value of a uniform variable for the current program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml).
+    void Uniform1f(uint32_t shaderProgramID, float value);
 };
 #endif // __GL_WRAPPER_H__

@@ -34,6 +34,12 @@ namespace Base
 		///
 		bool IsValid() const;
 
+		/// 
+		bool AttachToUniform(const std::string& uniformVariableName);
+
+		/// 
+		bool UpdateUniform(const std::string& uniformVariableName, float value);
+
 	protected:
 		///
 		uint32_t shaderProgramID_ = _UI32_MAX;
@@ -52,6 +58,9 @@ namespace Base
 
 		///
 		FragmentShader::ptr fragmentShader_;
+
+		///
+		std::map<std::string, int32_t> uniformVariables_;
 	};
 }
 #endif // __BASE_SHADER_PROGRAM_HPP__

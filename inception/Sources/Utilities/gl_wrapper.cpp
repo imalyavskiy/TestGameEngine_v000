@@ -243,9 +243,19 @@ namespace GL
 		glValidateProgram(shaderProgramID);
 	}
 
-	/// Installs a program object as part of current rendering state(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUseProgram.xhtml).
+	
 	void UseProgram(uint32_t shaderProgramID)
 	{
 		glUseProgram(shaderProgramID);
+	}
+
+	int32_t GetUniformLocation(uint32_t shaderProgramID, const std::string& uniformVariableName)
+	{
+		return glGetUniformLocation(shaderProgramID, uniformVariableName.data());
+	}
+
+	void Uniform1f(uint32_t shaderProgramID, float value)
+	{
+		glUniform1f(shaderProgramID, value);
 	}
 }

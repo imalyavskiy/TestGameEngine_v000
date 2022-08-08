@@ -13,9 +13,24 @@ static void RenderSceneCB()
     GLUT::SwapBuffers();
 }
 
+constexpr int oneThirtieth = 1000 / 30; // of a second in milliseconds
+std::chrono::steady_clock::time_point prev = std::chrono::steady_clock::now() - std::chrono::milliseconds(oneThirtieth);
+static void IdleCB()
+{
+    const auto now = std::chrono::steady_clock::now();
+    const auto dtMS = std::chrono::duration_cast<std::chrono::milliseconds>(now - prev);
+    prev = now;
+
+    scene->Update(dtMS.count()/1000.f);
+
+    RenderSceneCB();
+}
+
 static void InitializeGlutCallbacks()
 {
     GLUT::DisplayFunc(RenderSceneCB);
+
+    GLUT::IdleFunc(IdleCB);
 }
 
 static void InitializeScene()

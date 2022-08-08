@@ -9,11 +9,6 @@ namespace GLUT
 		glutSwapBuffers();
 	}
 
-	void DisplayFunc(void(*callback)(void))
-	{
-		glutDisplayFunc(callback);
-	}
-
 	void Init(int32_t argc, char** argv)
 	{
 		glutInit(&argc, argv);
@@ -46,5 +41,130 @@ namespace GLUT
 	void MainLoop()
 	{
 		glutMainLoop();
+	}
+
+	void IdleFunc(void(*callback)(void))
+	{
+		glutIdleFunc(callback);
+	}
+
+	void DisplayFunc(void(*callback)(void))
+	{
+		glutDisplayFunc(callback);
+	}
+
+	void MouseFunc(void(*callback)(int, int, int, int))
+	{
+		glutMouseFunc(callback);
+	}
+
+	void MotionFunc(void(*callback)(int, int))
+	{
+		glutMotionFunc(callback);
+	}
+
+	void PassiveMotionFunc(void(*callback)(int, int))
+	{
+		glutPassiveMotionFunc(callback);
+	}
+
+	void EntryFunc(void(*callback)(int))
+	{
+		glutEntryFunc(callback);
+	}
+
+	void KeyboardUpFunc(void(*callback)(unsigned char, int, int))
+	{
+		glutKeyboardUpFunc(callback);
+	}
+
+	void SpecialUpFunc(void(*callback)(int, int, int))
+	{
+		glutSpecialUpFunc(callback);
+	}
+
+	void JoystickFunc(void(*callback)(unsigned int, int, int, int), int pollInterval)
+	{
+		glutJoystickFunc(callback, pollInterval);
+	}
+
+	void MenuStateFunc(void(*callback)(int))
+	{
+		glutMenuStateFunc(callback);
+	}
+
+	void MenuStatusFunc(void(*callback)(int, int, int))
+	{
+		glutMenuStatusFunc(callback);
+	}
+
+	void OverlayDisplayFunc(void(*callback)(void))
+	{
+		glutOverlayDisplayFunc(callback);
+	}
+
+	void WindowStatusFunc(void(*callback)(int))
+	{
+		glutWindowStatusFunc(callback);
+	}
+
+	void SpaceballMotionFunc(void(*callback)(int, int, int))
+	{
+		glutSpaceballMotionFunc(callback);
+	}
+
+	void SpaceballRotateFunc(void(*callback)(int, int, int))
+	{
+		glutSpaceballRotateFunc(callback);
+	}
+
+	void SpaceballButtonFunc(void(*callback)(int, int))
+	{
+		glutSpaceballButtonFunc(callback);
+	}
+
+	void ButtonBoxFunc(void(*callback)(int, int))
+	{
+		glutButtonBoxFunc(callback);
+	}
+
+	void DialsFunc(void(*callback)(int, int))
+	{
+		glutDialsFunc(callback);
+	}
+
+	void TabletMotionFunc(void(*callback)(int, int))
+	{
+		glutTabletMotionFunc(callback);
+	}
+
+	void TabletButtonFunc(void(*callback)(int, int, int, int))
+	{
+		glutTabletButtonFunc(callback);
+	}
+
+	void TimerFunc(unsigned int time, void(*callback)(int), int value)
+	{
+		glutTimerFunc(time, callback, value);
+	}
+
+	void KeyboardFunc(void(*callback)(unsigned char, int, int))
+	{
+		glutKeyboardFunc(callback);
+	}
+
+	void SpecialFunc(void(*callback)(int, int, int))
+	{
+		glutSpecialFunc(callback);
+	}
+
+	void ReshapeFunc(void(*callback)(int, int))
+	{
+		glutReshapeFunc(callback);
+	}
+
+	void VisibilityFunc(void(*callback)(int))
+	{
+		glutVisibilityFunc(callback);
 	}
 }

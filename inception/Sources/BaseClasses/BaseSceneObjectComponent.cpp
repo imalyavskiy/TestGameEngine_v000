@@ -1,4 +1,5 @@
 #include <pch.hpp>
+#include <Utilities/Utilities.hpp>
 #include "BaseClasses.hpp"
 namespace Base {
 	SceneObjectComponent::SceneObjectComponent(const std::string& name)
