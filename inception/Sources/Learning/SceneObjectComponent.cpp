@@ -49,8 +49,8 @@ namespace Learning
         shaderProgram_->Use();
 
         auto worldMatrix = Math3D::Matrix4f::Identity();
-        worldMatrix.m[0][3] = std::sinf(scale_);
-        worldMatrix.m[1][3] = std::cos(scale_);
+        worldMatrix.m[0][0] =  std::cosf(scale_); worldMatrix.m[0][1] = -std::sinf(scale_);
+        worldMatrix.m[1][0] =  std::sinf(scale_); worldMatrix.m[1][1] =  std::cos(scale_);
 
         shaderProgram_->UpdateUniform("gWorld", worldMatrix);
 
