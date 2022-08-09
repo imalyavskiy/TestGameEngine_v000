@@ -181,6 +181,9 @@ namespace GL
     /// Renders primitives from array data(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawArrays.xhtml).
     void DrawArrays(DataType dataType, int32_t first, int32_t count);
 
+    /// Renders primitives from array data(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDrawElements.xhtml).
+    void DrawElements(DataType dataType, int32_t count, Type type);
+
     /// Disables a generic vertex attribute array(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml).
     void DisableVertexAttribArray(uint32_t index);
 

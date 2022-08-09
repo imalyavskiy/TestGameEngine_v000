@@ -9,15 +9,33 @@ namespace Learning
         : Base::SceneObjectComponent(name)
     {
         vertices_[0] = { -1.0f, -1.0f,  0.0f};
-        vertices_[1] = {  1.0f, -1.0f,  0.0f};
-        vertices_[2] = {  0.0f,  1.0f,  0.0f};
+        vertices_[1] = {  0.0f, -1.0f,  1.0f};
+        vertices_[2] = {  1.0f, -1.0f,  0.0f};
+        vertices_[3] = {  0.0f,  1.0f,  0.0f};
 
+        //
         GL::GenBuffer(vertexBufferObject_);
 
         GL::BindBuffer(GL::BufferType::ARRAY_BUFFER, vertexBufferObject_);
 
         GL::BufferData(GL::BufferType::ARRAY_BUFFER, vertices_.size() * sizeof vertices_[0], vertices_.data(), GL::Action::STATIC_DRAW);
 
+        //
+        uint32_t Indices[] =
+        {
+            0, 3, 1,
+            1, 3, 2,
+            2, 3, 0,
+            0, 2, 1
+        };
+
+        GL::GenBuffer(indexBufferObject_);
+
+        GL::BindBuffer(GL::BufferType::ELEMENT_ARRAY_BUFFER, indexBufferObject_);
+
+        GL::BufferData(GL::BufferType::ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL::Action::STATIC_DRAW);
+
+        //
         shaderProgram_ = std::make_shared<Base::ShaderProgram>(
             "shader program",
             std::make_shared<Base::VertexShader>(
@@ -52,9 +70,10 @@ namespace Learning
         shaderProgram_->Use();
 
         auto worldMatrix = Math3D::Matrix4f::Identity();
-        worldMatrix.m[0][0] = .5f;
-        worldMatrix.m[1][1] = .5f;
-        worldMatrix.m[2][2] = .5f;
+        worldMatrix.m[0][0] = std::cosf(scale_);
+        worldMatrix.m[0][2] = -std::sinf(scale_);
+        worldMatrix.m[2][0] = sinf(scale_);
+        worldMatrix.m[2][2] = cosf(scale_),
 
         shaderProgram_->UpdateUniform("gWorld", worldMatrix);
 
@@ -64,7 +83,9 @@ namespace Learning
 
         GL::VertexAttribPointer(0, 3, GL::Type::FLOAT, false, 0, 0);
 
-        GL::DrawArrays(GL::DataType::TRIANGLES, 0, vertices_.size());
+        GL::BindBuffer(GL::BufferType::ELEMENT_ARRAY_BUFFER, indexBufferObject_);
+
+        GL::DrawElements(GL::DataType::TRIANGLES, indecies_.size(), GL::Type::UNSIGNED_INT);
 
         GL::DisableVertexAttribArray(0);
 
@@ -73,6 +94,6 @@ namespace Learning
     
     void RootSceneObjectComponent::Update(float dt)
     {
-        scale_ += 1.8f * dt;
+        scale_ += 0.5f * dt;
     }
 }

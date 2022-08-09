@@ -164,6 +164,11 @@ namespace GL
 		glDrawArrays((GLenum)dataType, first, count);
 	}
 
+	void DrawElements(DataType dataType, int32_t count, Type type)
+	{
+		glDrawElements((GLenum)dataType, count, (GLenum)type, nullptr);
+	}
+
 	void DisableVertexAttribArray(uint32_t index)
 	{
 		glDisableVertexAttribArray(index);
