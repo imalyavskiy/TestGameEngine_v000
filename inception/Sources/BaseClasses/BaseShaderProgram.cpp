@@ -131,7 +131,10 @@ namespace Base {
 		if (location != -1)
 		{
 			uniformVariables_[uniformVariableName] = location;
+			return true;
 		}
+
+		return false;
 	}
 	
 	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, float value)

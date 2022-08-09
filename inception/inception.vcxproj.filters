@@ -88,7 +88,7 @@
       <Filter>Source Files\Sources\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Math3D\Math3d.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Sources\Math3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

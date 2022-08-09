@@ -69,11 +69,11 @@ namespace Learning
     {
         shaderProgram_->Use();
 
-        auto worldMatrix = Math3D::Matrix4f::Identity();
-        worldMatrix.m[0][0] = std::cosf(scale_);
-        worldMatrix.m[0][2] = -std::sinf(scale_);
-        worldMatrix.m[2][0] = sinf(scale_);
-        worldMatrix.m[2][2] = cosf(scale_),
+        auto worldMatrix = Math3D::Transform::Create(
+            Math3D::Position(std::sinf(scale_), 0.f, 0.f),
+            Math3D::Rotation(std::sinf(scale_) * 90.f, std::sinf(scale_) * 90.f, std::sinf(scale_) * 90.f),
+            Math3D::Scale(std::sinf(scale_ * 0.1f), std::sinf(scale_ * 0.1f), std::sinf(scale_ * 0.1f))
+        );
 
         shaderProgram_->UpdateUniform("gWorld", worldMatrix);
 
