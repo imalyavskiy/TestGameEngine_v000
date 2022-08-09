@@ -24,16 +24,19 @@ namespace Learning
                                 "#version 330                                                                       \n"
                                 "layout (location = 0) in vec3 Position;                                            \n"
                                 "uniform mat4 gWorld;                                                               \n"
+                                "out vec4 Color;                                                                    \n"
                                 "void main()                                                                        \n"
                                 "{                                                                                  \n"
                                 "    gl_Position = gWorld * vec4(Position, 1.0);                                    \n"
+                                "    Color = vec4(clamp(Position, 0.4, 1.0), 1.0);                                  \n"
                                 "}                                                                                  \n"),
             std::make_shared<Base::FragmentShader>(
                                 "#version 330                                                                       \n"
+                                "in vec4 Color;                                                                     \n"
                                 "out vec4 FragColor;                                                                \n"
                                 "void main()                                                                        \n"
                                 "{                                                                                  \n"
-                                "    FragColor = vec4(1.0, 0.0, 0.0, 1.0);                                          \n"
+                                "    FragColor = Color;                                                             \n"
                                 "}                                                                                  \n") );
         bool res = false;
         res = shaderProgram_->Build();
@@ -49,8 +52,9 @@ namespace Learning
         shaderProgram_->Use();
 
         auto worldMatrix = Math3D::Matrix4f::Identity();
-        worldMatrix.m[0][0] =  std::cosf(scale_);
-        worldMatrix.m[1][1] =  std::sinf(scale_);
+        worldMatrix.m[0][0] = .5f;
+        worldMatrix.m[1][1] = .5f;
+        worldMatrix.m[2][2] = .5f;
 
         shaderProgram_->UpdateUniform("gWorld", worldMatrix);
 
