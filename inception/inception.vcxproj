@@ -29,6 +29,7 @@
     <ClCompile Include="Sources\Learning\SceneObject.cpp" />
     <ClCompile Include="Sources\Learning\SceneObjectComponent.cpp" />
     <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\Math3D\Math3d.cpp" />
     <ClCompile Include="Sources\pch.cpp" />
     <ClCompile Include="Sources\Utilities\glew_wrapper.cpp" />
     <ClCompile Include="Sources\Utilities\glut_wrapper.cpp" />

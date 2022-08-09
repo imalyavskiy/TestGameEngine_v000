@@ -1,4 +1,5 @@
 #include <pch.hpp>
+#include <Math3D/Math3d.hpp>
 #include <Utilities/Utilities.hpp>
 #include <Learning/Learning.hpp>
 
@@ -22,10 +23,10 @@ namespace Learning
             std::make_shared<Base::VertexShader>(
                                 "#version 330                                                                       \n"
                                 "layout (location = 0) in vec3 Position;                                            \n"
-                                "uniform float gScale;                                                              \n"
+                                "uniform mat4 gWorld;                                                               \n"
                                 "void main()                                                                        \n"
                                 "{                                                                                  \n"
-                                "    gl_Position = vec4(gScale * Position.x, gScale * Position.y, Position.z, 1.0); \n"
+                                "    gl_Position = gWorld * vec4(Position, 1.0);                                    \n"
                                 "}                                                                                  \n"),
             std::make_shared<Base::FragmentShader>(
                                 "#version 330                                                                       \n"
@@ -38,17 +39,20 @@ namespace Learning
         res = shaderProgram_->Build();
         assert(res);
 
-        res = shaderProgram_->AttachToUniform("gScale");
+        res = shaderProgram_->AttachToUniform("gWorld");
         assert(res);
     }
-
 
 
     void RootSceneObjectComponent::Draw()
     {
         shaderProgram_->Use();
 
-        shaderProgram_->UpdateUniform("gScale", std::sinf(scale_));
+        auto worldMatrix = Math3D::Matrix4f::Identity();
+        worldMatrix.m[0][3] = std::sinf(scale_);
+        worldMatrix.m[1][3] = std::cos(scale_);
+
+        shaderProgram_->UpdateUniform("gWorld", worldMatrix);
 
         GL::EnableVertexAttribArray(0);
 

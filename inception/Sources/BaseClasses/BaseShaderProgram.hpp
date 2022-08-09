@@ -40,6 +40,9 @@ namespace Base
 		/// 
 		bool UpdateUniform(const std::string& uniformVariableName, float value);
 
+		///
+		bool UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix);
+
 	protected:
 		///
 		uint32_t shaderProgramID_ = _UI32_MAX;

@@ -1,6 +1,7 @@
 #include <pch.hpp>
 #include <Windows.h>
 #include <GL/glew.h>
+#include <Math3D/Math3d.hpp>
 #include "Utilities.hpp"
 namespace GL 
 {
@@ -254,8 +255,14 @@ namespace GL
 		return glGetUniformLocation(shaderProgramID, uniformVariableName.data());
 	}
 
-	void Uniform1f(uint32_t shaderProgramID, float value)
+	void Uniform1f(uint32_t location, float value)
 	{
-		glUniform1f(shaderProgramID, value);
+		glUniform1f(location, value);
+	}
+
+	void UniformMatrix4fv(uint32_t location, const Math3D::Matrix4f& matrix)
+	{
+		// Giving just one(2nd parameter) transposed(3rd parameter) matrix.
+		glUniformMatrix4fv(location, 1, GL_TRUE, matrix.data());
 	}
 }

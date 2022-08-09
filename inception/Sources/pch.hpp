@@ -8,5 +8,6 @@
 #include <map>
 #include <cassert>
 #include <chrono>
+#include <stdexcept>
 
 #endif // __PCH_HPP__

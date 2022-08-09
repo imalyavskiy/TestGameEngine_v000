@@ -1,5 +1,6 @@
 #include <pch.hpp>
 #include <GL/freeglut.h>
+#include <Math3D/Math3d.hpp>
 #include "Utilities.hpp"
 
 namespace GLUT 

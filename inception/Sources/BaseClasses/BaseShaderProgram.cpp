@@ -1,5 +1,7 @@
 #include <pch.hpp>
+#include <Math3D/Math3d.hpp>
 #include <Utilities/Utilities.hpp>
+
 #include "BaseClasses.hpp"
 
 namespace Base {
@@ -144,4 +146,18 @@ namespace Base {
 
 		return true;
 	}
+
+	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix)
+	{
+		auto it = uniformVariables_.find(uniformVariableName);
+		if (it == uniformVariables_.end())
+		{
+			return false;
+		}
+
+		GL::UniformMatrix4fv(it->second, matrix);
+
+		return true;
+	}
+
 }

@@ -224,6 +224,9 @@ namespace GL
     int32_t GetUniformLocation(uint32_t shaderProgramID, const std::string& uniformVariableName);
 
     /// Specify the value of a uniform variable for the current program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml).
-    void Uniform1f(uint32_t shaderProgramID, float value);
+    void Uniform1f(uint32_t location, float value);
+
+    /// Specify the value of a uniform variable for the current program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml).
+    void UniformMatrix4fv(uint32_t location, const Math3D::Matrix4f& matrix);
 };
 #endif // __GL_WRAPPER_H__
