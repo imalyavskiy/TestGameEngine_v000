@@ -45,11 +45,14 @@ static void InitializeScene()
 
 int main(int argc, char** argv)
 {
+    const float WINDOW_WIDTH = 1024;
+    const float WINDOW_HEIGHT = 768;
+
     GLUT::Init(argc, argv);
 
     GLUT::InitDisplayMode({ GLUT::DisplayMode::DOUBLE, GLUT::DisplayMode::RGBA });
 
-    GLUT::InitWindowSize(1024, 768);
+    GLUT::InitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     GLUT::InitWindowPosition(100, 100);
 

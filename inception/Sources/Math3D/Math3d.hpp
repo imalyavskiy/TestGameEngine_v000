@@ -90,6 +90,8 @@ namespace Math3D
     {
         static Matrix4f Identity();
 
+        static Matrix4f Projection(float fov, float width, float height, float zNear, float zFar);
+
         static Matrix4f Create(Position position, Rotation rotation, Scale scale);
 
         static Matrix4f Create(Position position);
@@ -97,6 +99,9 @@ namespace Math3D
         static Matrix4f Create(Rotation rotation);
 
         static Matrix4f Create(Scale scale);
+    
+    private:
+        static Matrix4f projectionMatrix_;
     };
 }
 #endif // __MATH_3D_H__

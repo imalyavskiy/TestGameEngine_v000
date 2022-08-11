@@ -33,6 +33,8 @@ namespace Math3D {
 		return &m[0][0];
 	}
 
+	Matrix4f Transform::projectionMatrix_ = Transform::Identity();
+
 	Matrix4f Transform::Identity()
 	{
 		return Matrix4f({ 1.f, 0.f, 0.f, 0.f },
@@ -41,13 +43,37 @@ namespace Math3D {
 						{ 0.f, 0.f, 0.f, 1.f });
 	}
 
+	Matrix4f Transform::Projection(float fov, float width, float height, float zNear, float zFar)
+	{
+		const float ar = width / height;
+		const float zRange = zFar - zNear;
+
+#if 0
+		const float tanHalfFov = std::tanf(fov / 2.f);
+		return {
+			{ 1.f / (ar * tanHalfFov),       0.f,                    0.f,                      0.f              },
+			{           0.f,            1 / tanHalfFov,              0.f,                      0.f              },
+			{           0.f,                  0.f,        (-zNear - zFar) / zRange, 2.f * zNear * zFar / zRange  },
+			{           0.f,                  0.f,                    1.f,                      0.f              },
+		};
+#else
+		const float ctanHalfFov = 1 / std::tanf(fov / 2.f);
+		return {
+			{ ctanHalfFov / ar,     0.f,              0.f,                      0.f              },
+			{       0.f,        ctanHalfFov,          0.f,                      0.f              },
+			{       0.f,            0.f,     (zNear+zFar) / zRange, -2.f * zNear * zFar / zRange },
+			{       0.f,            0.f,              1.f,                      0.f              },
+		};
+#endif
+	}
+
 	Matrix4f Transform::Create(Position position, Rotation rotation, Scale scale)
 	{
 		const auto trTranslate = Create(position);
 		const auto trRotate = Create(rotation);
 		const auto trScale = Create(scale);
 
-		return trTranslate * trRotate * trScale;
+		return /*projectionMatrix_ * */trTranslate * trRotate * trScale;
 	}
 
 	Matrix4f Transform::Create(Position position)
