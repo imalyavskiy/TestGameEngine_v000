@@ -11,9 +11,17 @@ namespace Base {
 
 	}
 
-	ShaderProgram::ShaderProgram(const std::string& name, VertexShader::ptr vertexShader, FragmentShader::ptr fragmentShader)
+	ShaderProgram::ShaderProgram( const std::string& name
+								, VertexShader::ptr vertexShader
+								, GeometryShader::ptr geometryShader
+								, TessControlShader::ptr tessControlShader
+								, TessEveluationShader::ptr tessEvaluationShader
+								, FragmentShader::ptr fragmentShader)
 		: Object(name)
 		, vertexShader_(vertexShader)
+		, geometryShader_(geometryShader)
+		, tessControlShader_(tessControlShader)
+		, tessEvaluationShader_(tessEvaluationShader)
 		, fragmentShader_(fragmentShader)
 	{
 	}
@@ -25,9 +33,9 @@ namespace Base {
 	{
 	}
 	
-	void ShaderProgram::SetVertexShader(const std::string& sourceCode)
+	void ShaderProgram::SetVertexShader(const std::string& vertexShader)
 	{
-		vertexShader_ = std::make_shared<VertexShader>(sourceCode);
+		vertexShader_ = std::make_shared<VertexShader>(vertexShader);
 	}
 
 	void ShaderProgram::SetVertexShader(VertexShader::ptr vertexShader)
@@ -35,9 +43,9 @@ namespace Base {
 		vertexShader_ = vertexShader;
 	}
 	
-	void ShaderProgram::SetGeometryShader(const std::string& sourceCode)
+	void ShaderProgram::SetGeometryShader(const std::string& geometryShader)
 	{
-		geometryShader_ = std::make_shared<GeometryShader>(sourceCode);
+		geometryShader_ = std::make_shared<GeometryShader>(geometryShader);
 	}
 
 	void ShaderProgram::SetGeometryShader(GeometryShader::ptr geometryShader)
@@ -45,9 +53,9 @@ namespace Base {
 		geometryShader_ = geometryShader;
 	}
 	
-	void ShaderProgram::SetFragmentShader(const std::string& sourceCode)
+	void ShaderProgram::SetFragmentShader(const std::string& fragmentShader)
 	{
-		fragmentShader_ = std::make_shared<FragmentShader>(sourceCode);
+		fragmentShader_ = std::make_shared<FragmentShader>(fragmentShader);
 	}
 
 	void ShaderProgram::SetFragmentShader(FragmentShader::ptr fragmentShader)
@@ -57,57 +65,89 @@ namespace Base {
 	
 	bool ShaderProgram::Build()
 	{
-		uint32_t shaderProgramID = GL::CreateProgram();
+		const uint32_t shaderProgramID = GL::CreateProgram();
 
-		// Compile. TODO: extract to separate method
-		{
-			if (shaderProgramID == 0) {
-				fprintf(stderr, "Error creating shader program\n");
-				return false;
-			}
+		auto shaderList = 
+			std::make_tuple( vertexShader_
+						   , geometryShader_
+						   , tessControlShader_
+						   , tessEvaluationShader_
+						   , fragmentShader_);
+		if (!CompileShaderObjects(shaderProgramID, shaderList))
+			return false;
 
-			if (vertexShader_ && vertexShader_->Compile())
-				GL::AttachShader(shaderProgramID, vertexShader_->GetID());
+		if (!LinkShaderProgram(shaderProgramID))
+			return false;
 
-			if (fragmentShader_ && fragmentShader_->Compile())
-				GL::AttachShader(shaderProgramID, fragmentShader_->GetID());
-		}
-
-		// Link. TODO: extract to separate method
-		{
-			int32_t success = 0;
-			std::string errorLog;
-
-			GL::LinkProgram(shaderProgramID);
-
-			GL::GetProgramiv(shaderProgramID, GL::ShaderProgramParameter::LINK_STATUS, &success);
-			if (!success) {
-				GL::GetProgramInfoLog(shaderProgramID_, errorLog);
-				std::cout << "Error linking shader program: '" << errorLog << "'\n";
-				return false;
-			}
-		}
-
-		// Validate. TODO: extract to separate method
-		{
-			int32_t success = 0;
-			std::string errorLog;
-
-			GL::ValidateProgram(shaderProgramID);
-
-			GL::GetProgramiv(shaderProgramID, GL::ShaderProgramParameter::VALIDATE_STATUS, &success);
-			if (!success) {
-				GL::GetProgramInfoLog(shaderProgramID, errorLog);
-				std::cout << "Invalid shader program: '" << errorLog << "'\n";
-				return false;
-			}
-		}
+		if (!ValidateShaderProgram(shaderProgramID))
+			return false;
 
 		shaderProgramID_ = shaderProgramID;
 
 		return true;
 	}
-	
+
+	bool ShaderProgram::CompileShaderObjects(const uint32_t shaderProgramID, ShaderList& shaderList)
+	{
+		if (shaderProgramID == 0) {
+			std::cerr << "Error creating shader program\n";
+			return false;
+		}
+
+		auto [ vertexShader
+			 , geometryShader
+			 , tessControlShader
+			 , tessEvaluationShader
+			 , fragmentShader] = shaderList;
+
+		if (vertexShader && vertexShader->Compile())
+			GL::AttachShader(shaderProgramID, vertexShader->GetID());
+
+		if (geometryShader && geometryShader->Compile())
+			GL::AttachShader(shaderProgramID, vertexShader->GetID());
+
+		if (tessControlShader && tessControlShader->Compile())
+			GL::AttachShader(shaderProgramID, vertexShader->GetID());
+
+		if (tessEvaluationShader&& tessEvaluationShader->Compile())
+			GL::AttachShader(shaderProgramID, vertexShader->GetID());
+
+		if (fragmentShader && fragmentShader->Compile())
+			GL::AttachShader(shaderProgramID, fragmentShader->GetID());
+
+		return true;
+	}
+
+	bool ShaderProgram::LinkShaderProgram(const uint32_t shaderProgramID)
+	{
+
+		GL::LinkProgram(shaderProgramID);
+
+		const int32_t success = GL::GetProgramIV(shaderProgramID, GL::ShaderProgramParameter::LINK_STATUS);
+
+		if (!success) {
+			std::cerr << "Error linking shader program: '" << GL::GetProgramInfoLog(shaderProgramID) << "'\n";
+			return false;
+		}
+
+		return true;
+	}
+
+	bool ShaderProgram::ValidateShaderProgram(const uint32_t shaderProgramID)
+	{
+		GL::ValidateProgram(shaderProgramID);
+
+		const int32_t success = GL::GetProgramIV(shaderProgramID, GL::ShaderProgramParameter::VALIDATE_STATUS);
+
+		if (!success) {
+			std::cerr << "Invalid shader program: '" << GL::GetProgramInfoLog(shaderProgramID) << "'\n";
+			return false;
+		}
+
+		return true;
+	}
+
+
 	void ShaderProgram::Use() const
 	{
 		GL::UseProgram(shaderProgramID_);
@@ -125,7 +165,7 @@ namespace Base {
 
 		GL::UseProgram(shaderProgramID_);
 
-		auto location = GL::GetUniformLocation(shaderProgramID_, uniformVariableName);
+		const auto location = GL::GetUniformLocation(shaderProgramID_, uniformVariableName);
 		
 		// TODO: There are other error values can be returned
 		if (location != -1)

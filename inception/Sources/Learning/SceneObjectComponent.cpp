@@ -8,6 +8,8 @@ namespace Learning
     RootSceneObjectComponent::RootSceneObjectComponent(const std::string& name)
         : Base::SceneObjectComponent(name)
     {
+        // TODO: move all this stuff to Init function
+
         vertices_ = {
             /* 0*/	Math3D::Vector3f{ -0.2500f, -0.2500f, -0.2500f },	/* 1*/	Math3D::Vector3f{ -0.0000f, -0.1001f, -0.1001f },	/* 2*/	Math3D::Vector3f{  0.2500f, -0.2500f, -0.2500f },
             /* 3*/	Math3D::Vector3f{ -0.1001f, -0.0000f, -0.1001f },	/* 4*/	Math3D::Vector3f{  0.0000f,  0.0000f, -0.3247f },	/* 5*/	Math3D::Vector3f{  0.1001f, -0.0000f, -0.1001f },
@@ -54,6 +56,7 @@ namespace Learning
                                 "    gl_Position = gWorld * vec4(Position, 1.0);                                    \n"
                                 "    Color = vec4(clamp(Position, 0.1, 1.0), 1.0);                                  \n"
                                 "}                                                                                  \n"),
+            nullptr, nullptr, nullptr,
             std::make_shared<Base::FragmentShader>(
                                 "#version 330                                                                       \n"
                                 "in vec4 Color;                                                                     \n"
@@ -61,15 +64,22 @@ namespace Learning
                                 "void main()                                                                        \n"
                                 "{                                                                                  \n"
                                 "    FragColor = Color;                                                             \n"
-                                "}                                                                                  \n") );
-        bool res = false;
-        res = shaderProgram_->Build();
-        assert(res);
+                                "}                                                                                  \n") 
+            );
 
-        res = shaderProgram_->AttachToUniform("gWorld");
-        assert(res);
+    	if (!shaderProgram_->Build())
+        {
+            std::cerr << "Failed to build shader program\n";
+            assert(0);
+        }
+
+        const std::string gWorldName("gWorld"); // uniform variable from vertex shader
+        if(!shaderProgram_->AttachToUniform(gWorldName))
+        {
+            std::cerr << "Failed to attach to uniform variable(" << gWorldName << ")\n";
+            assert(0);
+        }
     }
-
 
     void RootSceneObjectComponent::Draw()
     {
@@ -82,7 +92,7 @@ namespace Learning
         const auto rotationMatrix = 
             Math3D::Transform::Create(Math3D::Rotation(roll_, pitch_, yaw_));
         const auto scale = 
-            Math3D::Transform::Create(Math3D::Scale(0.25f, 0.25f, 0.25f));
+            Math3D::Transform::Create(Math3D::Scale(0.5f, 0.5f, 0.5f));
 
         const auto worldMatrix = projection * position * rotationMatrix * scale;
 

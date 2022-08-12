@@ -53,15 +53,15 @@ namespace Math3D {
 		return {
 			{ 1.f / (ar * tanHalfFov),       0.f,                    0.f,                      0.f              },
 			{           0.f,            1 / tanHalfFov,              0.f,                      0.f              },
-			{           0.f,                  0.f,        (-zNear - zFar) / zRange, 2.f * zNear * zFar / zRange  },
-			{           0.f,                  0.f,                    1.f,                      0.f              },
+			{           0.f,                  0.f,        (-zNear - zFar) / zRange, 2.f * zNear * zFar / zRange },
+			{           0.f,                  0.f,                    1.f,                      0.f             },
 		};
 #else
 		const float ctanHalfFov = 1 / std::tanf(fov / 2.f);
 		return {
 			{ ctanHalfFov / ar,     0.f,              0.f,                      0.f              },
 			{       0.f,        ctanHalfFov,          0.f,                      0.f              },
-			{       0.f,            0.f,     (zNear+zFar) / zRange, -2.f * zNear * zFar / zRange },
+			{       0.f,            0.f,     (zNear+zFar) / zRange, -2.f * zNear * zFar / zRange    },
 			{       0.f,            0.f,              1.f,                      0.f              },
 		};
 #endif
@@ -120,14 +120,14 @@ namespace Math3D {
 			0.0f,  0.0f, 0.0f, 1.0f,
 		};
 	
-		// This variant takes 128 multiplciation and 96 addition operations.
+		// This variant takes 128 multiplication and 96 addition operations.
 		return rz * ry * rx;
 	*/
 
-		// This is the analitically deduced matrix after 2 multiplications.
+		// This is the analytically deduced matrix after 2 multiplications.
 		// This variant has 16 multiplication and 4 addition operations. Such 
 		// advantage reached because of all multiplications by ZERO were 
-		// precalculated.
+		// pre-calculated.
 		return {
 			cy*cp, (-sy)*cr+cy*(-sp)*(-sr), (-sy)*sr+cy*(-sp)*cr, 0,
 			sy*cp,   cy*cr+sy*(-sp)*(-sr) ,   cy*sr+sy*(-sp)*cr , 0,

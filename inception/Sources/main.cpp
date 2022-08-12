@@ -45,8 +45,8 @@ static void InitializeScene()
 
 int main(int argc, char** argv)
 {
-    const float WINDOW_WIDTH = 1024;
-    const float WINDOW_HEIGHT = 768;
+    constexpr int32_t WINDOW_WIDTH = 1024;
+    constexpr int32_t WINDOW_HEIGHT = 768;
 
     GLUT::Init(argc, argv);
 
@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
     InitializeGlutCallbacks();
 
-    GLEW::Error res = GLEW::Init();
+    const GLEW::Error res = GLEW::Init();
     if (res != GLEW::Error::OK) {
         std::cerr << "Error: '" << GLEW::GetErrorString(res) << "'\n";
         return 1;

@@ -154,16 +154,31 @@ namespace GL
     };
     std::string toString(ShaderProgramParameter arg);
 
-    /// Clears buffers to preset values(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClear.xhtml).
+	/**
+	Clears buffers to preset values(see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClear.xhtml).
+	@param mask List of masks that indicate the buffers to be cleared. The three masks are GL::AttribMask{ GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, and GL_STENCIL_BUFFER_BIT }.
+	*/
     void Clear(std::initializer_list<AttribMask> mask);
 
-    /// Specifies clear values for the color buffers(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml).
+    /**
+    Specifies clear values for the color buffers(see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glClearColor.xhtml).
+    @param red Specify the red value used when the color buffers are cleared. The initial values are all 0.
+    @param green Specify the green value used when the color buffers are cleared. The initial values are all 0.
+    @param blue Specify the blue value used when the color buffers are cleared. The initial values are all 0.
+    @param alpha Specify the alpha value used when the color buffers are cleared. The initial values are all 0.
+    */
     void ClearColor(float red, float green, float blue, float alpha);
 
-    /// Convinience function. Generates buffer object name fo signle buffer object(calls GenBuffers).
+    /**
+    Generates buffer object name fo single buffer object(calls GenBuffers). Convenience function.
+    @param buffer Specifies a uint32_t storage for for the generated buffer object name be stored.
+    */
     void GenBuffer(uint32_t& buffer);
 
-    /// Generate buffer object names(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenBuffers.xhtml).
+    /**
+    Generate buffer object names(see https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGenBuffers.xhtml).
+    @param buffers Specifies an array in which the generated buffer object names are stored.
+    */
     void GenBuffers(std::vector<uint32_t>& buffers);
 
     /// Binds a named buffer object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml).
@@ -202,7 +217,10 @@ namespace GL
     /// Returns the information log for a shader object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetShaderInfoLog.xhtml).
     void GetShaderInfoLog(uint32_t shaderObjectID, std::string& infoLog);
 
-    /// Creates a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml).
+    /**
+    Creates a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glCreateProgram.xhtml).
+    @returns int32_t - shader program object id.
+    */ 
     uint32_t CreateProgram();
 
     /// Attaches a shader object to a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glAttachShader.xhtml).
@@ -212,10 +230,10 @@ namespace GL
     void LinkProgram(uint32_t shaderProgramID);
 
     /// Returns a parameter from a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml).
-    void GetProgramiv(uint32_t shaderProgramID, ShaderProgramParameter parameter, int32_t* parameterValue);
+    int32_t GetProgramIV(const uint32_t shaderProgramID, ShaderProgramParameter parameter);
 
     /// Returns the information log for a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramInfoLog.xhtml).
-    void GetProgramInfoLog(uint32_t shaderObjectID, std::string& infoLog);
+    std::string GetProgramInfoLog(const uint32_t shaderObjectID);
 
     /// Validates a program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glValidateProgram.xhtml).
     void ValidateProgram(uint32_t shaderProgramID);

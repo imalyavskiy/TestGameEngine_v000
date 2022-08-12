@@ -231,17 +231,20 @@ namespace GL
 		glLinkProgram(shaderProgramID);
 	}
 
-	void GetProgramiv(uint32_t shaderProgramID, ShaderProgramParameter parameter, int32_t* parameterValue)
+	int32_t GetProgramIV(const uint32_t shaderProgramID, ShaderProgramParameter parameter)
 	{
-		glGetProgramiv(shaderProgramID, (GLenum)parameter, parameterValue);
+		int32_t result = 0;
+		glGetProgramiv(shaderProgramID, static_cast<GLenum>(parameter), &result);
+		return result;
 	}
 
-	void GetProgramInfoLog(uint32_t shaderObjectID, std::string& infoLog)
+	std::string GetProgramInfoLog(const uint32_t shaderObjectID)
 	{
-		const uint32_t infoLogLength = 2048;
-		infoLog.reserve(infoLogLength);
-		int32_t infoLogFinalLength;
-		glGetProgramInfoLog(shaderObjectID, infoLogLength, &infoLogFinalLength, &infoLog[0]);
+		const uint32_t length = 2048;
+		std::string result; result.reserve(length);
+		int32_t infoLogFinalLength = 0;
+		glGetProgramInfoLog(shaderObjectID, length, &infoLogFinalLength, &result[0]);
+		return result;
 	}
 
 	void ValidateProgram(uint32_t shaderProgramID)
