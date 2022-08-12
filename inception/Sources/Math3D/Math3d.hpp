@@ -36,6 +36,7 @@ namespace Math3D
     struct Scale : Vector3f
     {
         Scale() = default;
+        Scale(const float val) : Vector3f(val, val, val) {}
         Scale(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
     };
 

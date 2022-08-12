@@ -92,7 +92,7 @@ namespace Learning
         const auto rotationMatrix = 
             Math3D::Transform::Create(Math3D::Rotation(roll_, pitch_, yaw_));
         const auto scale = 
-            Math3D::Transform::Create(Math3D::Scale(0.5f, 0.5f, 0.5f));
+            Math3D::Transform::Create(Math3D::Scale(2.f));
 
         const auto worldMatrix = projection * position * rotationMatrix * scale;
 
