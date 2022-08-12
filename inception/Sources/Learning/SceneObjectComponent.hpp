@@ -27,10 +27,10 @@ namespace Learning
 		uint32_t indexBufferObject_ = _UI32_MAX;
 
 		///
-		std::vector<Math3D::Vector3f> vertices_; // 4 vertices
+		std::array<Math3D::Vector3f, 4> vertices_; // 4 vertices
 
 		///
-		std::vector<int> indices_; // 4 triangles thus 4 * 3 = 12
+		std::array<int, 12> indices_; // 4 triangles thus 4 * 3 = 12
 
 		///
 		Base::ShaderProgram::ptr shaderProgram_;
