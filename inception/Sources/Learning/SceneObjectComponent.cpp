@@ -47,24 +47,24 @@ namespace Learning
         shaderProgram_ = std::make_shared<Base::ShaderProgram>(
             "shader program",
             std::make_shared<Base::VertexShader>(
-                                "#version 330                                                                       \n"
-                                "layout (location = 0) in vec3 Position;                                            \n"
-                                "uniform mat4 gWorld;                                                               \n"
-                                "out vec4 Color;                                                                    \n"
-                                "void main()                                                                        \n"
-                                "{                                                                                  \n"
-                                "    gl_Position = gWorld * vec4(Position, 1.0);                                    \n"
-                                "    Color = vec4(clamp(Position, 0.1, 1.0), 1.0);                                  \n"
-                                "}                                                                                  \n"),
+                                "#version 330                                      \n"
+                                "layout (location = 0) in vec3 Position;           \n"
+                                "uniform mat4 gWorld;                              \n"
+                                "out vec4 Color;                                   \n"
+                                "void main()                                       \n"
+                                "{                                                 \n"
+                                "    gl_Position = gWorld * vec4(Position, 1.0);   \n"
+                                "    Color = vec4(clamp(Position, 0.1, 1.0), 1.0); \n"
+                                "}                                                 \n"),
             nullptr, nullptr, nullptr,
             std::make_shared<Base::FragmentShader>(
-                                "#version 330                                                                       \n"
-                                "in vec4 Color;                                                                     \n"
-                                "out vec4 FragColor;                                                                \n"
-                                "void main()                                                                        \n"
-                                "{                                                                                  \n"
-                                "    FragColor = Color;                                                             \n"
-                                "}                                                                                  \n") 
+                                "#version 330                                      \n"
+                                "in vec4 Color;                                    \n"
+                                "out vec4 FragColor;                               \n"
+                                "void main()                                       \n"
+                                "{                                                 \n"
+                                "    FragColor = Color;                            \n"
+                                "}                                                 \n") 
             );
 
     	if (!shaderProgram_->Build())
@@ -85,18 +85,21 @@ namespace Learning
     {
         shaderProgram_->Use();
 
-        const auto projection =
-            Math3D::Transform::Projection(Math3D::DegToRad(30.f), 1024, 768, 1.f, 100.f);
-        const auto position = 
-            Math3D::Transform::Create(Math3D::Position(0.f, 0.f, 5.f));
-        const auto rotationMatrix = 
-            Math3D::Transform::Create(Math3D::Rotation(roll_, pitch_, yaw_));
-        const auto scale = 
-            Math3D::Transform::Create(Math3D::Scale(2.f));
+        Math3D::Transform pipeline;
+        pipeline.SetTransform(
+            Math3D::Position(0.f, 0.f, 5.f), 
+            Math3D::Rotation(roll_, pitch_, yaw_), 
+            Math3D::Scale(2.f)
+        );
+        pipeline.SetCamera(
+            Math3D::Position{ 0.f, 0.f, -3.f * std::sinf(scale_) }, 
+            Math3D::Direction{ 0.f,0.f,2.f }, 
+            Math3D::Direction{ 0.f, 1.f, 0.f }
+        );
+        pipeline.SetProjection(60.f, 1024, 768, 1.f, 100.f);
+        const auto matrixMVP = pipeline.GetMVPMatrix();
 
-        const auto worldMatrix = projection * position * rotationMatrix * scale;
-
-        shaderProgram_->UpdateUniform("gWorld", worldMatrix);
+        shaderProgram_->UpdateUniform("gWorld", matrixMVP);
 
         GL::EnableVertexAttribArray(0);
 
