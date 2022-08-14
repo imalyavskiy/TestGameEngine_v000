@@ -18,35 +18,26 @@ namespace Base {
 
 		virtual void Draw();
 
-		Math3D::Direction GetForwardVector() const
-		{
-			return {};
-		}
+		Math3D::Matrix4f GetWorldTransformMatrix() const;
 
-		Math3D::Direction GetBackwardVector() const
-		{
-			return {};
-		}
+        Math3D::Matrix4f GetWorldTransformMatrix(const Math3D::Matrix4f& local) const;
 
-	    Math3D::Direction GetUpVector() const
-		{
-			return {};
-		}
+        Math3D::Direction GetForwardVector() const;
 
-	    Math3D::Direction GetDownVector() const
-		{
-			return {};
-		}
+        Math3D::Direction GetBackwardVector() const;
 
-	    Math3D::Direction GetRightVector() const
-		{
-			return {};
-		}
+        Math3D::Direction GetUpVector() const;
 
-	    Math3D::Direction GetLeftVector() const
-		{
-			return {};
-		}
+        Math3D::Direction GetDownVector() const;
+
+        Math3D::Direction GetRightVector() const;
+
+        Math3D::Direction GetLeftVector() const;
+
+        /**
+		 * @brief Called when object being added to a scene.
+		 */
+		virtual void OnAddToScene();
 
 	private:
 		wptr parent_;

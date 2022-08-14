@@ -63,6 +63,7 @@ namespace Math3D
     {
         Rotation() = default;
         Rotation(const float roll, const float pitch, const float yaw) : Vector3f(roll, pitch, yaw) {}
+        explicit Rotation(const Vector3f& v3);
     };
 
     /**
@@ -73,6 +74,7 @@ namespace Math3D
         Scale() = default;
         Scale(const float val) : Vector3f(val, val, val) {}
         Scale(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
+        explicit Scale(const Vector3f& v3);
     };
 
     /**
@@ -82,6 +84,7 @@ namespace Math3D
     {
         Position() = default;
         Position(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
+        explicit Position(const Vector3f& v3);
 
         Position operator-() const { return { -x, -y, -z }; }
     };
@@ -98,6 +101,7 @@ namespace Math3D
     {
         Direction() = default;
         Direction(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
+        explicit Direction(const Vector3f& v3);
 
         static const Direction Forward;
         static const Direction Backward;
@@ -136,9 +140,14 @@ namespace Math3D
         Vector4f(const Direction& d3);
 
         /**
-         * @brief Initializes homogeneous coordinate item by component..
+         * @brief Initializes homogeneous coordinate item by component.
          */
         Vector4f(const float _x, const float _y, const float _z, const float _w);
+
+        /**
+         * @brief Extracts first three components.
+         */
+        Vector3f xyz() const;
     };
 
     /**
@@ -169,6 +178,11 @@ namespace Math3D
          * @brief Implements matrix multiplication algorithm.
          */
         Matrix4f operator*(const Matrix4f& right) const;
+
+        /**
+         * @brief Implements matrix to vector-column multiplication algorithm.
+         */
+        Vector4f operator*(const Vector4f& right) const;
     };
 
     /**

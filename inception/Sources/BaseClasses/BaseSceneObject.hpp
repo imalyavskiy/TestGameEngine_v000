@@ -37,6 +37,11 @@ namespace Base {
 		 */
 		virtual void Draw();
 
+		/**
+		 * @brief Called when object being added to a scene.
+		 */
+		virtual void OnAddToScene();
+
 	private:
 		/**
 		 * @todo describe this

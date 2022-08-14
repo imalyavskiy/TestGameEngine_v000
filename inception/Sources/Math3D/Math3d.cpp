@@ -60,6 +60,11 @@ namespace Math3D {
     {
     }
 
+    Vector3f Vector4f::xyz() const
+    {
+        return { x, y, z };
+    }
+
     Vector3f Cross(const Vector3f& l, const Vector3f& r)
     {
         return {
@@ -76,6 +81,21 @@ namespace Math3D {
         return { v.x / len, v.y / len, v.z / len };
     }
 
+    Rotation::Rotation(const Vector3f& v3)
+        : Vector3f(v3)
+    {
+    }
+
+    Scale::Scale(const Vector3f& v3)
+        : Vector3f(v3)
+    {
+    }
+
+    Position::Position(const Vector3f& v3)
+        : Vector3f(v3)
+    {
+    }
+
     Position operator*(const float factor, const Position& p3)
     {
         return { p3.x * factor, p3.y * factor, p3.z * factor };
@@ -84,6 +104,11 @@ namespace Math3D {
     Position operator*(const Position& p3, float factor)
     {
         return { p3.x * factor, p3.y * factor, p3.z * factor };
+    }
+
+    Direction::Direction(const Vector3f& v3)
+        : Vector3f(v3)
+    {
     }
 
     Matrix4f::Matrix4f(float _00, float _01, float _02, float _03,
@@ -116,7 +141,8 @@ namespace Math3D {
 
         for (size_t i = 0; i < 4; i++) {
             for (size_t j = 0; j < 4; j++) {
-                Ret.m[i][j] = m[i][0] * right.m[0][j] +
+                Ret.m[i][j] = 
+                    m[i][0] * right.m[0][j] +
                     m[i][1] * right.m[1][j] +
                     m[i][2] * right.m[2][j] +
                     m[i][3] * right.m[3][j];
@@ -124,6 +150,16 @@ namespace Math3D {
         }
 
         return Ret;
+    }
+
+    Vector4f Matrix4f::operator*(const Vector4f& right) const
+    {
+        return {
+            m[0][0] * right.x + m[0][1] * right.y + m[0][2] * right.z + m[0][3] * right.w,
+            m[1][0] * right.x + m[1][1] * right.y + m[1][2] * right.z + m[1][3] * right.w,
+            m[2][0] * right.x + m[2][1] * right.y + m[2][2] * right.z + m[2][3] * right.w,
+            m[3][0] * right.x + m[3][1] * right.y + m[3][2] * right.z + m[3][3] * right.w
+        };
     }
 
     Pipeline& Pipeline::Instance()

@@ -29,10 +29,13 @@ namespace Engine
         const Base::Scene::sptr scene =
             std::make_shared<Learning::DefaultScene>();
 
-        const auto sceneObject = std::make_shared<Learning::SceneObject>("dot scene object");
-        sceneObject->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
+        const auto soHedgehog = std::make_shared<Learning::SceneObject>("Hedgehog");
+        soHedgehog->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
+        scene->AddObject(soHedgehog);
 
-        scene->AddObject(sceneObject);
+        const auto soCamera = std::make_shared<Learning::SceneObject>("FreeCamera");
+        soCamera->SetRootComponent(std::make_shared<Base::Camera>(Base::SceneObjectComponent::wptr{}, "FreeCamera"));
+        scene->AddObject(soCamera);
 
         Instance().SetScene(scene);
 
