@@ -96,6 +96,7 @@ namespace Learning
             Math3D::Direction{ 0.f,0.f,2.f }, 
             Math3D::Direction{ 0.f, 1.f, 0.f }
         );
+
         pipeline.SetProjection(60.f, 1024, 768, 1.f, 100.f);
         const auto matrixMVP = pipeline.GetMVPMatrix();
 

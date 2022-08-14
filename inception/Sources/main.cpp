@@ -1,46 +1,55 @@
 ﻿#include "main.hpp"
-#include "Learning/Learning.hpp"
+#include "Engine/Engine.hpp"
 
 Base::Scene::ptr scene;
 
-
-static void RenderSceneCB()
+int InitEngine(const uint32_t width, const uint32_t height)
 {
-    GL::Clear({ GL::AttribMask::COLOR_BUFFER_BIT });
+    Engine::Settings settings;
+    settings.viewportWidth = width;
+    settings.viewportHeight = height;
 
-    scene->Draw();
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
+    GLUT::InitDisplayMode({ GLUT::DisplayMode::DOUBLE, GLUT::DisplayMode::RGBA });
+    GLUT::InitWindowSize(settings.viewportWidth, settings.viewportHeight);
+    GLUT::InitWindowPosition(100, 100);
+    GLUT::CreateWindow("Inception");
 
-    GLUT::SwapBuffers();
+    Engine::Initialize(settings);
+
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
+    const GLEW::Error res = GLEW::Init();
+    if (res != GLEW::Error::OK) {
+        std::cerr << "Error: '" << GLEW::GetErrorString(res) << "'\n";
+        return 1;
+    }
+
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
+    GLUT::DisplayFunc(Engine::DisplayProc);
+    GLUT::IdleFunc(Engine::DisplayProc);
+
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
+    GL::ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    Engine::Load();
+
+    return 0;
 }
 
-constexpr int oneThirtieth = 1000 / 30; // of a second in milliseconds
-std::chrono::steady_clock::time_point prev = std::chrono::steady_clock::now() - std::chrono::milliseconds(oneThirtieth);
-static void IdleCB()
+void RunEngine()
 {
-    const auto now = std::chrono::steady_clock::now();
-    const auto dtMS = std::chrono::duration_cast<std::chrono::milliseconds>(now - prev);
-    prev = now;
-
-    scene->Update(dtMS.count()/1000.f);
-
-    RenderSceneCB();
-}
-
-static void InitializeGlutCallbacks()
-{
-    GLUT::DisplayFunc(RenderSceneCB);
-
-    GLUT::IdleFunc(IdleCB);
-}
-
-static void InitializeScene()
-{
-    scene = std::make_shared<Learning::DefaultScene>("DefaultScene");
-
-    auto sceneObject = std::make_shared<Learning::SceneObject>("dot scene object");
-    sceneObject->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
-    
-    scene->AddObject(sceneObject);
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
+    GLUT::MainLoop();
 }
 
 int main(int argc, char** argv)
@@ -48,29 +57,14 @@ int main(int argc, char** argv)
     constexpr int32_t WINDOW_WIDTH = 1024;
     constexpr int32_t WINDOW_HEIGHT = 768;
 
+    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+    // Render API must be under Engine and hidden under abstract some 'Render Device'
+    // interface
     GLUT::Init(argc, argv);
 
-    GLUT::InitDisplayMode({ GLUT::DisplayMode::DOUBLE, GLUT::DisplayMode::RGBA });
+    InitEngine(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    GLUT::InitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    GLUT::InitWindowPosition(100, 100);
-
-    GLUT::CreateWindow("Inception");
-
-    InitializeGlutCallbacks();
-
-    const GLEW::Error res = GLEW::Init();
-    if (res != GLEW::Error::OK) {
-        std::cerr << "Error: '" << GLEW::GetErrorString(res) << "'\n";
-        return 1;
-    }
-
-    InitializeScene();
-
-    GL::ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-    GLUT::MainLoop();
+    RunEngine();
 
     return 0;
 }

@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Sources\Learning">
       <UniqueIdentifier>{e8d527a0-ce66-47f8-9797-401ffcb3fa54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sources\Engine">
+      <UniqueIdentifier>{40c47731-038a-4dfd-91fe-33a83bc021ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sources\Engine">
+      <UniqueIdentifier>{e7f7795b-99e2-4d86-9b27-16da2e92830a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\main.cpp">
@@ -89,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="Sources\Math3D\Math3d.cpp">
       <Filter>Source Files\Sources\Math3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\Engine.cpp">
+      <Filter>Source Files\Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Engine\EngineImpl.cpp">
+      <Filter>Source Files\Sources\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\Engine.hpp">
+      <Filter>Header Files\Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\EngineImpl.hpp">
+      <Filter>Header Files\Sources\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

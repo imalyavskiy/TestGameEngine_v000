@@ -25,6 +25,8 @@
     <ClCompile Include="Sources\BaseClasses\BaseScene.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseSceneObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseSceneObjectComponent.cpp" />
+    <ClCompile Include="Sources\Engine\Engine.cpp" />
+    <ClCompile Include="Sources\Engine\EngineImpl.cpp" />
     <ClCompile Include="Sources\Learning\DeafultScene.cpp" />
     <ClCompile Include="Sources\Learning\SceneObject.cpp" />
     <ClCompile Include="Sources\Learning\SceneObjectComponent.cpp" />
@@ -44,6 +46,8 @@
     <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSceneObjectComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\Interfaces.hpp" />
+    <ClInclude Include="Sources\Engine\Engine.hpp" />
+    <ClInclude Include="Sources\Engine\EngineImpl.hpp" />
     <ClInclude Include="Sources\Learning\DeafultScene.hpp" />
     <ClInclude Include="Sources\Learning\SceneObject.hpp" />
     <ClInclude Include="Sources\Learning\SceneObjectComponent.hpp" />
