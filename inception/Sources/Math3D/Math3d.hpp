@@ -98,6 +98,13 @@ namespace Math3D
     {
         Direction() = default;
         Direction(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
+
+        static const Direction Forward;
+        static const Direction Backward;
+        static const Direction Up;
+        static const Direction Down;
+        static const Direction Right;
+        static const Direction Left;
     };
 
 
@@ -165,12 +172,22 @@ namespace Math3D
     };
 
     /**
-     * @brief This class contains constructors for special matrices
-     *        such as translation, scale, rotation and projection.
+     * @brief ???
      */
     struct Transform
     {
-        static Transform& Instance();
+        Position  position;
+        Rotation  rotation;
+        Scale     scale;
+    };
+
+    /**
+     * @brief This class contains constructors for special matrices
+     *        such as translation, scale, rotation and projection.
+     */
+    struct Pipeline
+    {
+        static Pipeline& Instance();
 
         static Matrix4f Identity();
 
@@ -184,19 +201,13 @@ namespace Math3D
 
         static Matrix4f Create(const Scale& scale);
 
-        void SetTransform(const Position& position, const Rotation& rotation, const Scale& scale )
-        {
-            position_ = position;
-            rotation_ = rotation;
-            scale_ = scale;
-        }
+        static Matrix4f Create(const Transform& transform);
 
-        void SetCamera(const Position& position, const Direction& forward, const Direction& up)
-        {
-            cameraPosition_ = position;
-            cameraForward_ = forward;
-            cameraUp_ = up;
-        }
+        void SetTransform(const Transform& transform);
+
+        void SetTransform(const Position& position, const Rotation& rotation, const Scale& scale );
+
+        void SetCamera(const Position& position, const Direction& forward, const Direction& up);
 
         /**
          * @brief Sets perspective projection parameters
@@ -214,9 +225,7 @@ namespace Math3D
         Matrix4f GetMVPMatrix() const;
 
     protected:
-        Position  position_;
-        Rotation  rotation_;
-        Scale     scale_;
+        Transform transform_;
 
         Direction cameraForward_;
         Direction cameraUp_;

@@ -9,13 +9,25 @@ namespace Base {
 	{
 	}
 
-	void SceneObject::SetRootComponent(SceneObjectComponent::ptr p)
+	void SceneObject::SetRootComponent(SceneObjectComponent::sptr p)
 	{
 		root_ = p;
 	}
 
-	SceneObjectComponent::ptr SceneObject::GetRootComponent()
+	SceneObjectComponent::sptr SceneObject::GetRootComponent()
 	{
 		return root_;
 	}
+
+    void SceneObject::Update(float dt)
+    {
+		if (root_)
+			root_->Update(dt);
+    }
+
+    void SceneObject::Draw()
+    {
+		if (root_)
+			root_->Draw();
+    }
 }

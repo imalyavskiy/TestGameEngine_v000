@@ -1,7 +1,7 @@
 ﻿#include "main.hpp"
 #include "Engine/Engine.hpp"
 
-Base::Scene::ptr scene;
+Base::Scene::sptr scene;
 
 int InitEngine(const uint32_t width, const uint32_t height)
 {
@@ -31,8 +31,8 @@ int InitEngine(const uint32_t width, const uint32_t height)
     // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
     // Render API must be under Engine and hidden under abstract some 'Render Device'
     // interface
-    GLUT::DisplayFunc(Engine::DisplayProc);
-    GLUT::IdleFunc(Engine::DisplayProc);
+    GLUT::DisplayFunc(Engine::RenderProc);
+    GLUT::IdleFunc(Engine::RenderProc);
 
     // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
     // Render API must be under Engine and hidden under abstract some 'Render Device'

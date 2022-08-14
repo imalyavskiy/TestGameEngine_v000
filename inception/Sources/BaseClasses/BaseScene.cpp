@@ -9,8 +9,19 @@ namespace Base {
 	{
 	}
 
-	void Scene::AddObject(SceneObject::ptr sceneObject)
+	void Scene::AddObject(SceneObject::sptr sceneObject)
 	{
-		objects_.push_back(sceneObject);
+		objectTree_.push_back(sceneObject);
 	}
+
+    void Scene::Update(float dt)
+    {
+        for (const auto& object : objectTree_)
+            object->Update(dt);
+    }
+
+    const Scene::ObjectTree& Scene::GetObjectTree() const
+    {
+        return objectTree_;
+    }
 }

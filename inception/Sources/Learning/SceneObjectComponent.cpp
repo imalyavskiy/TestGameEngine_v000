@@ -6,7 +6,7 @@
 namespace Learning
 {
     RootSceneObjectComponent::RootSceneObjectComponent(const std::string& name)
-        : Base::SceneObjectComponent(name)
+        : Base::SceneObjectComponent({}, name)
     {
         // TODO: move all this stuff to Init function
 
@@ -85,7 +85,7 @@ namespace Learning
     {
         shaderProgram_->Use();
 
-        Math3D::Transform pipeline;
+        Math3D::Pipeline pipeline;
         pipeline.SetTransform(
             Math3D::Position(0.f, 0.f, 5.f), 
             Math3D::Rotation(roll_, pitch_, yaw_), 

@@ -13,13 +13,7 @@ namespace Learning
 
 	void DefaultScene::Update(float dt)
 	{
-		for (auto sceneObject : objects_)
+		for (auto sceneObject : objectTree_)
 			sceneObject->Update(dt);
-	}
-
-	void DefaultScene::Draw()
-	{
-		for (auto sceneObject : objects_)
-			sceneObject->Draw();
 	}
 }

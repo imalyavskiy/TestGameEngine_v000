@@ -102,6 +102,15 @@
     <ClCompile Include="Sources\Engine\EngineImpl.cpp">
       <Filter>Source Files\Sources\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Engine\RenderFacility.cpp">
+      <Filter>Source Files\Sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseCamera.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseRenderFacility.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\main.hpp">
@@ -166,6 +175,15 @@
     </ClInclude>
     <ClInclude Include="Sources\Engine\EngineImpl.hpp">
       <Filter>Header Files\Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Engine\RenderFacility.hpp">
+      <Filter>Header Files\Sources\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseCamera.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

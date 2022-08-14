@@ -72,7 +72,7 @@ namespace Engine
      * @brief Called when window needs to be redisplayed. Mast be passed to glutDisplayFunc.
      * @remark (https://www.opengl.org/resources/libraries/glut/spec3/node46.html#SECTION00081000000000000000)
      */
-    void  DisplayProc();
+    void  RenderProc();
 
     /**
      * @brief Called when user presses or releases some mouse key.

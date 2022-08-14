@@ -4,6 +4,7 @@
 #include <BaseClasses/Interfaces.hpp>
 #include <BaseClasses/BaseClasses.hpp>
 #include "Engine.hpp"
+#include "RenderFacility.hpp"
 #include "EngineImpl.hpp"
 namespace Engine
 {
@@ -35,19 +36,16 @@ namespace Engine
 
     constexpr int oneThirtieth = 1000 / 30; // of a second in milliseconds
     std::chrono::steady_clock::time_point prev = std::chrono::steady_clock::now() - std::chrono::milliseconds(oneThirtieth);
-    void Impl::DisplayProc()
+    void Impl::RenderProc()
     {
         const auto now = std::chrono::steady_clock::now();
         const auto dtMS = std::chrono::duration_cast<std::chrono::milliseconds>(now - prev);
         prev = now;
 
+        // @todo implement 2 pass physics calculations
         scene_->Update(dtMS.count() / 1000.f);
 
-        GL::Clear({ GL::AttribMask::COLOR_BUFFER_BIT });
-
-        scene_->Draw();
-
-        GLUT::SwapBuffers();
+        renderFacility_->Render(scene_->GetObjectTree());
     }
 
     void  Impl::MouseFunc(int, int, int, int)
@@ -139,7 +137,7 @@ namespace Engine
         throw std::logic_error("not implemented");
     }
 
-    void Impl::SetScene(Base::Scene::ptr scene)
+    void Impl::SetScene(Base::Scene::sptr scene)
     {
         scene_ = scene;
     }

@@ -1,23 +1,58 @@
 #ifndef __BASE_SCENE_OBJECT_COMPONENT_HPP__
 #define __BASE_SCENE_OBJECT_COMPONENT_HPP__ 
 namespace Base {
-	class SceneObjectComponent : public Object, public Updatable, public Drawable
+	class SceneObjectComponent : public Object
 	{
 	public:
-		using ptr = std::shared_ptr<SceneObjectComponent>;
-		using ChildList = std::vector<SceneObjectComponent::ptr>;
+		using sptr = std::shared_ptr<SceneObjectComponent>;
+		using wptr = std::weak_ptr<SceneObjectComponent>;
+		using ChildList = std::vector<SceneObjectComponent::sptr>;
 
-		explicit SceneObjectComponent(const std::string& name);
+		explicit SceneObjectComponent(wptr parent, const std::string& name);
 
-		void AddChild(ptr child);
+		void AddChild(sptr child);
 
 		ChildList& GetChildList();
 
-		void Update(float dt) override;
+		virtual void Update(float dt);
 
-		void Draw() override;
+		virtual void Draw();
+
+		Math3D::Direction GetForwardVector() const
+		{
+			return {};
+		}
+
+		Math3D::Direction GetBackwardVector() const
+		{
+			return {};
+		}
+
+	    Math3D::Direction GetUpVector() const
+		{
+			return {};
+		}
+
+	    Math3D::Direction GetDownVector() const
+		{
+			return {};
+		}
+
+	    Math3D::Direction GetRightVector() const
+		{
+			return {};
+		}
+
+	    Math3D::Direction GetLeftVector() const
+		{
+			return {};
+		}
 
 	private:
+		wptr parent_;
+
+		Math3D::Transform transform_;
+
 		ChildList childList_;
 	};
 }

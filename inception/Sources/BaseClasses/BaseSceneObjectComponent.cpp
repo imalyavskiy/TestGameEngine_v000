@@ -3,13 +3,13 @@
 #include <Utilities/Utilities.hpp>
 #include "BaseClasses.hpp"
 namespace Base {
-	SceneObjectComponent::SceneObjectComponent(const std::string& name)
+	SceneObjectComponent::SceneObjectComponent(wptr parent, const std::string& name)
 		: Object(name)
 	{
 
 	}
 
-	void SceneObjectComponent::AddChild(ptr child)
+	void SceneObjectComponent::AddChild(sptr child)
 	{
 		childList_.push_back(child);
 	}

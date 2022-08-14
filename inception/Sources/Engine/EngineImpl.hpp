@@ -30,7 +30,7 @@ namespace Engine
         /**
          * @todo add description
          */
-        void  DisplayProc();
+        void  RenderProc();
 
         /**
          * @todo add description
@@ -125,7 +125,7 @@ namespace Engine
         /**
          * @todo add description
          */
-        void SetScene(Base::Scene::ptr scene);
+        void SetScene(Base::Scene::sptr scene);
 
     protected:
         /**
@@ -136,7 +136,12 @@ namespace Engine
         /**
          * @todo add description
          */
-        Base::Scene::ptr scene_;
+        Base::Scene::sptr scene_;
+
+        /**
+         * @todo add description
+         */
+        RenderFacility::sptr renderFacility_;
     };
 }
 #endif // __ENGINE_IMPL_HPP__

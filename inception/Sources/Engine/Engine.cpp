@@ -3,6 +3,7 @@
 #include "Utilities/Utilities.hpp"
 #include "BaseClasses/BaseClasses.hpp"
 #include "Engine.hpp"
+#include "RenderFacility.hpp"
 #include "EngineImpl.hpp"
 #include "Learning/Learning.hpp"
 
@@ -25,8 +26,8 @@ namespace Engine
 
     bool Load()
     {
-        const Base::Scene::ptr scene =
-            std::make_shared<Learning::DefaultScene>("DefaultScene");
+        const Base::Scene::sptr scene =
+            std::make_shared<Learning::DefaultScene>();
 
         const auto sceneObject = std::make_shared<Learning::SceneObject>("dot scene object");
         sceneObject->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
@@ -58,9 +59,9 @@ namespace Engine
         Instance().VisibilityFunc(state);
     }
 
-    void  DisplayProc()
+    void  RenderProc()
     {
-        Instance().DisplayProc();
+        Instance().RenderProc();
     }
 
     void  MouseFunc(int button, int state, int x, int y)

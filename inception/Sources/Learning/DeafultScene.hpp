@@ -5,11 +5,9 @@ namespace Learning
 	class DefaultScene final : public Base::Scene
 	{
 	public:
-		explicit DefaultScene(const std::string& name);
+		explicit DefaultScene(const std::string& name = "DefaultScene");
 
 		void Update(float dt) override;
-
-		void Draw() override;
 	};
 }
 #endif // __LEARNING_DEAFULT_SCENE_H__

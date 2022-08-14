@@ -19,12 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\BaseClasses\BaseCamera.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseRenderFacility.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderProgram.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseScene.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseSceneObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseSceneObjectComponent.cpp" />
+    <ClCompile Include="Sources\Engine\RenderFacility.cpp" />
     <ClCompile Include="Sources\Engine\Engine.cpp" />
     <ClCompile Include="Sources\Engine\EngineImpl.cpp" />
     <ClCompile Include="Sources\Learning\DeafultScene.cpp" />
@@ -38,7 +41,9 @@
     <ClCompile Include="Sources\Utilities\gl_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\BaseClasses\BaseCamera.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderProgram.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseObject.hpp" />
@@ -46,6 +51,7 @@
     <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSceneObjectComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\Interfaces.hpp" />
+    <ClInclude Include="Sources\Engine\RenderFacility.hpp" />
     <ClInclude Include="Sources\Engine\Engine.hpp" />
     <ClInclude Include="Sources\Engine\EngineImpl.hpp" />
     <ClInclude Include="Sources\Learning\DeafultScene.hpp" />
