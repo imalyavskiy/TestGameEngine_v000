@@ -45,7 +45,7 @@ namespace Engine
         // @todo implement 2 pass physics calculations
         scene_->Update(dtMS.count() / 1000.f);
 
-        renderFacility_->Render(scene_->GetObjectTree());
+        renderFacility_->Draw(scene_->GetObjectTree());
     }
 
     void  Impl::MouseFunc(int, int, int, int)
@@ -140,5 +140,10 @@ namespace Engine
     void Impl::SetScene(Base::Scene::sptr scene)
     {
         scene_ = scene;
+    }
+
+    void Impl::SetRenderer(Base::RenderFacility::sptr renderer)
+    {
+        renderFacility_ = renderer;
     }
 }

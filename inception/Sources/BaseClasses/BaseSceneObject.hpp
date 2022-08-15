@@ -35,12 +35,17 @@ namespace Base {
 		/**
 		 * @todo describe this
 		 */
-		virtual void Draw();
+		virtual void Draw(Generic::VideoRenderer& renderer);
 
 		/**
-		 * @brief Called when object being added to a scene.
+		 * @todo describe this
 		 */
-		virtual void OnAddToScene();
+		virtual void Init();
+
+		/**
+		 * @todo describe this
+		 */
+		virtual void JoinScene();
 
 	private:
 		/**

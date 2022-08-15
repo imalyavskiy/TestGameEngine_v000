@@ -7,6 +7,6 @@ namespace Learning
 
 		void Update(float dt) override;
 
-		void Draw() override;
+		void Draw(Base::Generic::VideoRenderer& renderer) override;
 	};
 }

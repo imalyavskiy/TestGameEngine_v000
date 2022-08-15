@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\BaseClasses\BaseCamera.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseCameraComponent.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseMeshComponent.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseRenderFacility.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderProgram.cpp" />
@@ -41,8 +42,9 @@
     <ClCompile Include="Sources\Utilities\gl_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sources\BaseClasses\BaseCamera.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseCameraComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseMeshComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderProgram.hpp" />
@@ -50,6 +52,9 @@
     <ClInclude Include="Sources\BaseClasses\BaseScene.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSceneObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSceneObjectComponent.hpp" />
+    <ClInclude Include="Sources\BaseClasses\GenericAudioRenderer.hpp" />
+    <ClInclude Include="Sources\BaseClasses\GenericCamera.hpp" />
+    <ClInclude Include="Sources\BaseClasses\GenericVideoRenderer.hpp" />
     <ClInclude Include="Sources\BaseClasses\Interfaces.hpp" />
     <ClInclude Include="Sources\Engine\RenderFacility.hpp" />
     <ClInclude Include="Sources\Engine\Engine.hpp" />

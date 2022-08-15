@@ -9,7 +9,11 @@ namespace Base {
 	{
 	}
 
-	void Scene::AddObject(SceneObject::sptr sceneObject)
+    Scene::~Scene()
+    {
+    }
+
+    void Scene::AddObject(SceneObject::sptr sceneObject)
 	{
 		objectTree_.push_back(sceneObject);
 	}

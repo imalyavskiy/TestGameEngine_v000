@@ -11,11 +11,11 @@ namespace Engine
     {
     }
 
-    void RenderFacility::Render(const std::vector<Base::SceneObject::sptr>& sceneTree_)
+    void RenderFacility::Draw(const std::vector<Base::SceneObject::sptr>& sceneTree_)
     {
         GL::Clear({ GL::AttribMask::COLOR_BUFFER_BIT });
 
-        // todo: draw 
+        Base::RenderFacility::Draw(sceneTree_);
 
         GLUT::SwapBuffers();
     }

@@ -29,15 +29,23 @@ namespace Engine
         const Base::Scene::sptr scene =
             std::make_shared<Learning::DefaultScene>();
 
+        const Base::RenderFacility::sptr renderer =
+            std::make_shared<Engine::RenderFacility>();
+
         const auto soHedgehog = std::make_shared<Learning::SceneObject>("Hedgehog");
         soHedgehog->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
+        soHedgehog->Init();
         scene->AddObject(soHedgehog);
 
         const auto soCamera = std::make_shared<Learning::SceneObject>("FreeCamera");
-        soCamera->SetRootComponent(std::make_shared<Base::Camera>(Base::SceneObjectComponent::wptr{}, "FreeCamera"));
+        auto& genereicVideoRenderer = *(static_cast<Base::Generic::VideoRenderer*>(renderer.get()));
+        const auto baseCamera = std::make_shared<Base::CameraComponent>(genereicVideoRenderer, Base::SceneObjectComponent::wptr{}, "FreeCamera");
+        soCamera->SetRootComponent(baseCamera);
+        soCamera->Init();
         scene->AddObject(soCamera);
 
         Instance().SetScene(scene);
+        Instance().SetRenderer(renderer);
 
         return true; // @todo wrong! return value makes no sense
     }

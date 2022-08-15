@@ -25,9 +25,19 @@ namespace Base {
 			root_->Update(dt);
     }
 
-    void SceneObject::Draw()
+    void SceneObject::Draw(Generic::VideoRenderer& renderer)
     {
 		if (root_)
-			root_->Draw();
+			root_->Draw(renderer);
+    }
+
+    void SceneObject::Init()
+    {
+		if (root_)
+			root_->Init();
+    }
+
+    void SceneObject::JoinScene()
+    {
     }
 }

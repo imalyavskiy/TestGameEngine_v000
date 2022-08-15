@@ -10,6 +10,8 @@ namespace Base {
 
         explicit Scene(const std::string& name);
 
+        ~Scene() override;
+
         /**
          * @brief Adds object into scene.
          */

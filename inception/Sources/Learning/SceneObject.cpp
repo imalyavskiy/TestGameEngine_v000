@@ -17,9 +17,9 @@ namespace Learning
             root->Update(dt);
     }
 
-    void SceneObject::Draw()
+    void SceneObject::Draw(Base::Generic::VideoRenderer& renderer)
     {
         if (auto root = GetRootComponent())
-            root->Draw();
+            root->Draw(renderer);
     }
 }

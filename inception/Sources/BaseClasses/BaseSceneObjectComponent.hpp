@@ -10,34 +10,35 @@ namespace Base {
 
 		explicit SceneObjectComponent(wptr parent, const std::string& name);
 
-		void AddChild(sptr child);
+		~SceneObjectComponent() override;
+
+        void AddChild(sptr child);
 
 		ChildList& GetChildList();
 
 		virtual void Update(float dt);
 
-		virtual void Draw();
+		virtual void Draw(Generic::VideoRenderer& renderer);
+
+		virtual void Init();
 
 		Math3D::Matrix4f GetWorldTransformMatrix() const;
 
         Math3D::Matrix4f GetWorldTransformMatrix(const Math3D::Matrix4f& local) const;
 
-        Math3D::Direction GetForwardVector() const;
+        Math3D::Direction GetWorldForwardVector() const;
 
-        Math3D::Direction GetBackwardVector() const;
+        Math3D::Direction GetWorldBackwardVector() const;
 
-        Math3D::Direction GetUpVector() const;
+        Math3D::Direction GetWorldUpVector() const;
 
-        Math3D::Direction GetDownVector() const;
+        Math3D::Direction GetWorldDownVector() const;
 
-        Math3D::Direction GetRightVector() const;
+        Math3D::Direction GetWorldRightVector() const;
 
-        Math3D::Direction GetLeftVector() const;
+        Math3D::Direction GetWorldLeftVector() const;
 
-        /**
-		 * @brief Called when object being added to a scene.
-		 */
-		virtual void OnAddToScene();
+		Math3D::Position GetWorldPosition() const;
 
 	private:
 		wptr parent_;

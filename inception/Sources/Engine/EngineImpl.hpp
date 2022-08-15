@@ -127,6 +127,11 @@ namespace Engine
          */
         void SetScene(Base::Scene::sptr scene);
 
+        /**
+         *
+         */
+        void SetRenderer(Base::RenderFacility::sptr renderer);
+
     protected:
         /**
          * @todo add description
@@ -141,7 +146,7 @@ namespace Engine
         /**
          * @todo add description
          */
-        RenderFacility::sptr renderFacility_;
+        Base::RenderFacility::sptr renderFacility_;
     };
 }
 #endif // __ENGINE_IMPL_HPP__

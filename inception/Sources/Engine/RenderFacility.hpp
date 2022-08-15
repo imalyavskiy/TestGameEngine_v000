@@ -12,9 +12,9 @@ namespace Engine
 		using sptr = std::shared_ptr<RenderFacility>;
 		using wptr = std::weak_ptr<RenderFacility>;
 
-		RenderFacility(const std::string& name);
+		RenderFacility(const std::string& name = "renderer");
 
-		void Render(const std::vector<Base::SceneObject::sptr>& sceneTree_);
+		void Draw(const std::vector<Base::SceneObject::sptr>& sceneTree_) override;
 	};
 }
 #endif // __RENDER_FACILITY_HPP__

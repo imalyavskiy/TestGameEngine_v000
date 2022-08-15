@@ -49,6 +49,9 @@
     <Filter Include="Source Files\Sources\Engine">
       <UniqueIdentifier>{e7f7795b-99e2-4d86-9b27-16da2e92830a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sources\BaseClasses\Generic">
+      <UniqueIdentifier>{e94ebf23-a719-4c1e-b99e-96de02689b55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\main.cpp">
@@ -105,10 +108,13 @@
     <ClCompile Include="Sources\Engine\RenderFacility.cpp">
       <Filter>Source Files\Sources\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\BaseClasses\BaseCamera.cpp">
+    <ClCompile Include="Sources\BaseClasses\BaseCameraComponent.cpp">
       <Filter>Source Files\Sources\BaseClasses</Filter>
     </ClCompile>
     <ClCompile Include="Sources\BaseClasses\BaseRenderFacility.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseMeshComponent.cpp">
       <Filter>Source Files\Sources\BaseClasses</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,10 +185,22 @@
     <ClInclude Include="Sources\Engine\RenderFacility.hpp">
       <Filter>Header Files\Sources\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\BaseClasses\BaseCamera.hpp">
+    <ClInclude Include="Sources\BaseClasses\BaseCameraComponent.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\GenericAudioRenderer.hpp">
+      <Filter>Header Files\Sources\BaseClasses\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\GenericCamera.hpp">
+      <Filter>Header Files\Sources\BaseClasses\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\GenericVideoRenderer.hpp">
+      <Filter>Header Files\Sources\BaseClasses\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseMeshComponent.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
   </ItemGroup>

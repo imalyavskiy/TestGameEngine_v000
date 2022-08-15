@@ -9,5 +9,7 @@
 #include <cassert>
 #include <chrono>
 #include <stdexcept>
+#include <memory>
+#include <set>
 
 #endif // __PCH_HPP__

@@ -3,34 +3,45 @@
 #include <Utilities/Utilities.hpp>
 #include "BaseClasses.hpp"
 namespace Base {
-	SceneObjectComponent::SceneObjectComponent(wptr parent, const std::string& name)
-		: Object(name)
-	{
+    SceneObjectComponent::SceneObjectComponent(wptr parent, const std::string& name)
+        : Object(name)
+    {
 
-	}
+    }
 
-	void SceneObjectComponent::AddChild(sptr child)
-	{
-		childList_.push_back(child);
-	}
+    SceneObjectComponent::~SceneObjectComponent()
+    {
+        
+    }
 
-	SceneObjectComponent::ChildList&
-		SceneObjectComponent::GetChildList()
-	{
-		return childList_;
-	}
+    void SceneObjectComponent::AddChild(sptr child)
+    {
+        childList_.push_back(child);
+    }
 
-	void SceneObjectComponent::Update(float dt)
-	{
-		for (auto child : childList_)
-			child->Update(dt);
-	}
+    SceneObjectComponent::ChildList&
+        SceneObjectComponent::GetChildList()
+    {
+        return childList_;
+    }
 
-	void SceneObjectComponent::Draw()
-	{
-		for (auto child : childList_)
-			child->Draw();
-	}
+    void SceneObjectComponent::Update(float dt)
+    {
+        for (auto child : childList_)
+            child->Update(dt);
+    }
+
+    void SceneObjectComponent::Draw(Generic::VideoRenderer& renderer)
+    {
+        for (auto child : childList_)
+            child->Draw(renderer);
+    }
+
+    void SceneObjectComponent::Init()
+    {
+        for (auto child : childList_)
+            child->Init();
+    }
 
     Math3D::Matrix4f SceneObjectComponent::GetWorldTransformMatrix() const
     {
@@ -47,7 +58,7 @@ namespace Base {
         return parent_.lock()->GetWorldTransformMatrix(m);
     }
 
-    Math3D::Direction SceneObjectComponent::GetForwardVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldForwardVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Forward, 0.f);
         const auto world = GetWorldTransformMatrix();
@@ -55,7 +66,7 @@ namespace Base {
         return Math3D::Direction((world * forward).xyz());
     }
 
-    Math3D::Direction SceneObjectComponent::GetBackwardVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldBackwardVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Backward, 0.f);
         const auto world = GetWorldTransformMatrix();
@@ -63,7 +74,7 @@ namespace Base {
         return Math3D::Direction((world * forward).xyz());
     }
 
-    Math3D::Direction SceneObjectComponent::GetUpVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldUpVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Up, 0.f);
         const auto world = GetWorldTransformMatrix();
@@ -71,7 +82,7 @@ namespace Base {
         return Math3D::Direction((world * forward).xyz());
     }
 
-    Math3D::Direction SceneObjectComponent::GetDownVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldDownVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Down, 0.f);
         const auto world = GetWorldTransformMatrix();
@@ -79,7 +90,7 @@ namespace Base {
         return Math3D::Direction((world * forward).xyz());
     }
 
-    Math3D::Direction SceneObjectComponent::GetRightVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldRightVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Right, 0.f);
         const auto world = GetWorldTransformMatrix();
@@ -87,11 +98,19 @@ namespace Base {
         return Math3D::Direction((world * forward).xyz());
     }
 
-    Math3D::Direction SceneObjectComponent::GetLeftVector() const
+    Math3D::Direction SceneObjectComponent::GetWorldLeftVector() const
     {
         const auto forward = Math3D::Vector4f(Math3D::Direction::Left, 0.f);
         const auto world = GetWorldTransformMatrix();
 
         return Math3D::Direction((world * forward).xyz());
+    }
+
+    Math3D::Position SceneObjectComponent::GetWorldPosition() const
+    {
+        const auto position = Math3D::Vector4f{};
+        const auto world = GetWorldTransformMatrix();
+
+        return Math3D::Position((world * position).xyz());
     }
 }
