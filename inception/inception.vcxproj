@@ -46,6 +46,7 @@
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseMeshComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseSettings.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderProgram.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseObject.hpp" />

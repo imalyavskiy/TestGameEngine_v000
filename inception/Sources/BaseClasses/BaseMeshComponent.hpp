@@ -13,6 +13,7 @@ namespace Base
         ~MeshComponent() override;
 
         void Init() override;
+
     protected:
         ///
         uint32_t vertexBufferObject_ = _UI32_MAX;

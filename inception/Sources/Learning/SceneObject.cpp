@@ -17,9 +17,9 @@ namespace Learning
             root->Update(dt);
     }
 
-    void SceneObject::Draw(Base::Generic::VideoRenderer& renderer)
+    void SceneObject::Draw(const Math3D::Matrix4f& matViewProjection)
     {
         if (auto root = GetRootComponent())
-            root->Draw(renderer);
+            root->Draw(matViewProjection);
     }
 }

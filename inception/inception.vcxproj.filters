@@ -203,5 +203,8 @@
     <ClInclude Include="Sources\BaseClasses\BaseMeshComponent.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseSettings.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

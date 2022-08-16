@@ -12,7 +12,7 @@ namespace Engine
 		using sptr = std::shared_ptr<RenderFacility>;
 		using wptr = std::weak_ptr<RenderFacility>;
 
-		RenderFacility(const std::string& name = "renderer");
+		RenderFacility(const Base::Settings& settings, const std::string& name = "renderer");
 
 		void Draw(const std::vector<Base::SceneObject::sptr>& sceneTree_) override;
 	};

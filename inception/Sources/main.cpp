@@ -4,12 +4,8 @@
 Base::Scene::sptr scene;
 
 [[nodiscard]]
-int EngineInit(const uint32_t width, const uint32_t height)
+int EngineInit(const Base::Settings& settings)
 {
-    Engine::Settings settings;
-    settings.viewportWidth = width;
-    settings.viewportHeight = height;
-
     // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
     // Render API must be under Engine and hidden under abstract some 'Render Device'
     // interface
@@ -44,9 +40,9 @@ int EngineInit(const uint32_t width, const uint32_t height)
 }
 
 [[nodiscard]]
-int EngineLoad()
+int EngineLoad(const Base::Settings& settings)
 {
-    Engine::Load();
+    Engine::Load(settings);
 
     return 0;
 }
@@ -64,21 +60,20 @@ int EngineRun()
 
 int main(int argc, char** argv)
 {
-    constexpr int32_t WINDOW_WIDTH = 1024;
-    constexpr int32_t WINDOW_HEIGHT = 768;
+  const Base::Settings settings;
 
-    // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
-    // Render API must be under Engine and hidden under abstract some 'Render Device'
-    // interface
-    GLUT::Init(argc, argv);
+  // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
+  // Render API must be under Engine and hidden under abstract some 'Render Device'
+  // interface
+  GLUT::Init(argc, argv);
 
-    int result = 0;
+  int result = 0;
 
-    result = EngineInit(WINDOW_WIDTH, WINDOW_HEIGHT);
+  result = EngineInit(settings);
 
-    result = EngineLoad();
+  result = EngineLoad(settings);
 
-    result = EngineRun();
+  result = EngineRun();
 
-    return result;
+  return result;
 }

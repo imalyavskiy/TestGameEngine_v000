@@ -8,7 +8,7 @@
 #include "EngineImpl.hpp"
 namespace Engine
 {
-    Impl::Impl(Settings settings)
+    Impl::Impl(Base::Settings settings)
         : settings_(settings)
     {
 

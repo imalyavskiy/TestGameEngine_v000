@@ -27,6 +27,12 @@ namespace Base {
          */
         const ObjectTree& GetObjectTree() const;
 
+
+        /**
+        * @brief Loads the scene content.
+        */
+        virtual bool Load(const Base::RenderFacility::sptr& renderer) = 0;
+
     protected:
         ObjectTree objectTree_;
     };

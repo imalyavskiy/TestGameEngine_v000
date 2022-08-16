@@ -11,149 +11,139 @@ namespace Engine
 {
     static Impl* instance = nullptr;
 
-    Impl& Instance()
-    {
-        assert(instance);
-        return *instance;
-    }
+  Impl& Instance()
+  {
+    assert(instance);
+    return *instance;
+  }
 
-    bool Initialize(const Settings& settings)
-    {
-        instance = new Impl(settings);
+  bool Initialize(const Base::Settings& settings)
+  {
+    instance = new Impl(settings);
 
-        return true; // @todo wrong! return value makes no sense
-    }
+    return true; // @todo wrong! return value makes no sense
+  }
 
-    bool Load()
-    {
-        const Base::Scene::sptr scene =
-            std::make_shared<Learning::DefaultScene>();
+  bool Load(const Base::Settings& settings)
+  {
+    const Base::Scene::sptr scene =
+      std::make_shared<Learning::DefaultScene>();
 
-        const Base::RenderFacility::sptr renderer =
-            std::make_shared<Engine::RenderFacility>();
+    const Base::RenderFacility::sptr renderer =
+      std::make_shared<Engine::RenderFacility>(settings);
 
-        const auto soHedgehog = std::make_shared<Learning::SceneObject>("Hedgehog");
-        soHedgehog->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
-        soHedgehog->Init();
-        scene->AddObject(soHedgehog);
+    scene->Load(renderer);
 
-        const auto soCamera = std::make_shared<Learning::SceneObject>("FreeCamera");
-        auto& genereicVideoRenderer = *(static_cast<Base::Generic::VideoRenderer*>(renderer.get()));
-        const auto baseCamera = std::make_shared<Base::CameraComponent>(genereicVideoRenderer, Base::SceneObjectComponent::wptr{}, "FreeCamera");
-        soCamera->SetRootComponent(baseCamera);
-        soCamera->Init();
-        scene->AddObject(soCamera);
+    Instance().SetScene(scene);
+    Instance().SetRenderer(renderer);
 
-        Instance().SetScene(scene);
-        Instance().SetRenderer(renderer);
+    return true; // @todo wrong! return value makes no sense
+  }
 
-        return true; // @todo wrong! return value makes no sense
-    }
+  void  KeyboardFunc(unsigned char ch, int x, int y)
+  {
+    Instance().KeyboardFunc(ch, x, y);
+  }
 
-    void  KeyboardFunc(unsigned char ch, int x, int y)
-    {
-        Instance().KeyboardFunc(ch, x, y);
-    }
+  void  SpecialFunc(int id, int x, int y)
+  {
+    Instance().SpecialFunc(id, x, y);
+  }
 
-    void  SpecialFunc(int id, int x, int y)
-    {
-        Instance().SpecialFunc(id, x, y);
-    }
+  void  ReshapeFunc(int w, int h)
+  {
+    Instance().ReshapeFunc(w, h);
+  }
 
-    void  ReshapeFunc(int w, int h)
-    {
-        Instance().ReshapeFunc(w, h);
-    }
+  void  VisibilityFunc(int state)
+  {
+    Instance().VisibilityFunc(state);
+  }
 
-    void  VisibilityFunc(int state)
-    {
-        Instance().VisibilityFunc(state);
-    }
+  void  RenderProc()
+  {
+    Instance().RenderProc();
+  }
 
-    void  RenderProc()
-    {
-        Instance().RenderProc();
-    }
+  void  MouseFunc(int button, int state, int x, int y)
+  {
+    Instance().MouseFunc(button, state, x, y);
+  }
 
-    void  MouseFunc(int button, int state, int x, int y)
-    {
-        Instance().MouseFunc(button, state, x, y);
-    }
+  void  MotionFunc(int x, int y)
+  {
+    Instance().MotionFunc(x, y);
+  }
 
-    void  MotionFunc(int x, int y)
-    {
-        Instance().MotionFunc(x, y);
-    }
+  void  PassiveMotionFunc(int x, int y)
+  {
+    Instance().PassiveMotionFunc(x, y);
+  }
 
-    void  PassiveMotionFunc(int x, int y)
-    {
-        Instance().PassiveMotionFunc(x, y);
-    }
+  void  EntryFunc(int state) {
+    Instance().EntryFunc(state);
+  }
 
-    void  EntryFunc(int state) {
-        Instance().EntryFunc(state);
-    }
+  void  KeyboardUpFunc(unsigned char key, int x, int y) {
+    Instance().KeyboardUpFunc(key, x, y);
+  }
 
-    void  KeyboardUpFunc(unsigned char key, int x, int y) {
-        Instance().KeyboardUpFunc(key, x, y);
-    }
+  void  SpecialUpFunc(int key, int x, int y) {
+    Instance().SpecialUpFunc(key, x, y);
+  }
 
-    void  SpecialUpFunc(int key, int x, int y) {
-        Instance().SpecialUpFunc(key, x, y);
-    }
+  void  JoystickFunc(unsigned int buttons, int x, int y, int z)
+  {
+      Instance().JoystickFunc(buttons, x, y, z);
+  }
 
-    void  JoystickFunc(unsigned int buttons, int x, int y, int z)
-    {
-        Instance().JoystickFunc(buttons, x, y, z);
-    }
+  void  MenuStateFunc(int state)
+  {
+    Instance().MenuStateFunc(state);
+  }
 
-    void  MenuStateFunc(int state)
-    {
-        Instance().MenuStateFunc(state);
-    }
+  void  MenuStatusFunc(int status, int x, int y)
+  {
+    Instance().MenuStatusFunc(status, x, y);
+  }
 
-    void  MenuStatusFunc(int status, int x, int y)
-    {
-        Instance().MenuStatusFunc(status, x, y);
-    }
+  void  OverlayDisplayFunc()
+  {
+    Instance().OverlayDisplayFunc();
+  }
 
-    void  OverlayDisplayFunc()
-    {
-        Instance().OverlayDisplayFunc();
-    }
+  void  WindowStatusFunc(int status)
+  {
+    Instance().WindowStatusFunc(status);
+  }
 
-    void  WindowStatusFunc(int status)
-    {
-        Instance().WindowStatusFunc(status);
-    }
+  void  SpaceballMotionFunc(int x, int y, int z) {
+    Instance().SpaceballMotionFunc(x, y, z);
+  }
 
-    void  SpaceballMotionFunc(int x, int y, int z) {
-        Instance().SpaceballMotionFunc(x, y, z);
-    }
+  void  SpaceballRotateFunc(int x, int y, int z)
+  {
+    Instance().SpaceballRotateFunc(x, y, z);
+  }
 
-    void  SpaceballRotateFunc(int x, int y, int z)
-    {
-        Instance().SpaceballRotateFunc(x, y, z);
-    }
+  void  SpaceballButtonFunc(int button, int state) {
+    Instance().SpaceballButtonFunc(button, state);
+  }
 
-    void  SpaceballButtonFunc(int button, int state) {
-        Instance().SpaceballButtonFunc(button, state);
-    }
+  void  ButtonBoxFunc(int button, int state) {
+    Instance().ButtonBoxFunc(button, state);
+  }
 
-    void  ButtonBoxFunc(int button, int state) {
-        Instance().ButtonBoxFunc(button, state);
-    }
+  void  DialsFunc(int dial, int value) {
+    Instance().DialsFunc(dial, value);
+  }
 
-    void  DialsFunc(int dial, int value) {
-        Instance().DialsFunc(dial, value);
-    }
+  void  TabletMotionFunc(int x, int y) {
+    Instance().TabletMotionFunc(x, y);
+  }
 
-    void  TabletMotionFunc(int x, int y) {
-        Instance().TabletMotionFunc(x, y);
-    }
-
-    void  TabletButtonFunc(int button, int state, int x, int y) {
-        Instance().TabletButtonFunc(button, state, x, y);
-    }
+  void  TabletButtonFunc(int button, int state, int x, int y) {
+    Instance().TabletButtonFunc(button, state, x, y);
+  }
 
 }

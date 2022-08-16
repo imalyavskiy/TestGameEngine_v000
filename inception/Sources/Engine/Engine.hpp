@@ -2,25 +2,15 @@
 #define __ENGINE_HPP__
 namespace Engine
 {
-    struct Settings
-    {
-        uint32_t viewportWidth = 0;
-        uint32_t viewportHeight = 0;
-        // @todo add scene name, this also required to create a 'scene factory', this in self turn
-        //       requires to to make scenes able to register in compile or load time in the 'scene
-        //       factory'. At time of specific scene loading the 'scene factory' object runs a specific
-        //       'scene loader' and then releases ready to use scene that passes to the engine object.
-    };
-
     /**
      * @brief Initializes the engine instance with Settings structure
      */
-    bool Initialize(const Settings& settings);
+    bool Initialize(const Base::Settings& settings);
 
     /**
      *
      */
-    bool Load();
+    bool Load(const Base::Settings& settings);
 
     /**
      * @brief Called each time when user presses a character key coupled with current mouse

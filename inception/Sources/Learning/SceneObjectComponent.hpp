@@ -14,7 +14,7 @@ namespace Learning
 		RootSceneObjectComponent(const std::string& name);
 
 		///
-		void Draw(Base::Generic::VideoRenderer& renderer) override;
+		void Draw(const Math3D::Matrix4f& matViewProjection) override;
 
 		///
 		void Update(float dt) override;

@@ -8,28 +8,13 @@ namespace Learning
     RootSceneObjectComponent::RootSceneObjectComponent(const std::string& name)
         : Base::MeshComponent({}, name)
     {
-        // TODO: move all this stuff to Init function
     }
 
-    void RootSceneObjectComponent::Draw(Base::Generic::VideoRenderer& renderer)
+    void RootSceneObjectComponent::Draw(const Math3D::Matrix4f& matViewProjection)
     {
         shaderProgram_->Use();
 
-        Math3D::Pipeline pipeline;
-        pipeline.SetTransform(
-            Math3D::Position(0.f, 0.f, 5.f), 
-            Math3D::Rotation(roll_, pitch_, yaw_), 
-            Math3D::Scale(2.f)
-        );
-
-        pipeline.SetCamera(
-            Math3D::Position{ 0.f, 0.f, -3.f * std::sinf(scale_) },
-            Math3D::Direction{ 0.f,0.f,2.f }, 
-            Math3D::Direction{ 0.f, 1.f, 0.f }
-        );
-
-        pipeline.SetProjection(60.f, 1024, 768, 1.f, 100.f);
-        const auto matrixMVP = pipeline.GetMVPMatrix();
+        const auto matrixMVP = matViewProjection * Math3D::Pipeline::Create(transform_);
 
         shaderProgram_->UpdateUniform("gWorld", matrixMVP);
 
@@ -45,16 +30,14 @@ namespace Learning
 
         GL::DisableVertexAttribArray(0);
 
-        Base::SceneObjectComponent::Draw(renderer);
+        Base::SceneObjectComponent::Draw(matViewProjection);
     }
     
     void RootSceneObjectComponent::Update(float dt)
     {
-        scale_ += 0.5f * dt;
-
-        roll_ += rollSpeed_ * dt;
-        pitch_ += pitchSPeed_ * dt;
-        yaw_ += yawSpeed_ * dt;
+        transform_.rotation.x += rollSpeed_ * dt;
+        transform_.rotation.y += pitchSPeed_ * dt;
+        transform_.rotation.z += yawSpeed_ * dt;
     }
 
     void RootSceneObjectComponent::Init()

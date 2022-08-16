@@ -5,7 +5,7 @@ namespace Engine
     class Impl
     {
     public:
-        Impl(Settings settings);
+        Impl(Base::Settings settings);
 
         /**
          * @todo add description
@@ -136,7 +136,7 @@ namespace Engine
         /**
          * @todo add description
          */
-        Settings settings_;
+        Base::Settings settings_;
 
         /**
          * @todo add description

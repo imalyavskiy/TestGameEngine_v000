@@ -43,6 +43,15 @@ namespace Math3D
         {
             return { -x, -y, -z };
         }
+
+        Vector3f operator+=(const float v)
+        {
+          x += v;
+          y += v;
+          z += v;
+
+          return (*this);
+        }
     };
 
     /**

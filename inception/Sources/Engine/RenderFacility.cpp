@@ -6,8 +6,8 @@
 
 namespace Engine
 {
-    RenderFacility::RenderFacility(const std::string& name)
-        : Base::RenderFacility(name)
+    RenderFacility::RenderFacility(const Base::Settings& settings, const std::string& name)
+        : Base::RenderFacility(settings, name)
     {
     }
 

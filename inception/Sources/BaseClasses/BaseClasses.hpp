@@ -5,6 +5,7 @@
 #include "GenericCamera.hpp"
 #include "GenericVideoRenderer.hpp"
 #include "GenericAudioRenderer.hpp"
+#include "BaseSettings.hpp"
 #include "BaseObject.hpp"
 #include "BaseSceneObjectComponent.hpp"
 #include "BaseSceneObject.hpp"

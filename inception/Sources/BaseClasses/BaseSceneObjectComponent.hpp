@@ -1,51 +1,56 @@
 #ifndef __BASE_SCENE_OBJECT_COMPONENT_HPP__
 #define __BASE_SCENE_OBJECT_COMPONENT_HPP__ 
 namespace Base {
-	class SceneObjectComponent : public Object
-	{
-	public:
-		using sptr = std::shared_ptr<SceneObjectComponent>;
-		using wptr = std::weak_ptr<SceneObjectComponent>;
-		using ChildList = std::vector<SceneObjectComponent::sptr>;
+  class SceneObjectComponent : public Object
+  {
+  public:
+    using sptr = std::shared_ptr<SceneObjectComponent>;
+    using wptr = std::weak_ptr<SceneObjectComponent>;
+    using ChildList = std::vector<SceneObjectComponent::sptr>;
 
-		explicit SceneObjectComponent(wptr parent, const std::string& name);
+    explicit SceneObjectComponent(wptr parent, const std::string& name);
+    ~SceneObjectComponent() override;
 
-		~SceneObjectComponent() override;
+    void Transform(const Math3D::Transform& transform);
 
-        void AddChild(sptr child);
+    const Math3D::Transform& Transform() const;
 
-		ChildList& GetChildList();
+    Math3D::Transform& Transform();
 
-		virtual void Update(float dt);
+    void AddChild(sptr child);
 
-		virtual void Draw(Generic::VideoRenderer& renderer);
+    ChildList& GetChildList();
 
-		virtual void Init();
+    virtual void Update(float dt);
 
-		Math3D::Matrix4f GetWorldTransformMatrix() const;
+    virtual void Draw(const Math3D::Matrix4f& matViewProjection);
 
-        Math3D::Matrix4f GetWorldTransformMatrix(const Math3D::Matrix4f& local) const;
+    virtual void Init();
 
-        Math3D::Direction GetWorldForwardVector() const;
+    Math3D::Matrix4f GetWorldTransformMatrix() const;
 
-        Math3D::Direction GetWorldBackwardVector() const;
+    Math3D::Matrix4f GetWorldTransformMatrix(const Math3D::Matrix4f& local) const;
 
-        Math3D::Direction GetWorldUpVector() const;
+    Math3D::Direction GetWorldForwardVector() const;
 
-        Math3D::Direction GetWorldDownVector() const;
+    Math3D::Direction GetWorldBackwardVector() const;
 
-        Math3D::Direction GetWorldRightVector() const;
+    Math3D::Direction GetWorldUpVector() const;
 
-        Math3D::Direction GetWorldLeftVector() const;
+    Math3D::Direction GetWorldDownVector() const;
 
-		Math3D::Position GetWorldPosition() const;
+    Math3D::Direction GetWorldRightVector() const;
 
-	private:
-		wptr parent_;
+    Math3D::Direction GetWorldLeftVector() const;
 
-		Math3D::Transform transform_;
+    Math3D::Position GetWorldPosition() const;
 
-		ChildList childList_;
-	};
+  protected:
+    wptr parent_;
+
+    Math3D::Transform transform_;
+
+    ChildList childList_;
+  };
 }
 #endif // __BASE_SCENE_OBJECT_COMPONENT_HPP__

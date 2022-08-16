@@ -7,7 +7,7 @@ namespace Base
     public:
         using sptr = std::shared_ptr<RenderFacility>;
 
-        RenderFacility(const std::string& name);
+        RenderFacility(const Base::Settings& settings, const std::string& name);
 
         virtual void Draw(const std::vector<SceneObject::sptr>& objectsList);
 
@@ -15,7 +15,13 @@ namespace Base
 
         bool RemoveCamera(Generic::Camera& camera) override;
     protected:
+#if 0
         std::set<Generic::Camera*> cameraList_;
+#else
+        Generic::Camera* camera_;
+#endif
+
+        Settings settings_;
     };
 
 }
