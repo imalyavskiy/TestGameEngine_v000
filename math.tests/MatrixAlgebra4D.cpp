@@ -312,6 +312,9 @@ TEST(MatrixAlgebra4D, MultiplicationDouble)
 
     EXPECT_EQ((matrix1 + matrix2) * matrix3, matrix1 * matrix3 + matrix2 * matrix3);
     EXPECT_EQ(matrix3 * (matrix1 + matrix2), matrix3 * matrix1 + matrix3 * matrix2);
+
+    EXPECT_EQ(matrix1 * matrix2 * matrix3, matrix1 * matrix2 * matrix3);
+    EXPECT_EQ((matrix1 * matrix2) * matrix3, matrix1 * (matrix2 * matrix3));
 }
 
 TEST(MatrixAlgebra4D, DeterminantFloat)
