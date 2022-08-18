@@ -22,17 +22,11 @@
     <Filter Include="Header Files\Sources\Utilities">
       <UniqueIdentifier>{c492af37-e0c0-459c-b6e2-609bf6847af8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Sources\Math3D">
-      <UniqueIdentifier>{d6fb35fa-6bee-4f2b-a74d-e63707338a72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Sources">
       <UniqueIdentifier>{48fc34f3-ff84-45c4-b7e2-96ceaf2f2d33}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Sources\BaseClasses">
       <UniqueIdentifier>{a23f33d0-0806-4246-8179-9506d4b00039}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Sources\Math3D">
-      <UniqueIdentifier>{838f5989-8840-4c4b-bf7c-fcb5abe448f5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Sources\Utilities">
       <UniqueIdentifier>{78acc9be-ebd9-4ebb-91c3-7af77a473108}</UniqueIdentifier>
@@ -96,9 +90,6 @@
     <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp">
       <Filter>Source Files\Sources\BaseClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Math3D\Math3d.cpp">
-      <Filter>Source Files\Sources\Math3D</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Engine\Engine.cpp">
       <Filter>Source Files\Sources\Engine</Filter>
     </ClCompile>
@@ -119,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Sources\Learning\Camera.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Math3D\Math3d.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Sources\BaseClasses\Interfaces.hpp">
       <Filter>Header Files\Sources\BaseClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Sources\Math3D\Math3d.hpp">
-      <Filter>Header Files\Sources\Math3D</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Utilities\gl_wrapper.hpp">
       <Filter>Header Files\Sources\Utilities</Filter>
@@ -211,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Sources\Learning\Camera.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Math3D\Math3d.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
