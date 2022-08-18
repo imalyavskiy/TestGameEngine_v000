@@ -7,5 +7,6 @@
 #include "DeafultScene.hpp"
 #include "SceneObject.hpp"
 #include "SceneObjectComponent.hpp"
+#include "Camera.hpp"
 
 #endif // __LEARNING_HPP__

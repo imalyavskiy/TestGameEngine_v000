@@ -125,6 +125,7 @@ namespace Base {
     const auto position = Math3D::Vector4f{};
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Position((world * position).xyz());
+    const auto result = Math3D::Position((world * position).xyz());
+    return result;
   }
 }

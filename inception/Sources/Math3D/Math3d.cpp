@@ -162,6 +162,18 @@ namespace Math3D {
         };
     }
 
+    Transform::Transform()
+      : scale(1.f, 1.f, 1.f)
+    {
+    }
+
+    Transform::Transform(const Position _position, const Rotation _rotation, const Scale _scale)
+      : position(_position)
+      , rotation(_rotation)
+      , scale(_scale)
+    {
+    }
+
     Pipeline& Pipeline::Instance()
     {
         static Pipeline instance;
@@ -280,7 +292,7 @@ namespace Math3D {
 
     Matrix4f Pipeline::Create(const Transform& transform)
     {
-        return Create(transform.position) * Create(transform.rotation) * Create(transform.scale);
+      return Create(transform.position) * Create(transform.rotation) * Create(transform.scale);
     }
 
     void Pipeline::SetTransform(const Transform& transform)

@@ -34,7 +34,7 @@ namespace Base
         void SetActive(bool active) override;
 
     protected:
-        float fov_ = 90.f;
+        float fov_ = 60.f;
 
         bool active_ = false;
 
