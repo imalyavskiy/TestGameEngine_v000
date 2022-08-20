@@ -11,8 +11,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math.tests", "math.tests\ma
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inception", "inception\inception.vcxproj", "{B5A13C1A-3E40-47E9-B302-EBACC26814E9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D3D42A2-239A-4BFC-A7EE-6DD21055E6E9} = {4D3D42A2-239A-4BFC-A7EE-6DD21055E6E9}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inception.tests", "inception.tests\inception.tests.vcxproj", "{B8A2A2FD-796C-47C7-9B36-68C3E0D03337}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D3D42A2-239A-4BFC-A7EE-6DD21055E6E9} = {4D3D42A2-239A-4BFC-A7EE-6DD21055E6E9}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inception.math3d", "inception.math3d\inception.math3d.vcxproj", "{4D3D42A2-239A-4BFC-A7EE-6DD21055E6E9}"
 EndProject

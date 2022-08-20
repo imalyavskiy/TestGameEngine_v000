@@ -12,48 +12,28 @@ namespace Base
 
     void RenderFacility::Draw(const std::vector<SceneObject::sptr>& objectsList)
     {
-      struct
-      {
-        float fov = 60.f;
-        float width = 1024;
-        float height = 768;
-        float near = 1.f;
-        float far = 100.f;
-      } const projSettings;
-      const Math3D::Position  cameraPos{ 0.f, 0.f, -3.f };
-      const Math3D::Direction cameraForward{ 0.f, 0.f, -1.f };
-      const Math3D::Direction cameraUp{ 0.f, 1.f, 0.f };
+      const auto proj = 
+        Math3D::Pipeline::Projection(
+          camera_->FoV(), 
+          settings_.viewportWidth, 
+          settings_.viewportHeight, 
+          camera_->Near(), 
+          camera_->Far()
+        );
 
-//      const auto viewProjection =
-//        Math3D::Pipeline::Projection(projSettings.fov, projSettings.width, projSettings.height, projSettings.near, projSettings.far);
-//      const auto viewRotation = 
-//        Math3D::Pipeline::ViewRotation(cameraForward, cameraUp);
-//      const auto viewPosition =
-//        Math3D::Pipeline::Create(cameraPos);
-//      const auto trans1 = viewProjection * viewRotation * viewPosition;
+      const auto camView = 
+        Math3D::Pipeline::ViewRotation(
+          camera_->LookAt(), 
+          camera_->Up());
 
-      Math3D::Pipeline pipeline;
-      //      pipeline.SetProjection(projSettings.fov, projSettings.width, projSettings.height, projSettings.near, projSettings.far);
-      pipeline.SetProjection(camera_->FoV(), settings_.viewportWidth, settings_.viewportHeight, settings_.nearClipPlane, settings_.farClipPlane);
+      const auto camPos = 
+        Math3D::Pipeline::Create(
+          camera_->Position()
+        );
 
-      //      pipeline.SetCamera( cameraPos, cameraForward, cameraUp);
-      auto pos = camera_->Position(); // HERE IS THE ERROR - INVALID POSITION
-      pipeline.SetCamera({0.f, 0.f, -3.f}/*pos*/, camera_->LookAt(), camera_->Up());
-
-      pipeline.SetTransform({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, { 1.f, 1.f, 1.f });
-      const auto trans2 =
-        pipeline.GetMVPMatrix();
-
+      const auto matViewProjection = proj * camView * camPos;
       for (const auto& object : objectsList)
-        object->Draw(trans2/*matViewProjection*/);
-
-//      const auto cameraProjection = 
-//        Math3D::Pipeline::Projection(camera_->FoV(), settings_.viewportWidth, settings_.viewportHeight, settings_.nearClipPlane, settings_.farClipPlane );
-//      const auto cameraRotation = 
-//        Math3D::Pipeline::ViewRotation(camera_->LookAt(), camera_->Up());
-//      const auto cameraPosition = 
-//        Math3D::Pipeline::Create(camera_->Position());
-//      const auto matViewProjection = cameraProjection * cameraRotation * cameraPosition;
+        object->Draw(matViewProjection);
     }
 
     bool RenderFacility::AddCamera(Generic::Camera& camera)

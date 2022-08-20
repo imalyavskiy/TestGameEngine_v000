@@ -122,7 +122,7 @@ namespace Base {
 
   Math3D::Position SceneObjectComponent::GetWorldPosition() const
   {
-    const auto position = Math3D::Vector4f{};
+    const auto position = Math3D::Vector4f(Math3D::Position());
     const auto world = GetWorldTransformMatrix();
 
     const auto result = Math3D::Position((world * position).xyz());

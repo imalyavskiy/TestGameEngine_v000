@@ -34,8 +34,8 @@ namespace Learning
     const auto baseCamera =
       std::make_shared<Learning::CameraComponent>(genereicVideoRenderer, Base::SceneObjectComponent::wptr{}, "FreeCamera");
     soCamera->SetRootComponent(baseCamera);
-    soCamera->Transform().position = Math3D::Position(0.f, 0.f, -5.f);
-    soCamera->Transform().rotation = Math3D::Rotation(Math3D::DegToRad(-90.f), Math3D::DegToRad(-90.f), Math3D::DegToRad(0.f));
+    soCamera->Transform().position = Math3D::Position(0.f, 0.f, -3.f);
+    soCamera->Transform().rotation = Math3D::Rotation(0.f, Math3D::DegToRad(-90.f), Math3D::DegToRad(90.f));
     soCamera->Init();
     AddObject(soCamera);
 

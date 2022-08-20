@@ -42,6 +42,16 @@ namespace Base
     return fov_;
   }
 
+  float CameraComponent::Near() const
+  {
+    return near_;
+  }
+
+  float CameraComponent::Far() const
+  {
+    return far_;
+  }
+
   bool CameraComponent::IsActive() const
   {
     return active_;

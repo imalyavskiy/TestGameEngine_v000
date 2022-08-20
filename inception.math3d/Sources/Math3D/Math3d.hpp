@@ -96,6 +96,8 @@ namespace Math3D
     explicit Position(const Vector3f& v3);
 
     Position operator-() const { return { -x, -y, -z }; }
+
+    bool operator==(const Position& r);
   };
 
 
@@ -111,6 +113,8 @@ namespace Math3D
     Direction() = default;
     Direction(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
     explicit Direction(const Vector3f& v3);
+
+    Direction& operator=(const Vector3f& other);
 
     static const Direction Forward;
     static const Direction Backward;
@@ -157,6 +161,16 @@ namespace Math3D
      * @brief Extracts first three components.
      */
     Vector3f xyz() const;
+
+    /**
+     *
+     */
+    bool operator==(const Math3D::Vector4f& r) const;
+
+    /**
+     *
+     */
+    bool operator!=(const Math3D::Vector4f& r) const { return !operator==(r); }
   };
 
   /**
@@ -269,11 +283,11 @@ namespace Math3D
     Direction cameraUp_;
     Position  cameraPosition_;
 
-    float     fov_ = 0.f;
-    uint32_t  width_ = 0;
-    uint32_t  height_ = 0;
-    float     near_ = 0.f;
-    float     far_ = 0.f;
+    float     fov_ = 0.f;  // degrees
+    uint32_t  width_ = 0;  // pixels
+    uint32_t  height_ = 0; // pixels
+    float     near_ = 0.f; // units
+    float     far_ = 0.f;  // units
   };
 }
 using Math3D::operator*;

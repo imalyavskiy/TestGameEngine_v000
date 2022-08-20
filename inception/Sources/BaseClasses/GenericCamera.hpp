@@ -43,6 +43,18 @@ namespace Base
              * @brief ???
              */
             [[nodiscard]]
+            virtual float             Near() const = 0;
+
+            /**
+             * @brief ???
+             */
+            [[nodiscard]]
+            virtual float             Far() const = 0;
+
+            /**
+             * @brief ???
+             */
+            [[nodiscard]]
             virtual bool IsActive() const = 0;
 
             /**
