@@ -9,7 +9,7 @@ namespace Learning
 
 		void Update(float dt) override;
 
-		bool Load(const Base::RenderFacility::sptr& renderer) override;
+		bool Load(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController) override;
 	};
 }
 #endif // __LEARNING_DEAFULT_SCENE_H__

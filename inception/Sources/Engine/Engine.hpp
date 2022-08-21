@@ -19,7 +19,7 @@ namespace Engine
      * @param x Mouse x.
      * @param y Mouse y.
      */
-    void  KeyboardFunc(unsigned char ch, int x, int y);
+    void  KeyboardProc(unsigned char ch, int x, int y);
 
     /**
      * @brief Triggered when keyboard function or directional keys are pressed coupled with current
@@ -30,7 +30,7 @@ namespace Engine
      * @param y Mouse y.
      * @remark Note that the escape, backspace, and delete keys are generated as an ASCII character.
      */
-    void  SpecialFunc(int key, int x, int y);
+    void  SpecialKeyboardProc(int key, int x, int y);
 
     /**
      * @brief Called when a window is reshaped. Also called immediately before a window's first display
@@ -102,7 +102,7 @@ namespace Engine
      * @todo add description
      * @remark (https://linux.die.net/man/3/glutspecialupfunc)
      */
-    void  SpecialUpFunc(int key, int x, int y);
+    void  SpecialKeyboardUpProc(int id, int x, int y);
 
     /**
      * @todo add description

@@ -9,7 +9,7 @@
 
 namespace Engine
 {
-    static Impl* instance = nullptr;
+  static Impl* instance = nullptr;
 
   Impl& Instance()
   {
@@ -26,28 +26,32 @@ namespace Engine
 
   bool Load(const Base::Settings& settings)
   {
-    const Base::Scene::sptr scene =
-      std::make_shared<Learning::DefaultScene>();
+    const Base::Controller::sptr controller =
+      std::make_shared<Learning::DefaultController>(settings);
 
     const Base::RenderFacility::sptr renderer =
       std::make_shared<Engine::RenderFacility>(settings);
 
-    scene->Load(renderer);
+    const Base::Scene::sptr scene =
+      std::make_shared<Learning::DefaultScene>();
+
+    scene->Load(renderer, controller);
 
     Instance().SetScene(scene);
     Instance().SetRenderer(renderer);
+    Instance().SetController(controller);
 
     return true; // @todo wrong! return value makes no sense
   }
 
-  void  KeyboardFunc(unsigned char ch, int x, int y)
+  void  KeyboardProc(unsigned char ch, int x, int y)
   {
     Instance().KeyboardFunc(ch, x, y);
   }
 
-  void  SpecialFunc(int id, int x, int y)
+  void  SpecialKeyboardProc(int id, int x, int y)
   {
-    Instance().SpecialFunc(id, x, y);
+    Instance().SpecialKeyboardProc(static_cast<GLUT::KEY>(id), x, y);
   }
 
   void  ReshapeFunc(int w, int h)
@@ -88,8 +92,8 @@ namespace Engine
     Instance().KeyboardUpFunc(key, x, y);
   }
 
-  void  SpecialUpFunc(int key, int x, int y) {
-    Instance().SpecialUpFunc(key, x, y);
+  void  SpecialKeyboardUpProc(int id, int x, int y) {
+    Instance().SpecialKeyboardUpProc(static_cast<GLUT::KEY>(id), x, y);
   }
 
   void  JoystickFunc(unsigned int buttons, int x, int y, int z)

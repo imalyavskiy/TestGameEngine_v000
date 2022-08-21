@@ -5,6 +5,55 @@
 
 namespace GLUT 
 {
+  std::string toString(KEY key)
+  {
+    switch (key) {
+    case KEY::F1:
+      return "GLUT::KEY::F1";
+    case KEY::F2:
+      return "GLUT::KEY::F2";
+    case KEY::F3:
+      return "GLUT::KEY::F3";
+    case KEY::F4:
+      return "GLUT::KEY::F4";
+    case KEY::F5:
+      return "GLUT::KEY::F5";
+    case KEY::F6:
+      return "GLUT::KEY::F6";
+    case KEY::F7:
+      return "GLUT::KEY::F7";
+    case KEY::F8:
+      return "GLUT::KEY::F8";
+    case KEY::F9:
+      return "GLUT::KEY::F9";
+    case KEY::F10:
+      return "GLUT::KEY::F10";
+    case KEY::F11:
+      return "GLUT::KEY::F11";
+    case KEY::F12:
+      return "GLUT::KEY::F12";
+    case KEY::LEFT:
+      return "GLUT::KEY::LEFT";
+    case KEY::UP:
+      return "GLUT::KEY::UP";
+    case KEY::RIGHT:
+      return "GLUT::KEY::RIGHT";
+    case KEY::DOWN:
+      return "GLUT::KEY::DOWN";
+    case KEY::PAGE_UP:
+      return "GLUT::KEY::PAGE_UP";
+    case KEY::PAGE_DOWN:
+      return "GLUT::KEY::PAGE_DOWN";
+    case KEY::HOME:
+      return "GLUT::KEY::HOME";
+    case KEY::END:
+      return "GLUT::KEY::END";
+    case KEY::INSERT:
+      return "GLUT::KEY::INSERT";
+    }
+    return "n/a";
+  }
+
 	void SwapBuffers() 
 	{
 		glutSwapBuffers();

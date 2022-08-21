@@ -17,7 +17,7 @@ namespace Learning
 			sceneObject->Update(dt);
 	}
 
-  bool DefaultScene::Load(const Base::RenderFacility::sptr& renderer)
+  bool DefaultScene::Load(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController)
   {
     // Hedgehog
     const auto soHedgehog =
@@ -28,7 +28,7 @@ namespace Learning
 
     // Camera
     const auto soCamera =
-      std::make_shared<Learning::SceneObject>("FreeCamera");
+      std::make_shared<Learning::Pawn>("FreeCamera");
     auto& genereicVideoRenderer =
       *(static_cast<Base::Generic::VideoRenderer*>(renderer.get()));
     const auto baseCamera =
@@ -38,6 +38,7 @@ namespace Learning
     soCamera->Transform().rotation = Math3D::Rotation(0.f, Math3D::DegToRad(-90.f), Math3D::DegToRad(90.f));
     soCamera->Init();
     AddObject(soCamera);
+    inputController->SetPawn(soCamera);
 
     return true;
   }

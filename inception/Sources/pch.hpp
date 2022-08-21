@@ -11,5 +11,6 @@
 #include <stdexcept>
 #include <memory>
 #include <set>
+#include <functional>
 
 #endif // __PCH_HPP__

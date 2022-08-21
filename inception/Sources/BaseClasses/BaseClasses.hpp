@@ -9,10 +9,12 @@
 #include "BaseObject.hpp"
 #include "BaseSceneObjectComponent.hpp"
 #include "BaseSceneObject.hpp"
+#include "BasePawn.hpp"
 #include "BaseShaderObject.hpp"
 #include "BaseShaderProgram.hpp"
 #include "BaseCameraComponent.hpp"
 #include "BaseMeshComponent.hpp"
 #include "BaseRenderFacility.hpp"
+#include "BaseController.hpp"
 #include "BaseScene.hpp"
 #endif // __BASE_CLASSES_HPP__

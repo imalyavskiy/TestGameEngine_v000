@@ -8,5 +8,7 @@
 #include "SceneObject.hpp"
 #include "SceneObjectComponent.hpp"
 #include "Camera.hpp"
+#include "DefaultController.hpp"
+#include "Pawn.hpp"
 
 #endif // __LEARNING_HPP__

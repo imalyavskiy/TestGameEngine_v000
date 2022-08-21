@@ -14,14 +14,15 @@ namespace Engine
 
   }
 
-  void Impl::KeyboardFunc(unsigned char ch, int x, int y)
+    void Impl::KeyboardFunc(unsigned char ch, int x, int y)
   {
     throw std::logic_error("not implemented");
   }
 
-  void Impl::SpecialFunc(int, int, int)
+  void Impl::SpecialKeyboardProc(GLUT::KEY key, int, int)
   {
-    throw std::logic_error("not implemented");
+    if (inputController_)
+      inputController_->OnKey(key, true);
   }
 
   void Impl::ReshapeFunc(int, int)
@@ -51,7 +52,7 @@ namespace Engine
 #endif
 
     // @todo implement 2 pass physics calculations
-
+    inputController_->Update(dt);
     scene_->Update(dt);
 
     renderFacility_->Draw(scene_->GetObjectTree());
@@ -81,9 +82,10 @@ namespace Engine
     throw std::logic_error("not implemented");
   }
 
-  void  Impl::SpecialUpFunc(int, int, int)
+  void  Impl::SpecialKeyboardUpProc(GLUT::KEY key, int, int)
   {
-    throw std::logic_error("not implemented");
+    if(inputController_)
+      inputController_->OnKey(key, false);
   }
 
   void  Impl::JoystickFunc(unsigned int, int, int, int)
@@ -154,5 +156,10 @@ namespace Engine
   void Impl::SetRenderer(Base::RenderFacility::sptr renderer)
   {
     renderFacility_ = renderer;
+  }
+
+  void Impl::SetController(Base::Controller::sptr controller)
+  {
+    inputController_ = controller;
   }
 }

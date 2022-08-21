@@ -31,7 +31,7 @@ namespace Base {
         /**
         * @brief Loads the scene content.
         */
-        virtual bool Load(const Base::RenderFacility::sptr& renderer) = 0;
+        virtual bool Load(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController) = 0;
 
     protected:
         ObjectTree objectTree_;

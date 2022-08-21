@@ -20,7 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\BaseClasses\BaseCameraComponent.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BaseController.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseMeshComponent.cpp" />
+    <ClCompile Include="Sources\BaseClasses\BasePawn.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseRenderFacility.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderObject.cpp" />
     <ClCompile Include="Sources\BaseClasses\BaseShaderProgram.cpp" />
@@ -33,6 +35,8 @@
     <ClCompile Include="Sources\Engine\EngineImpl.cpp" />
     <ClCompile Include="Sources\Learning\Camera.cpp" />
     <ClCompile Include="Sources\Learning\DeafultScene.cpp" />
+    <ClCompile Include="Sources\Learning\DefaultController.cpp" />
+    <ClCompile Include="Sources\Learning\Pawn.cpp" />
     <ClCompile Include="Sources\Learning\SceneObject.cpp" />
     <ClCompile Include="Sources\Learning\SceneObjectComponent.cpp" />
     <ClCompile Include="Sources\main.cpp" />
@@ -44,7 +48,9 @@
   <ItemGroup>
     <ClInclude Include="Sources\BaseClasses\BaseCameraComponent.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseClasses.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BaseController.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseMeshComponent.hpp" />
+    <ClInclude Include="Sources\BaseClasses\BasePawn.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseRenderFacility.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseSettings.hpp" />
     <ClInclude Include="Sources\BaseClasses\BaseShaderObject.hpp" />
@@ -62,6 +68,8 @@
     <ClInclude Include="Sources\Engine\EngineImpl.hpp" />
     <ClInclude Include="Sources\Learning\Camera.hpp" />
     <ClInclude Include="Sources\Learning\DeafultScene.hpp" />
+    <ClInclude Include="Sources\Learning\DefaultController.hpp" />
+    <ClInclude Include="Sources\Learning\Pawn.hpp" />
     <ClInclude Include="Sources\Learning\SceneObject.hpp" />
     <ClInclude Include="Sources\Learning\SceneObjectComponent.hpp" />
     <ClInclude Include="Sources\Learning\Learning.hpp" />

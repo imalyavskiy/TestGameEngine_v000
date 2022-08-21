@@ -111,6 +111,18 @@
     <ClCompile Include="Sources\Learning\Camera.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BaseController.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\BaseClasses\BasePawn.cpp">
+      <Filter>Source Files\Sources\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Learning\DefaultController.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Learning\Pawn.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\main.hpp">
@@ -198,6 +210,18 @@
       <Filter>Header Files\Sources\BaseClasses</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Learning\Camera.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BaseController.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\BaseClasses\BasePawn.hpp">
+      <Filter>Header Files\Sources\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\DefaultController.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\Pawn.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
   </ItemGroup>
