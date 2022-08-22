@@ -27,15 +27,15 @@ namespace Learning
     GL::DrawElements(GL::DataType::TRIANGLES, indices_.size(), GL::Type::UNSIGNED_INT);
 
     GL::DisableVertexAttribArray(0);
-
+     
     Base::SceneObjectComponent::Draw(matViewProjection);
   }
   
   void RootSceneObjectComponent::Update(float dt)
   {
-    transform_.rotation.x += rollSpeed_ * dt;
-    transform_.rotation.y += pitchSPeed_ * dt;
-    transform_.rotation.z += yawSpeed_ * dt;
+    transform_.rotation.x += Math3D::DegToRad(rollSpeed_ * dt);
+    transform_.rotation.y += Math3D::DegToRad(pitchSPeed_ * dt);
+    transform_.rotation.z += Math3D::DegToRad(yawSpeed_ * dt);
 
     Base::MeshComponent::Update(dt);
   }

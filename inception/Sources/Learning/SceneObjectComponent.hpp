@@ -24,18 +24,12 @@ namespace Learning
 	
 	private:
 		///
-		float scale_ = 0.f;
-
-		///
-		float roll_ = 0.f;
 		float rollSpeed_ = 1.f;
 		
 		///
-		float pitch_ = 0.f;
 		float pitchSPeed_ = 1.f;
 		
 		///
-		float yaw_ = 0.f;
 		float yawSpeed_ = 1.f;
 	};
 }

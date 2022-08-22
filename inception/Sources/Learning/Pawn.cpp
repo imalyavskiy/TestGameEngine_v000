@@ -29,9 +29,10 @@ namespace Learning
   void Pawn::Update(float dt)
   {
     auto& transform = Transform();
-    transform.position.x += forwardDelta * 0.2f;
-    transform.position.y += rightDelta * 0.2f;
-    transform.position.z += upDelta * 0.2f;
+
+    transform.position.x += 0.0005f * forwardDelta;
+    transform.position.y += 0.0005f * rightDelta;
+    transform.position.z += 0.0005f * upDelta;
 
     Base::Pawn::Update(dt);
   }

@@ -11,7 +11,7 @@ namespace Learning
   {
     std::shared_ptr<Button> up(new Button(GLUT::KEY::UP));
     std::shared_ptr<Button> dn(new Button(GLUT::KEY::DOWN));
-    std::shared_ptr<AxisAction> fwd(new AxisAction(up, dn, [&](float val) {
+    std::shared_ptr<AxisAction> fwd(new AxisAction(dn, up, [&](float val) {
       if(controlledPawn_)
         controlledPawn_->MoveForward(val);
     }));
@@ -23,7 +23,7 @@ namespace Learning
     std::shared_ptr<Button> lt(new Button(GLUT::KEY::LEFT));
     std::shared_ptr<AxisAction> rght(new AxisAction(rt, lt, [&](float val) {
       if(controlledPawn_)
-        controlledPawn_->MoveForward(val);
+        controlledPawn_->MoveRight(val);
     }));
     registeredKeys_[rt->id] = rt;
     registeredKeys_[lt->id] = lt;

@@ -13,10 +13,6 @@ namespace Learning
 
   void CameraComponent::Update(float dt)
   {
-    transform_.rotation.x += rotationSpeed_.x * dt;
-    transform_.rotation.y += rotationSpeed_.y * dt;
-    transform_.rotation.z += rotationSpeed_.z * dt;
-
     Base::CameraComponent::Update(dt);
   }
 }

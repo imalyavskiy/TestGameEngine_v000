@@ -9,7 +9,7 @@ int EngineInit(const Base::Settings& settings)
     // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
     // Render API must be under Engine and hidden under abstract some 'Render Device'
     // interface
-    GLUT::InitDisplayMode({ GLUT::DisplayMode::DOUBLE, GLUT::DisplayMode::RGBA });
+    GLUT::InitDisplayMode({ GLUT::DisplayMode::DOUBLE, GLUT::DisplayMode::DEPTH, GLUT::DisplayMode::RGBA });
     GLUT::InitWindowSize(settings.viewportWidth, settings.viewportHeight);
     GLUT::InitWindowPosition(100, 100);
     GLUT::CreateWindow("Inception");
