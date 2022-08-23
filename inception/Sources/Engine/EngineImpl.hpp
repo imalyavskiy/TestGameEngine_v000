@@ -10,12 +10,12 @@ namespace Engine
     /**
      * @todo add description
      */
-    void  KeyboardFunc(unsigned char ch, int x, int y);
+    void  SpecialKeyboardProc(GLUT::KEY key, int x, int y);
 
     /**
      * @todo add description
      */
-    void  SpecialKeyboardProc(GLUT::KEY key, int x, int y);
+    void  SpecialKeyboardUpProc(GLUT::KEY key, int, int);
 
     /**
      * @todo add description
@@ -35,32 +35,32 @@ namespace Engine
     /**
      * @todo add description
      */
-    void  MouseFunc(int _0, int _1, int _2, int _3);
+    void  MouseProc(GLUT::MOUSE_BUTTON button, GLUT::MOUSE_BUTTON_STATE state, int x, int y);
 
     /**
      * @todo add description
      */
-    void  MotionFunc(int _0, int _1);
+    void  MotionProc(int x, int y);
 
     /**
      * @todo add description
      */
-    void  PassiveMotionFunc(int _0, int _1);
+    void  PassiveMotionProc(int x, int y);
 
     /**
      * @todo add description
      */
-    void  EntryFunc(int _0);
+    void  EntryProc(GLUT::MOUSE_STATE state);
+
+    /**
+     * @todo add description
+     */
+    void  KeyboardFunc(unsigned char ch, int x, int y);
 
     /**
      * @todo add description
      */
     void  KeyboardUpFunc(unsigned char _0, int _1, int _2);
-
-    /**
-     * @todo add description
-     */
-    void  SpecialKeyboardUpProc(GLUT::KEY key, int, int);
 
     /**
      * @todo add description

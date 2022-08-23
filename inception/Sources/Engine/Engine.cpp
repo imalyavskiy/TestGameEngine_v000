@@ -69,23 +69,23 @@ namespace Engine
     Instance().RenderProc();
   }
 
-  void  MouseFunc(int button, int state, int x, int y)
+  void  MouseProc(int button, int state, int x, int y)
   {
-    Instance().MouseFunc(button, state, x, y);
+    Instance().MouseProc(static_cast<GLUT::MOUSE_BUTTON>(button), static_cast<GLUT::MOUSE_BUTTON_STATE>(state), x, y);
   }
 
-  void  MotionFunc(int x, int y)
+  void  MotionProc(int x, int y)
   {
-    Instance().MotionFunc(x, y);
+    Instance().MotionProc(x, y);
   }
 
-  void  PassiveMotionFunc(int x, int y)
+  void  PassiveMotionProc(int x, int y)
   {
-    Instance().PassiveMotionFunc(x, y);
+    Instance().PassiveMotionProc(x, y);
   }
 
-  void  EntryFunc(int state) {
-    Instance().EntryFunc(state);
+  void  EntryProc(int state) {
+    Instance().EntryProc(static_cast<GLUT::MOUSE_STATE>(state));
   }
 
   void  KeyboardUpFunc(unsigned char key, int x, int y) {

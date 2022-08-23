@@ -19,13 +19,53 @@ namespace Learning
 
   bool DefaultScene::Load(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController)
   {
-    // Hedgehog
-    const auto soHedgehog =
-      std::make_shared<Learning::SceneObject>("Hedgehog");
-    soHedgehog->SetRootComponent(std::make_shared<Learning::RootSceneObjectComponent>("dot component"));
-    soHedgehog->Init();
-    AddObject(soHedgehog);
+    LoadVectorTriple();
 
+    LoadCamera(renderer, inputController);
+
+    return true;
+  }
+
+  void DefaultScene::LoadVectorTriple()
+	{
+    const auto socRoot =
+      std::make_shared<Base::SceneObjectComponent>(Base::SceneObjectComponent::wptr(), "Root");
+
+	  const auto socSphere =
+      std::make_shared<Learning::VectorTripletOrigin>("VectorTripleOrigin");
+    socSphere->SetColor({ 1.f, 1.f, 1.f });
+    socSphere->Transform().scale.x = 0.35;
+    socSphere->Transform().scale.y = 0.35;
+    socSphere->Transform().scale.z = 0.35;
+    socRoot->AddChild(socSphere);
+
+	  const auto socVectorX =
+      std::make_shared<Learning::VectorArrow>("Vector X");
+    socVectorX->SetColor({ 1.f, 0.f, 0.f });
+    socRoot->AddChild(socVectorX);
+
+	  const auto socVectorY=
+      std::make_shared<Learning::VectorArrow>("Vector Y");
+    socVectorY->SetColor({ 0.f, 0.f, 1.f });
+    socVectorY->Transform().rotation.z = 90.f;
+    socRoot->AddChild(socVectorY);
+
+	  const auto socVectorZ =
+      std::make_shared<Learning::VectorArrow>("Vector Z");
+    socVectorZ->SetColor({ 0.f, 1.f, 0.f });
+    socVectorZ->Transform().rotation.y = -90.f;
+    socRoot->AddChild(socVectorZ);
+
+    const auto vectorTriple =
+      std::make_shared<Learning::RotatingObject>("VectorTriple");
+    vectorTriple->SetRootComponent(socRoot);
+    vectorTriple->Init();
+
+	  AddObject(vectorTriple);
+  }
+
+  void DefaultScene::LoadCamera(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController)
+  {
     // Camera
     const auto soCamera =
       std::make_shared<Learning::Pawn>("FreeCamera");
@@ -39,7 +79,5 @@ namespace Learning
     soCamera->Init();
     AddObject(soCamera);
     inputController->SetPawn(soCamera);
-
-    return true;
   }
 }

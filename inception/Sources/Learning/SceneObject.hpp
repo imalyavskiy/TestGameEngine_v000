@@ -1,12 +1,14 @@
 namespace Learning
 {
-	class SceneObject : public Base::SceneObject
+	class RotatingObject : public Base::SceneObject
 	{
 	public:
-		SceneObject(const std::string& name);
+		RotatingObject(const std::string& name);
 
 		void Update(float dt) override;
 
-		void Draw(const Math3D::Matrix4f& matViewProjection) override;
+	protected:
+		const Math3D::Rotation rotationSpeed_ = { 5.f, 5.f, 5.f };
 	};
+
 }

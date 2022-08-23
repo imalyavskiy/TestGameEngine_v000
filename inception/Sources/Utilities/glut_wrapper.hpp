@@ -10,23 +10,23 @@
 /// Functions in this namespace wraps glut functions in order to join together sources and documentation
 /// https://www.opengl.org/resources/libraries/glut/spec3/node1.html
 namespace GLUT {
-	/// InitDisplayMode function constants(https://www.opengl.org/resources/libraries/glut/spec3/node12.html#SECTION00033000000000000000)
-	enum class DisplayMode : uint32_t
-	{
-		RGB         = 0x00000000,
-		RGBA        = 0x00000000,
-		INDEX       = 0x00000001,
-		SINGLE      = 0x00000000,
-		DOUBLE      = 0x00000002,
-		ACCUM       = 0x00000004,
-		ALPHA       = 0x00000008,
-		DEPTH       = 0x00000010,
-		STENCIL     = 0x00000020,
-		MULTISAMPLE = 0x00000080,
-		STEREO      = 0x00000100,
-		LUMINANCE   = 0x00000200,
-		INVALID_DISPLAY_MODE = _UI32_MAX,
-	};
+  /// InitDisplayMode function constants(https://www.opengl.org/resources/libraries/glut/spec3/node12.html#SECTION00033000000000000000)
+  enum class DisplayMode : uint32_t
+  {
+  	RGB         = 0x00000000,
+  	RGBA        = 0x00000000,
+  	INDEX       = 0x00000001,
+  	SINGLE      = 0x00000000,
+  	DOUBLE      = 0x00000002,
+  	ACCUM       = 0x00000004,
+  	ALPHA       = 0x00000008,
+  	DEPTH       = 0x00000010,
+  	STENCIL     = 0x00000020,
+  	MULTISAMPLE = 0x00000080,
+  	STEREO      = 0x00000100,
+  	LUMINANCE   = 0x00000200,
+  	INVALID_DISPLAY_MODE = _UI32_MAX,
+  };
 
 	enum class KEY : unsigned char
 	{
@@ -53,7 +53,23 @@ namespace GLUT {
 		INSERT    = 0x006C, // GLUT_KEY_INSERT   
 	};
 
-	std::string toString(KEY key);
+  enum class MOUSE_BUTTON : int {
+    LEFT     = 0x0000,
+    MIDDLE   = 0x0001,
+    RIGHT    = 0x0002,
+  };
+
+  enum class MOUSE_BUTTON_STATE : int {
+    DOWN     = 0x0000,
+    UP       = 0x0001,
+  };
+
+  enum class MOUSE_STATE : int {
+    LEFT    = 0x0000,
+    ENTERED = 0x0001,
+  };
+
+  std::string toString(KEY key);
 
   /// Swaps the buffers of the current window if double buffered(https://www.opengl.org/resources/libraries/glut/spec3/node21.html#SECTION00056000000000000000).
 	void SwapBuffers();

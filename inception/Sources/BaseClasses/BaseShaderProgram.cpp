@@ -177,30 +177,42 @@ namespace Base {
 		return false;
 	}
 	
-	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, float value)
+	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, float valuef)
 	{
-		auto it = uniformVariables_.find(uniformVariableName);
+		const auto it = uniformVariables_.find(uniformVariableName);
 		if(it == uniformVariables_.end())
 		{ 
 			return false;
 		}
 
-		GL::Uniform1f(it->second, value);
+		GL::Uniform1f(it->second, valuef);
 
 		return true;
 	}
 
-	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix)
+	bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix4f)
 	{
-		auto it = uniformVariables_.find(uniformVariableName);
+		const auto it = uniformVariables_.find(uniformVariableName);
 		if (it == uniformVariables_.end())
 		{
 			return false;
 		}
 
-		GL::UniformMatrix4fv(it->second, matrix);
+		GL::UniformMatrix4fv(it->second, matrix4f);
 
 		return true;
 	}
 
+  bool ShaderProgram::UpdateUniform(const std::string& uniformVariableName, const Math3D::Vector3f& vector3f)
+  {
+		const auto it = uniformVariables_.find(uniformVariableName);
+		if (it == uniformVariables_.end())
+		{
+			return false;
+		}
+
+		GL::Uniform3fv(it->second, vector3f);
+
+		return true;
+	}
 }

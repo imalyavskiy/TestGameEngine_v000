@@ -72,25 +72,25 @@ namespace Engine
      * @param y Indicate the window relative y coordinate when the mouse button state changed.
      * @remark (https://www.opengl.org/resources/libraries/glut/spec3/node50.html#SECTION00085000000000000000)
      */
-    void  MouseFunc(int button, int state, int x, int y);
+    void  MouseProc(int button, int state, int x, int y);
 
     /**
      * @todo add description
      * @remark (https://www.opengl.org/resources/libraries/glut/spec3/node51.html#SECTION00086000000000000000)
      */
-    void  MotionFunc(int x, int y);
+    void  MotionProc(int x, int y);
 
     /**
      * @todo add description
      * @remark (https://www.opengl.org/resources/libraries/glut/spec3/node51.html#SECTION00086000000000000000)
      */
-    void  PassiveMotionFunc(int x, int y);
+    void  PassiveMotionProc(int x, int y);
 
     /**
      * @todo add description
      * @remark (https://www.opengl.org/resources/libraries/glut/spec3/node53.html#SECTION00088000000000000000)
      */
-    void  EntryFunc(int state);
+    void  EntryProc(int state);
 
     /**
      * @todo add description

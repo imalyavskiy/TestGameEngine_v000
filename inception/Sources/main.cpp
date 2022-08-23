@@ -32,6 +32,10 @@ int EngineInit(const Base::Settings& settings)
     GLUT::IdleFunc(Engine::RenderProc);
     GLUT::SpecialFunc(Engine::SpecialKeyboardProc);
     GLUT::SpecialUpFunc(Engine::SpecialKeyboardUpProc);
+    GLUT::MouseFunc(Engine::MouseProc);
+    GLUT::MotionFunc(Engine::MotionProc);
+    GLUT::PassiveMotionFunc(Engine::PassiveMotionProc);
+    GLUT::EntryFunc(Engine::EntryProc);
 
     // @todo Refactor this. Abstraction levels mix-up: render API and application structure.
     // Render API must be under Engine and hidden under abstract some 'Render Device'

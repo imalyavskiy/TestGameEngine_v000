@@ -6,31 +6,40 @@
 
 namespace Learning
 {
-	///
-	class RootSceneObjectComponent : public Base::MeshComponent
+	class VectorArrow : public Base::MeshComponent
 	{
 	public:
-		///
-		RootSceneObjectComponent(const std::string& name);
+		VectorArrow(const std::string& name);
 
-		///
 		void Draw(const Math3D::Matrix4f& matViewProjection) override;
 
-		///
-		void Update(float dt) override;
-
-		///
 		void Init() override;
-	
-	private:
-		///
-		float rollSpeed_ = 1.f;
-		
-		///
-		float pitchSPeed_ = 1.f;
-		
-		///
-		float yawSpeed_ = 1.f;
+
+		void SetColor(Math3D::Vector3f color);
+
+    const Math3D::Vector3f& GetColor() const;
+
+
+  protected:
+
+	  Math3D::Vector3f color_;
+	};
+
+	class VectorTripletOrigin : public Base::MeshComponent
+	{
+	public:
+		VectorTripletOrigin(const std::string& name);
+
+		void Draw(const Math3D::Matrix4f& matViewProjection) override;
+
+	  void Init() override;
+
+		void SetColor(const Math3D::Vector3f& color);
+
+    const Math3D::Vector3f& GetColor() const;
+  protected:
+
+		Math3D::Vector3f color_;
 	};
 }
 

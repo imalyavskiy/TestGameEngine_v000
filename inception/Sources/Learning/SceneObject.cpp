@@ -6,20 +6,19 @@
 
 namespace Learning
 {
-    SceneObject::SceneObject(const std::string& name)
-        : Base::SceneObject(name)
+    RotatingObject::RotatingObject(const std::string& name)
+      : Base::SceneObject(name)
     {
     }
 
-    void SceneObject::Update(float dt)
+    void RotatingObject::Update(float dt)
     {
-        if (auto root = GetRootComponent())
-            root->Update(dt);
-    }
+      auto& transform = Transform();
 
-    void SceneObject::Draw(const Math3D::Matrix4f& matViewProjection)
-    {
-        if (auto root = GetRootComponent())
-            root->Draw(matViewProjection);
+      transform.rotation.x += Math3D::DegToRad(rotationSpeed_.x * dt);
+      transform.rotation.y += Math3D::DegToRad(rotationSpeed_.y * dt);
+      transform.rotation.z += Math3D::DegToRad(rotationSpeed_.z * dt);
+
+      SceneObject::Update(dt);
     }
 }

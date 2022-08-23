@@ -52,6 +52,11 @@ namespace Math3D
 
       return (*this);
     }
+
+    const float* data() const
+    {
+      return &x;
+    }
   };
 
   /**

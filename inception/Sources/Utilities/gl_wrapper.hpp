@@ -249,5 +249,8 @@ namespace GL
 
     /// Specify the value of a uniform variable for the current program object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glUniform.xhtml).
     void UniformMatrix4fv(uint32_t location, const Math3D::Matrix4f& matrix);
+
+    /// Specify the value of a uniform variable for the current program object().
+    void Uniform3fv(uint32_t location, const Math3D::Vector3f& vector3f);
 };
 #endif // __GL_WRAPPER_H__

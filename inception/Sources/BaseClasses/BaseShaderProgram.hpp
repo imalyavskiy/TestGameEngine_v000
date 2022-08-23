@@ -63,11 +63,15 @@ namespace Base
 
 		/**
 		*/
-		bool UpdateUniform(const std::string& uniformVariableName, float value);
+		bool UpdateUniform(const std::string& uniformVariableName, float valuef);
 
 		/**
 		*/
-		bool UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix);
+		bool UpdateUniform(const std::string& uniformVariableName, const Math3D::Matrix4f& matrix4f);
+
+		/**
+		*/
+		bool UpdateUniform(const std::string& uniformVariableName, const Math3D::Vector3f& vector3f);
 
 	protected:
 		using ShaderList = std::tuple<VertexShader::ptr, GeometryShader::ptr, TessControlShader::ptr, TessEveluationShader::ptr, FragmentShader::ptr>;

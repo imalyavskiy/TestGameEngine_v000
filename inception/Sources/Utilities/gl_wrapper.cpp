@@ -273,4 +273,9 @@ namespace GL
 		// Giving just one(2nd parameter) transposed(3rd parameter) matrix.
 		glUniformMatrix4fv(location, 1, GL_TRUE, matrix.data());
 	}
+
+  void Uniform3fv(uint32_t location, const Math3D::Vector3f& vector3f)
+  {
+		glUniform3fv(location, 1, vector3f.data());
+  }
 }

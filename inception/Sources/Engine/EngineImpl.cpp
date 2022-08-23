@@ -6,6 +6,9 @@
 #include "Engine.hpp"
 #include "RenderFacility.hpp"
 #include "EngineImpl.hpp"
+
+#include <GL/freeglut_std.h>
+
 namespace Engine
 {
   Impl::Impl(Base::Settings settings)
@@ -23,6 +26,12 @@ namespace Engine
   {
     if (inputController_)
       inputController_->OnKey(key, true);
+  }
+
+  void  Impl::SpecialKeyboardUpProc(GLUT::KEY key, int, int)
+  {
+    if (inputController_)
+      inputController_->OnKey(key, false);
   }
 
   void Impl::ReshapeFunc(int, int)
@@ -58,34 +67,39 @@ namespace Engine
     renderFacility_->Draw(scene_->GetObjectTree());
   }
 
-  void  Impl::MouseFunc(int, int, int, int)
+  void Impl::MouseProc(GLUT::MOUSE_BUTTON button, GLUT::MOUSE_BUTTON_STATE state, int x, int y)
   {
-    throw std::logic_error("not implemented");
+    switch(button)
+    {
+    case GLUT::MOUSE_BUTTON::LEFT:
+      std::cout << "LMB " << ((bool)state == true ? "up" : "down") << " at ("<< x << ", " << y << ")\n";
+      break;
+    case GLUT::MOUSE_BUTTON::RIGHT:
+      std::cout << "RMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+      break;
+    case GLUT::MOUSE_BUTTON::MIDDLE:
+      std::cout << "MMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+      break;
+    }
   }
 
-  void  Impl::MotionFunc(int, int) {
-    throw std::logic_error("not implemented");
+  void  Impl::MotionProc(int x, int y) {
+    std::cout << "Mouse is MoViNg position(" << x << ", " << y << ")\n";
   }
 
-  void  Impl::PassiveMotionFunc(int, int)
+  void  Impl::PassiveMotionProc(int x, int y)
   {
-    throw std::logic_error("not implemented");
+    std::cout << "Mouse is mOvInG position(" << x << ", " << y << ")\n";
   }
 
-  void  Impl::EntryFunc(int _0)
+  void  Impl::EntryProc(GLUT::MOUSE_STATE state)
   {
-    throw std::logic_error("not implemented");
+    std::cout << "Mouse pointer " << ((bool)state == true ? "entered" : "left") << " the viewport\n";
   }
 
   void  Impl::KeyboardUpFunc(unsigned char, int, int)
   {
     throw std::logic_error("not implemented");
-  }
-
-  void  Impl::SpecialKeyboardUpProc(GLUT::KEY key, int, int)
-  {
-    if(inputController_)
-      inputController_->OnKey(key, false);
   }
 
   void  Impl::JoystickFunc(unsigned int, int, int, int)
