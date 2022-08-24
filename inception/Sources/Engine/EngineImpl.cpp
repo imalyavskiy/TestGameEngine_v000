@@ -28,7 +28,7 @@ namespace Engine
   {
 //    std::cout << "0x" << std::hex << std::setw(4) << std::setfill('0') << static_cast<uint16_t>(key) << "-\n";
     if (inputController_)
-      inputController_->OnKey(key, true);
+      inputController_->OnKey(key, false);
   }
 
   void Impl::SpecialKeyboardProc(GLUT::KEY key, int, int)

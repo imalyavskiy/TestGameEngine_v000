@@ -9,25 +9,71 @@ namespace Learning
   DefaultController::DefaultController(const Base::Settings& settings, const std::string& name)
     : Base::Controller(settings, name)
   {
-    std::shared_ptr<Button> up(new Button(GLUT::KEY::UP));
-    std::shared_ptr<Button> dn(new Button(GLUT::KEY::DOWN));
-    std::shared_ptr<AxisAction> fwd(new AxisAction(dn, up, [&](float val) {
-      if(controlledPawn_)
-        controlledPawn_->MoveForward(val);
-    }));
-    registeredKeys_[up->id] = up;
-    registeredKeys_[dn->id] = dn;
-    actionList_.push_back(fwd);
+    {
+      // Forward
+      std::shared_ptr<Button> forward(new Button(GLUT::KEY::SMALL_W));
+      std::shared_ptr<Button> backwards(new Button(GLUT::KEY::SMALL_S));
+      std::shared_ptr<AxisAction> axisActionForward(new AxisAction(forward, backwards, [&](float val) {
+        if (controlledPawn_)
+          controlledPawn_->MoveForward(val);
+        }));
+      registeredKeys_[forward->id] = forward;
+      registeredKeys_[backwards->id] = backwards;
+      actionList_.push_back(axisActionForward);
+    }
 
-    std::shared_ptr<Button> rt(new Button(GLUT::KEY::RIGHT));
-    std::shared_ptr<Button> lt(new Button(GLUT::KEY::LEFT));
-    std::shared_ptr<AxisAction> rght(new AxisAction(rt, lt, [&](float val) {
-      if(controlledPawn_)
-        controlledPawn_->MoveRight(val);
-    }));
-    registeredKeys_[rt->id] = rt;
-    registeredKeys_[lt->id] = lt;
-    actionList_.push_back(rght);
+    {
+      // Right
+      std::shared_ptr<Button> right(new Button(GLUT::KEY::SMALL_D));
+      std::shared_ptr<Button> left(new Button(GLUT::KEY::SMALL_A));
+      std::shared_ptr<AxisAction> axisActionRight(new AxisAction(right, left, [&](float val) {
+        if (controlledPawn_)
+          controlledPawn_->MoveRight(val);
+        }));
+      registeredKeys_[right->id] = right;
+      registeredKeys_[left->id] = left;
+      actionList_.push_back(axisActionRight);
+    }
+
+    {
+      // Up
+      std::shared_ptr<Button> up(new Button(GLUT::KEY::SMALL_R));
+      std::shared_ptr<Button> down(new Button(GLUT::KEY::SMALL_F));
+      std::shared_ptr<AxisAction> axisActionUp(new AxisAction(up, down, [&](float val) {
+        if (controlledPawn_)
+          controlledPawn_->MoveUp(val);
+        }));
+      registeredKeys_[up->id] = up;
+      registeredKeys_[down->id] = down;
+      actionList_.push_back(axisActionUp);
+    }
+
+    // Roll
+    {
+      // Pitch
+      std::shared_ptr<Button> pitchUp(new Button(GLUT::KEY::UP));
+      std::shared_ptr<Button> pitchDn(new Button(GLUT::KEY::DOWN));
+      std::shared_ptr<AxisAction> axisActionPitch(new AxisAction(pitchUp, pitchDn, [&](float val) {
+        if (controlledPawn_)
+          controlledPawn_->Pitch(val);
+        }));
+      registeredKeys_[pitchUp->id] = pitchUp;
+      registeredKeys_[pitchDn->id] = pitchDn;
+      actionList_.push_back(axisActionPitch);
+    }
+
+    {
+      // Yaw
+      std::shared_ptr<Button> yawCW(new Button(GLUT::KEY::RIGHT));
+      std::shared_ptr<Button> yawCCW(new Button(GLUT::KEY::LEFT));
+      std::shared_ptr<AxisAction> axisActionYaw(new AxisAction(yawCW, yawCCW, [&](float val) {
+        if (controlledPawn_)
+          controlledPawn_->Yaw(val);
+        }));
+      registeredKeys_[yawCW->id] = yawCW;
+      registeredKeys_[yawCCW->id] = yawCCW;
+      actionList_.push_back(axisActionYaw);
+    }
   }
 
   bool DefaultController::OnKey(GLUT::KEY key, bool state)

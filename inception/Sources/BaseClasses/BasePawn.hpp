@@ -29,6 +29,22 @@ namespace Base
 		 * @param value changes in [-1, 1] range. 1 - up, -1 - down
 		 */
 		virtual void MoveUp(float value);
+
+		/*
+		 * @param value changes in [-1, 1] range. 1 - right, -1 - left
+		 */
+		virtual void Yaw(float value);
+
+		/*
+		 * @param value changes in [-1, 1] range. 1 - up, -1 - down
+		 */
+		virtual void Pitch(float value);
+
+		/*
+		 * @param value changes in [-1, 1] range. 1 - right, -1 - left
+		 */
+		virtual void Roll(float value);
+
 	};
 }
 #endif //__BASE_PAWN_HPP__

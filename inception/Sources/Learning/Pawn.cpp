@@ -13,26 +13,45 @@ namespace Learning
 
   void Pawn::MoveForward(float value)
   {
-    forwardDelta = value;
+    forwardDelta_ = value;
   }
 
   void Pawn::MoveUp(float value)
   {
-    upDelta = value;
+    upDelta_ = value;
   }
 
   void Pawn::MoveRight(float value)
   {
-    rightDelta = value;
+    rightDelta_ = value;
+  }
+
+  void Pawn::Yaw(float value)
+  {
+    yawDelta_ = value;
+  }
+
+  void Pawn::Pitch(float value)
+  {
+    pitchDelta_ = value;
+  }
+
+  void Pawn::Roll(float value)
+  {
+    rollDelta_ = value;
   }
 
   void Pawn::Update(float dt)
   {
     auto& transform = Transform();
 
-    transform.position.x += 0.0005f * forwardDelta;
-    transform.position.y += 0.0005f * rightDelta;
-    transform.position.z += 0.0005f * upDelta;
+    transform.position.x += 0.0005f * forwardDelta_;
+    transform.position.y += 0.0005f * rightDelta_;
+    transform.position.z += 0.0005f * upDelta_;
+
+    transform.rotation.x += 0.0005f * rollDelta_;
+    transform.rotation.y += 0.0005f * pitchDelta_;
+    transform.rotation.z += 0.0005f * yawDelta_;
 
     Base::Pawn::Update(dt);
   }

@@ -15,10 +15,20 @@ namespace Learning
 
     void Update(float dt) override;
 
+    void Yaw(float value) override;
+
+    void Pitch(float value) override;
+
+    void Roll(float value) override;
+
   protected:
-    float forwardDelta = 0.f;
-    float rightDelta = 0.f;
-    float upDelta = 0.f;
+    float forwardDelta_ = 0.f;
+    float rightDelta_ = 0.f;
+    float upDelta_ = 0.f;
+
+    float yawDelta_ = 0.f;
+    float pitchDelta_ = 0.f;
+    float rollDelta_ = 0.f;
   };
 }
 #endif // __LEARNING_PAWN_HPP__

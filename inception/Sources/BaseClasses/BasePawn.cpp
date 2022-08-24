@@ -20,4 +20,16 @@ namespace Base
   void Pawn::MoveUp(float value)
   {
   }
+
+  void Pawn::Yaw(float value)
+  {
+  }
+
+  void Pawn::Pitch(float value)
+  {
+  }
+
+  void Pawn::Roll(float value)
+  {
+  }
 }

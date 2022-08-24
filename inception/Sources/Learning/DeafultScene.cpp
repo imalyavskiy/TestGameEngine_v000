@@ -27,11 +27,11 @@ namespace Learning
   }
 
   void DefaultScene::LoadVectorTriple()
-	{
+  {
     const auto socRoot =
       std::make_shared<Base::SceneObjectComponent>(Base::SceneObjectComponent::wptr(), "Root");
 
-	  const auto socSphere =
+    const auto socSphere =
       std::make_shared<Learning::VectorTripletOrigin>("VectorTripleOrigin");
     socSphere->SetColor({ 1.f, 1.f, 1.f });
     socSphere->Transform().scale.x = 0.35f;
@@ -39,21 +39,21 @@ namespace Learning
     socSphere->Transform().scale.z = 0.35f;
     socRoot->AddChild(socSphere);
 
-	  const auto socVectorX =
+    const auto socVectorX =
       std::make_shared<Learning::VectorArrow>("Vector X");
     socVectorX->SetColor({ 1.f, 0.f, 0.f });
     socRoot->AddChild(socVectorX);
 
-	  const auto socVectorY=
+    const auto socVectorY=
       std::make_shared<Learning::VectorArrow>("Vector Y");
     socVectorY->SetColor({ 0.f, 0.f, 1.f });
-    socVectorY->Transform().rotation.z = 90.f;
+    socVectorY->Transform().rotation.z = Math3D::DegToRad(90.f);
     socRoot->AddChild(socVectorY);
 
-	  const auto socVectorZ =
+    const auto socVectorZ =
       std::make_shared<Learning::VectorArrow>("Vector Z");
     socVectorZ->SetColor({ 0.f, 1.f, 0.f });
-    socVectorZ->Transform().rotation.y = -90.f;
+    socVectorZ->Transform().rotation.y = Math3D::DegToRad(-90.f);
     socRoot->AddChild(socVectorZ);
 
     const auto vectorTriple =
@@ -61,7 +61,7 @@ namespace Learning
     vectorTriple->SetRootComponent(socRoot);
     vectorTriple->Init();
 
-	  AddObject(vectorTriple);
+    AddObject(vectorTriple);
   }
 
   void DefaultScene::LoadCamera(const Base::RenderFacility::sptr& renderer, Base::Controller::sptr inputController)

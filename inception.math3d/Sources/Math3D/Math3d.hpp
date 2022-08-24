@@ -222,7 +222,12 @@ namespace Math3D
     Transform(const Position position, const Rotation rotation, const Scale scale);
 
     Position  position;
+
+    /**
+     * @brief angles in radians
+     */
     Rotation  rotation;
+
     Scale     scale;
   };
 
