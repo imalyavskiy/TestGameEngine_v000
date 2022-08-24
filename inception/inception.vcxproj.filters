@@ -78,7 +78,7 @@
     <ClCompile Include="Sources\Learning\SceneObject.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Learning\SceneObjectComponent.cpp">
+    <ClCompile Include="Sources\Learning\VectorTripletOrigin.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
     <ClCompile Include="Sources\Utilities\glew_wrapper.cpp">
@@ -123,6 +123,9 @@
     <ClCompile Include="Sources\Learning\Pawn.cpp">
       <Filter>Source Files\Sources\Learning</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Learning\VectorArrow.cpp">
+      <Filter>Source Files\Sources\Learning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\main.hpp">
@@ -161,7 +164,7 @@
     <ClInclude Include="Sources\Learning\SceneObject.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
-    <ClInclude Include="Sources\Learning\SceneObjectComponent.hpp">
+    <ClInclude Include="Sources\Learning\VectorTripletOrigin.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Learning\Learning.hpp">
@@ -222,6 +225,9 @@
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
     <ClInclude Include="Sources\Learning\Pawn.hpp">
+      <Filter>Header Files\Sources\Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="Sources\Learning\VectorArrow.hpp">
       <Filter>Header Files\Sources\Learning</Filter>
     </ClInclude>
   </ItemGroup>

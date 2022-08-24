@@ -17,9 +17,18 @@ namespace Engine
 
   }
 
-    void Impl::KeyboardFunc(unsigned char ch, int x, int y)
+  void Impl::KeyboardProc(GLUT::KEY key, int x, int y)
   {
-    throw std::logic_error("not implemented");
+//    std::cout << "0x" << std::hex << std::setw(4) << std::setfill('0') << static_cast<uint16_t>(key) << "+\n";
+    if (inputController_)
+      inputController_->OnKey(key, true);
+  }
+
+  void  Impl::KeyboardUpFunc(GLUT::KEY key, int x, int y)
+  {
+//    std::cout << "0x" << std::hex << std::setw(4) << std::setfill('0') << static_cast<uint16_t>(key) << "-\n";
+    if (inputController_)
+      inputController_->OnKey(key, true);
   }
 
   void Impl::SpecialKeyboardProc(GLUT::KEY key, int, int)
@@ -69,37 +78,32 @@ namespace Engine
 
   void Impl::MouseProc(GLUT::MOUSE_BUTTON button, GLUT::MOUSE_BUTTON_STATE state, int x, int y)
   {
-    switch(button)
-    {
-    case GLUT::MOUSE_BUTTON::LEFT:
-      std::cout << "LMB " << ((bool)state == true ? "up" : "down") << " at ("<< x << ", " << y << ")\n";
-      break;
-    case GLUT::MOUSE_BUTTON::RIGHT:
-      std::cout << "RMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
-      break;
-    case GLUT::MOUSE_BUTTON::MIDDLE:
-      std::cout << "MMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
-      break;
-    }
+//    switch(button)
+//    {
+//    case GLUT::MOUSE_BUTTON::LEFT:
+//      std::cout << "LMB " << ((bool)state == true ? "up" : "down") << " at ("<< x << ", " << y << ")\n";
+//      break;
+//    case GLUT::MOUSE_BUTTON::RIGHT:
+//      std::cout << "RMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+//      break;
+//    case GLUT::MOUSE_BUTTON::MIDDLE:
+//      std::cout << "MMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+//      break;
+//    }
   }
 
   void  Impl::MotionProc(int x, int y) {
-    std::cout << "Mouse is MoViNg position(" << x << ", " << y << ")\n";
+//    std::cout << "Mouse is MoViNg position(" << x << ", " << y << ")\n";
   }
 
   void  Impl::PassiveMotionProc(int x, int y)
   {
-    std::cout << "Mouse is mOvInG position(" << x << ", " << y << ")\n";
+//    std::cout << "Mouse is mOvInG position(" << x << ", " << y << ")\n";
   }
 
   void  Impl::EntryProc(GLUT::MOUSE_STATE state)
   {
-    std::cout << "Mouse pointer " << ((bool)state == true ? "entered" : "left") << " the viewport\n";
-  }
-
-  void  Impl::KeyboardUpFunc(unsigned char, int, int)
-  {
-    throw std::logic_error("not implemented");
+//    std::cout << "Mouse pointer " << ((bool)state == true ? "entered" : "left") << " the viewport\n";
   }
 
   void  Impl::JoystickFunc(unsigned int, int, int, int)

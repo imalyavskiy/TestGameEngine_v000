@@ -46,12 +46,24 @@ namespace Engine
 
   void  KeyboardProc(unsigned char ch, int x, int y)
   {
-    Instance().KeyboardFunc(ch, x, y);
+    const uint16_t ui16id = 0x0000 | static_cast<uint8_t>(ch);
+    Instance().KeyboardProc(static_cast<GLUT::KEY>(ui16id), x, y);
+  }
+
+  void  KeyboardUpProc(unsigned char key, int x, int y) {
+    const uint16_t ui16id = 0x0000 | static_cast<uint8_t>(key);
+    Instance().KeyboardUpFunc(static_cast<GLUT::KEY>(ui16id), x, y);
   }
 
   void  SpecialKeyboardProc(int id, int x, int y)
   {
-    Instance().SpecialKeyboardProc(static_cast<GLUT::KEY>(id), x, y);
+    const uint16_t ui16id = 0x0100|static_cast<uint8_t>(id);
+    Instance().SpecialKeyboardProc(static_cast<GLUT::KEY>(ui16id), x, y);
+  }
+
+  void  SpecialKeyboardUpProc(int id, int x, int y) {
+    const uint16_t ui16id = 0x0100 | static_cast<uint8_t>(id);
+    Instance().SpecialKeyboardUpProc(static_cast<GLUT::KEY>(ui16id), x, y);
   }
 
   void  ReshapeFunc(int w, int h)
@@ -86,14 +98,6 @@ namespace Engine
 
   void  EntryProc(int state) {
     Instance().EntryProc(static_cast<GLUT::MOUSE_STATE>(state));
-  }
-
-  void  KeyboardUpFunc(unsigned char key, int x, int y) {
-    Instance().KeyboardUpFunc(key, x, y);
-  }
-
-  void  SpecialKeyboardUpProc(int id, int x, int y) {
-    Instance().SpecialKeyboardUpProc(static_cast<GLUT::KEY>(id), x, y);
   }
 
   void  JoystickFunc(unsigned int buttons, int x, int y, int z)

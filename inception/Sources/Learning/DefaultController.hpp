@@ -6,7 +6,7 @@ namespace Learning
   {
     Button(GLUT::KEY id) : id(id) {}
     GLUT::KEY id;
-    bool   pressed = false;
+    bool pressed = false;
   };
 
   struct PawnAction

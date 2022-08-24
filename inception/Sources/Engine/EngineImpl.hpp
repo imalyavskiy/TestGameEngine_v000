@@ -20,6 +20,16 @@ namespace Engine
     /**
      * @todo add description
      */
+    void  KeyboardProc(GLUT::KEY key, int x, int y);
+
+    /**
+     * @todo add description
+     */
+    void  KeyboardUpFunc(GLUT::KEY key, int x, int y);
+
+    /**
+     * @todo add description
+     */
     void  ReshapeFunc(int w, int h);
 
     /**
@@ -51,16 +61,6 @@ namespace Engine
      * @todo add description
      */
     void  EntryProc(GLUT::MOUSE_STATE state);
-
-    /**
-     * @todo add description
-     */
-    void  KeyboardFunc(unsigned char ch, int x, int y);
-
-    /**
-     * @todo add description
-     */
-    void  KeyboardUpFunc(unsigned char _0, int _1, int _2);
 
     /**
      * @todo add description

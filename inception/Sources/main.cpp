@@ -32,6 +32,8 @@ int EngineInit(const Base::Settings& settings)
     GLUT::IdleFunc(Engine::RenderProc);
     GLUT::SpecialFunc(Engine::SpecialKeyboardProc);
     GLUT::SpecialUpFunc(Engine::SpecialKeyboardUpProc);
+    GLUT::KeyboardFunc(Engine::KeyboardProc);
+    GLUT::KeyboardUpFunc(Engine::KeyboardUpProc);
     GLUT::MouseFunc(Engine::MouseProc);
     GLUT::MotionFunc(Engine::MotionProc);
     GLUT::PassiveMotionFunc(Engine::PassiveMotionProc);

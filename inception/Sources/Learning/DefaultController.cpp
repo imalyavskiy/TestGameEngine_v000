@@ -34,9 +34,16 @@ namespace Learning
   {
     if (!controlledPawn_)
       return false;
-
-    registeredKeys_[key]->pressed = state;
-    std::cout << GLUT::toString(key) << " " << (state ? "pressed" : "released") << "\n";
+    if(registeredKeys_.end() != registeredKeys_.find(key))
+    {
+      registeredKeys_[key]->pressed = state;
+      std::cout << GLUT::toString(key) << " " << (state ? "pressed" : "released") << "\n";
+    }
+    else
+    {
+      const bool usualKey = (static_cast<uint16_t>(key) >> 8) == 0;
+      std::cout << "Unknown key: 0x" << std::hex << std::setw(4) << std::setfill('0') << static_cast<uint16_t>(key) << (state ? "+" : "-") << "\n";
+    }
 
     return true;
   }

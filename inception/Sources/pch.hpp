@@ -12,5 +12,6 @@
 #include <memory>
 #include <set>
 #include <functional>
+#include <iomanip>
 
 #endif // __PCH_HPP__

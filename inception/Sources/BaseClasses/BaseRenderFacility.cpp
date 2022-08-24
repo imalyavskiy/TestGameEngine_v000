@@ -21,15 +21,22 @@ namespace Base
           camera_->Far()
         );
 
-      const auto camView = 
-        Math3D::Pipeline::ViewRotation(
-          camera_->LookAt(), 
-          camera_->Up());
+      const Math3D::Direction lookAt = 
+        camera_->LookAt();
+      const Math3D::Direction up = 
+        camera_->Up();
+      const Math3D::Matrix4f camView = 
+        Math3D::Pipeline::ViewRotation( lookAt, up);
 
-      const auto camPos = 
-        Math3D::Pipeline::Create(
-          camera_->Position()
-        );
+      const Math3D::Position pos = 
+        camera_->Position();
+      const Math3D::Matrix4f camPos = 
+        Math3D::Pipeline::Create(pos);
+
+//      const auto cameraMat = camView * camPos;
+//      const Math3D::Vector4f _fwd   = cameraMat * Math3D::Vector4f(1.f, 0.f, 0.f, 0.f);
+//      const Math3D::Vector4f _up    = cameraMat * Math3D::Vector4f(0.f, 0.f, 1.f, 0.f);
+//      const Math3D::Vector4f _right = cameraMat * Math3D::Vector4f(0.f, 1.f, 0.f, 0.f);
 
       const auto matViewProjection = proj * camView * camPos;
       for (const auto& object : objectsList)

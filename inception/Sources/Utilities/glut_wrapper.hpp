@@ -28,29 +28,29 @@ namespace GLUT {
   	INVALID_DISPLAY_MODE = _UI32_MAX,
   };
 
-	enum class KEY : unsigned char
+	enum class KEY : unsigned short
 	{
-		F1        = 0x0001, // GLUT_KEY_F1        
-		F2        = 0x0002, // GLUT_KEY_F2       
-		F3        = 0x0003, // GLUT_KEY_F3       
-		F4        = 0x0004, // GLUT_KEY_F4       
-		F5        = 0x0005, // GLUT_KEY_F5       
-		F6        = 0x0006, // GLUT_KEY_F6       
-		F7        = 0x0007, // GLUT_KEY_F7       
-		F8        = 0x0008, // GLUT_KEY_F8       
-		F9        = 0x0009, // GLUT_KEY_F9       
-		F10       = 0x000A, // GLUT_KEY_F10      
-		F11       = 0x000B, // GLUT_KEY_F11      
-		F12       = 0x000C, // GLUT_KEY_F12      
-		LEFT      = 0x0064, // GLUT_KEY_LEFT     
-		UP        = 0x0065, // GLUT_KEY_UP       
-		RIGHT     = 0x0066, // GLUT_KEY_RIGHT    
-		DOWN      = 0x0067, // GLUT_KEY_DOWN     
-		PAGE_UP   = 0x0068, // GLUT_KEY_PAGE_UP  
-		PAGE_DOWN = 0x0069, // GLUT_KEY_PAGE_DOWN
-		HOME      = 0x006A, // GLUT_KEY_HOME     
-		END       = 0x006B, // GLUT_KEY_END      
-		INSERT    = 0x006C, // GLUT_KEY_INSERT   
+		F1        = 0x0101, // 0x01|GLUT_KEY_F1
+		F2        = 0x0102, // 0x01|GLUT_KEY_F2
+		F3        = 0x0103, // 0x01|GLUT_KEY_F3
+		F4        = 0x0104, // 0x01|GLUT_KEY_F4
+		F5        = 0x0105, // 0x01|GLUT_KEY_F5
+		F6        = 0x0106, // 0x01|GLUT_KEY_F6
+		F7        = 0x0107, // 0x01|GLUT_KEY_F7
+		F8        = 0x0108, // 0x01|GLUT_KEY_F8
+		F9        = 0x0109, // 0x01|GLUT_KEY_F9
+		F10       = 0x010A, // 0x01|GLUT_KEY_F10
+		F11       = 0x010B, // 0x01|GLUT_KEY_F11
+		F12       = 0x010C, // 0x01|GLUT_KEY_F12
+		LEFT      = 0x0164, // 0x01|GLUT_KEY_LEFT
+		UP        = 0x0165, // 0x01|GLUT_KEY_UP
+		RIGHT     = 0x0166, // 0x01|GLUT_KEY_RIGHT
+		DOWN      = 0x0167, // 0x01|GLUT_KEY_DOWN
+		PAGE_UP   = 0x0168, // 0x01|GLUT_KEY_PAGE_UP
+		PAGE_DOWN = 0x0169, // 0x01|GLUT_KEY_PAGE_DOWN
+		HOME      = 0x016A, // 0x01|GLUT_KEY_HOME
+		END       = 0x016B, // 0x01|GLUT_KEY_END
+		INSERT    = 0x016C, // 0x01|GLUT_KEY_INSERT
 	};
 
   enum class MOUSE_BUTTON : int {

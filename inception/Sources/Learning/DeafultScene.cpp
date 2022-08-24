@@ -34,9 +34,9 @@ namespace Learning
 	  const auto socSphere =
       std::make_shared<Learning::VectorTripletOrigin>("VectorTripleOrigin");
     socSphere->SetColor({ 1.f, 1.f, 1.f });
-    socSphere->Transform().scale.x = 0.35;
-    socSphere->Transform().scale.y = 0.35;
-    socSphere->Transform().scale.z = 0.35;
+    socSphere->Transform().scale.x = 0.35f;
+    socSphere->Transform().scale.y = 0.35f;
+    socSphere->Transform().scale.z = 0.35f;
     socRoot->AddChild(socSphere);
 
 	  const auto socVectorX =
@@ -75,9 +75,10 @@ namespace Learning
       std::make_shared<Learning::CameraComponent>(genereicVideoRenderer, Base::SceneObjectComponent::wptr{}, "FreeCamera");
     soCamera->SetRootComponent(baseCamera);
     soCamera->Transform().position = Math3D::Position(3.f, 0.f, 0.f);
-    //soCamera->Transform().rotation = Math3D::Rotation(0.f, Math3D::DegToRad(-90.f), Math3D::DegToRad(90.f));
     soCamera->Init();
-    AddObject(soCamera);
-    inputController->SetPawn(soCamera);
+
+	  AddObject(soCamera);
+
+	  inputController->SetPawn(soCamera);
   }
 }

@@ -96,7 +96,7 @@ namespace Engine
      * @todo add description
      * @remark (https://www.unix.com/man-page/mojave/3GLUT/glutKeyboardUpFunc/)
      */
-    void  KeyboardUpFunc(unsigned char key, int x, int y);
+    void  KeyboardUpProc(unsigned char key, int x, int y);
 
     /**
      * @todo add description

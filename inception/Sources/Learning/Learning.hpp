@@ -6,7 +6,8 @@
 
 #include "DeafultScene.hpp"
 #include "SceneObject.hpp"
-#include "SceneObjectComponent.hpp"
+#include "VectorTripletOrigin.hpp"
+#include "VectorArrow.hpp"
 #include "Camera.hpp"
 #include "DefaultController.hpp"
 #include "Pawn.hpp"
