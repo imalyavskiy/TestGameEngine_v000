@@ -13,5 +13,6 @@
 #include <set>
 #include <functional>
 #include <iomanip>
+#include <sstream>
 
 #endif // __PCH_HPP__

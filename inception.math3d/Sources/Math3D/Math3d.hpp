@@ -57,6 +57,18 @@ namespace Math3D
     {
       return &x;
     }
+
+    operator std::string() const
+    {
+      std::stringstream sstr;
+      sstr << "{" << x << ", " << y << ", " << z << "}";
+      return sstr.str();
+    }
+
+    float len() const
+    {
+      return std::sqrtf(x * x + y * y + z * z);
+    }
   };
 
   /**

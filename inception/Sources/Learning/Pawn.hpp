@@ -21,6 +21,8 @@ namespace Learning
 
     void Roll(float value) override;
 
+    void Draw(const Math3D::Matrix4f& matViewProjection) override;
+
   protected:
     float forwardDelta_ = 0.f;
     float rightDelta_ = 0.f;

@@ -19,6 +19,8 @@ namespace Learning
       transform.rotation.y += Math3D::DegToRad(rotationSpeed_.y * dt);
       transform.rotation.z += Math3D::DegToRad(rotationSpeed_.z * dt);
 
+
+
       SceneObject::Update(dt);
     }
 }

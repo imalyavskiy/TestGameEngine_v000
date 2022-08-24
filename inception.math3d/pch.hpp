@@ -17,5 +17,6 @@
 #include <stdexcept>
 #include <memory>
 #include <set>
+#include <sstream>
 
 #endif //__PCH_HPP__
