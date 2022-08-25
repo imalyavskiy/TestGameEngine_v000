@@ -44,6 +44,11 @@ namespace Math3D
       return { -x, -y, -z };
     }
 
+    Vector3f operator*(const float factor) const 
+    {
+      return { factor * x, factor * y, factor * z };
+    }
+
     Vector3f operator+=(const float v)
     {
       x += v;
@@ -132,6 +137,16 @@ namespace Math3D
     explicit Direction(const Vector3f& v3);
 
     Direction& operator=(const Vector3f& other);
+
+    Direction operator-() const
+    {
+      return { -1 * x, -1 * y, -1 * z };
+    }
+
+    Direction operator*(const float factor) const
+    {
+      return { factor * x, factor * y, factor * z };
+    }
 
     static const Direction Forward;
     static const Direction Backward;

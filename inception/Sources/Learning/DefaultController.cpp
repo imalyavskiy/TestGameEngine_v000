@@ -51,19 +51,21 @@ namespace Learning
     // Roll
     {
       // Pitch
-      std::shared_ptr<Button> pitchUp(new Button(GLUT::KEY::UP));
-      std::shared_ptr<Button> pitchDn(new Button(GLUT::KEY::DOWN));
-      std::shared_ptr<AxisAction> axisActionPitch(new AxisAction(pitchUp, pitchDn, [&](float val) {
+      // Angle value grows in CW direction about Y axis as it mast to be for LH basis
+      std::shared_ptr<Button> pitchCW(new Button(GLUT::KEY::DOWN));
+      std::shared_ptr<Button> pitchCCW(new Button(GLUT::KEY::UP));
+      std::shared_ptr<AxisAction> axisActionPitch(new AxisAction(pitchCW, pitchCCW, [&](float val) {
         if (controlledPawn_)
           controlledPawn_->Pitch(val);
         }));
-      registeredKeys_[pitchUp->id] = pitchUp;
-      registeredKeys_[pitchDn->id] = pitchDn;
+      registeredKeys_[pitchCCW->id] = pitchCCW;
+      registeredKeys_[pitchCW->id] = pitchCW;
       actionList_.push_back(axisActionPitch);
     }
 
     {
       // Yaw
+      // Angle value grows in CW direction about Z axis as it mast to be for LH basis
       std::shared_ptr<Button> yawCW(new Button(GLUT::KEY::RIGHT));
       std::shared_ptr<Button> yawCCW(new Button(GLUT::KEY::LEFT));
       std::shared_ptr<AxisAction> axisActionYaw(new AxisAction(yawCW, yawCCW, [&](float val) {
