@@ -31,7 +31,7 @@ namespace Base
       const Math3D::Position pos = 
         camera_->Position();
       const Math3D::Matrix4f camPos = 
-        Math3D::Pipeline::Create(pos);
+        Math3D::Pipeline::Create(-pos); // camera position must be negated
 
 //      const auto cameraMat = camView * camPos;
 //      const Math3D::Vector4f _fwd   = cameraMat * Math3D::Vector4f(1.f, 0.f, 0.f, 0.f);

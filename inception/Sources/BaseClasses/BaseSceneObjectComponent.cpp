@@ -82,42 +82,42 @@ namespace Base {
 
   Math3D::Direction SceneObjectComponent::GetWorldBackwardVector() const
   {
-    const auto forward = Math3D::Vector4f(Math3D::Direction::Backward, 0.f);
+    const auto backwards = Math3D::Vector4f(Math3D::Direction::Backward, 0.f);
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Direction((world * forward).xyz());
+    return Math3D::Direction((world * backwards).xyz());
   }
 
   Math3D::Direction SceneObjectComponent::GetWorldUpVector() const
   {
-    const auto forward = Math3D::Vector4f(Math3D::Direction::Up, 0.f);
+    const auto up = Math3D::Vector4f(Math3D::Direction::Up, 0.f);
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Direction((world * forward).xyz());
+    return Math3D::Direction((world * up).xyz());
   }
 
   Math3D::Direction SceneObjectComponent::GetWorldDownVector() const
   {
-    const auto forward = Math3D::Vector4f(Math3D::Direction::Down, 0.f);
+    const auto down = Math3D::Vector4f(Math3D::Direction::Down, 0.f);
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Direction((world * forward).xyz());
+    return Math3D::Direction((world * down).xyz());
   }
 
   Math3D::Direction SceneObjectComponent::GetWorldRightVector() const
   {
-    const auto forward = Math3D::Vector4f(Math3D::Direction::Right, 0.f);
+    const auto right = Math3D::Vector4f(Math3D::Direction::Right, 0.f);
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Direction((world * forward).xyz());
+    return Math3D::Direction((world * right).xyz());
   }
 
   Math3D::Direction SceneObjectComponent::GetWorldLeftVector() const
   {
-    const auto forward = Math3D::Vector4f(Math3D::Direction::Left, 0.f);
+    const auto left = Math3D::Vector4f(Math3D::Direction::Left, 0.f);
     const auto world = GetWorldTransformMatrix();
 
-    return Math3D::Direction((world * forward).xyz());
+    return Math3D::Direction((world * left).xyz());
   }
 
   Math3D::Position SceneObjectComponent::GetWorldPosition() const

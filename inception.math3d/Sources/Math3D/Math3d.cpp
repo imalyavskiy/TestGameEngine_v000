@@ -93,6 +93,15 @@ namespace Math3D {
   {
   }
 
+  Scale& Scale::operator*=(float factor)
+  {
+    x *= factor;
+    y *= factor;
+    z *= factor;
+
+    return (*this);
+  }
+
   Position::Position(const Vector3f& v3)
     : Vector3f(v3)
   {

@@ -106,6 +106,7 @@ namespace Math3D
     Scale(const float val) : Vector3f(val, val, val) {}
     Scale(const float _x, const float _y, const float _z) : Vector3f(_x, _y, _z) {}
     explicit Scale(const Vector3f& v3);
+    Scale& operator*=(float factor);
   };
 
   /**
