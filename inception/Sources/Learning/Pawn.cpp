@@ -61,14 +61,14 @@ namespace Learning
     const auto ulen = u.len();
 
     // Translation is relative to object's forward, right and up vectors
-    transform.position.x += 0.005f * (forwardDelta_ * (f.x / flen) + rightDelta_ * (r.x / rlen) + upDelta_ * (u.x / ulen));
-    transform.position.y += 0.005f * (forwardDelta_ * (f.y / flen) + rightDelta_ * (r.y / rlen) + upDelta_ * (u.y / ulen));
-    transform.position.z += 0.005f * (forwardDelta_ * (f.z / flen) + rightDelta_ * (r.z / rlen) + upDelta_ * (u.z / ulen));
+    transform.position.x += 0.0005f * (forwardDelta_ * (f.x / flen) + rightDelta_ * (r.x / rlen) + upDelta_ * (u.x / ulen));
+    transform.position.y += 0.0005f * (forwardDelta_ * (f.y / flen) + rightDelta_ * (r.y / rlen) + upDelta_ * (u.y / ulen));
+    transform.position.z += 0.0005f * (forwardDelta_ * (f.z / flen) + rightDelta_ * (r.z / rlen) + upDelta_ * (u.z / ulen));
 
     // Rotation is absolute - wrong
-    transform.rotation.x += 0.005f * rollDelta_;
-    transform.rotation.y += 0.005f * pitchDelta_;
-    transform.rotation.z += 0.005f * yawDelta_;
+    transform.rotation.x += 0.0005f * rollDelta_;
+    transform.rotation.y += 0.0005f * pitchDelta_;
+    transform.rotation.z += 0.0005f * yawDelta_;
 
     Base::Pawn::Update(dt);
   }

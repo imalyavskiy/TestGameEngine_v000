@@ -131,6 +131,15 @@ namespace Math3D {
     return (*this);
   }
 
+  bool Direction::operator==(const Direction& r) const
+  {
+    const float dx = std::abs(x - r.x);
+    const float dy = std::abs(y - r.y);
+    const float dz = std::abs(z - r.z);
+
+    return dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  }
+
   bool Vector4f::operator==(const Math3D::Vector4f& r) const
   {
     const float dx = std::abs(x - r.x);
@@ -269,45 +278,45 @@ namespace Math3D {
     const float sy = std::sinf(rotation.z); // sin(yaw)
     const float cy = std::cosf(rotation.z); // cos(yaw)
 
-  /*
-      const Matrix4f rx
-      {
-          1.0f,  0.0f,   0.0f, 0.0f,
-          0.0f,   cr ,   -sr , 0.0f,
-          0.0f,   sr ,    cr , 0.0f,
-          0.0f,  0.0f,   0.0f, 1.0f,
-      };
-  
-      const Matrix4f ry
-      {
-           cp , 0.0f, -sp , 0.0f,
-          0.0f, 1.0f, 0.0f, 0.0f,
-           sp , 0.0f,  cp , 0.0f,
-          0.0f, 0.0f, 0.0f, 1.0f,
-      };
-  
-      const Matrix4f rz
-      {
-           cy ,  -sy , 0.0f, 0.0f,
-           sy ,   cy , 0.0f, 0.0f,
-          0.0f,  0.0f, 1.0f, 0.0f,
-          0.0f,  0.0f, 0.0f, 1.0f,
-      };
-  
-      // This variant takes 128 multiplication and 96 addition operations.
-      return rz * ry * rx;
-  */
+#if false
+    const Matrix4f rr // roll
+    {
+        1.0f,  0.0f,   0.0f, 0.0f,
+        0.0f,   cr ,   -sr , 0.0f,
+        0.0f,   sr ,    cr , 0.0f,
+        0.0f,  0.0f,   0.0f, 1.0f,
+    };
 
+    const Matrix4f rp // pitch
+    {
+         cp , 0.0f,  sp , 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        -sp , 0.0f,  cp , 0.0f,
+        0.0f, 0.0f, 0.0f, 1.0f,
+    };
+
+    const Matrix4f ry // yaw
+    {
+         cy ,  -sy , 0.0f, 0.0f,
+         sy ,   cy , 0.0f, 0.0f,
+        0.0f,  0.0f, 1.0f, 0.0f,
+        0.0f,  0.0f, 0.0f, 1.0f,
+    };
+
+    // This variant takes 128 multiplication and 96 addition operations.
+    return ry * rp * rr;
+#else
     // This is the analytically deduced matrix after 2 multiplications.
     // This variant has 16 multiplication and 4 addition operations. Such 
     // advantage reached because of all multiplications by ZERO were 
     // pre-calculated.
     return {
-      cy*cp, (-sy)*cr+cy*(-sp)*(-sr), (-sy)*sr+cy*(-sp)*cr, 0,
-      sy*cp,   cy*cr+sy*(-sp)*(-sr) ,   cy*sr+sy*(-sp)*cr , 0,
-        sp ,         cp*(-sr)       ,         cp*cr       , 0,
-         0 ,           0            ,           0         , 1,
+      cy*cp, -sy*cr+cy*sp*sr,  sy*sr+cy*sp*cr,  0,
+      sy*cp,  cy*cr+sy*sp*sr, -cy*sr+sy*sp*cr,  0,
+       -sp ,      cp*sr     ,      cp*cr     ,  0,
+        0  ,        0       ,        0       ,  1,
     };
+#endif
   }
 
   Matrix4f Pipeline::Create(const Scale& scale)

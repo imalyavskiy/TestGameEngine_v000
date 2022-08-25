@@ -148,6 +148,8 @@ namespace Math3D
       return { factor * x, factor * y, factor * z };
     }
 
+    bool operator==(const Direction& r) const;
+
     static const Direction Forward;
     static const Direction Backward;
     static const Direction Up;

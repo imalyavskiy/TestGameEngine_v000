@@ -61,6 +61,10 @@ namespace Learning
     vectorTriple->SetRootComponent(socRoot);
     vectorTriple->Init();
 
+    assert(Math3D::Direction::Forward == socVectorX->GetWorldForwardVector());
+    assert(Math3D::Direction::Right   == socVectorY->GetWorldForwardVector());
+    assert(Math3D::Direction::Up      == socVectorZ->GetWorldForwardVector());
+
     AddObject(vectorTriple);
   }
 
