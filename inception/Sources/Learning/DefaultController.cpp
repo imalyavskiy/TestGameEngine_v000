@@ -1,4 +1,4 @@
-#include <pch.hpp>
+﻿#include <pch.hpp>
 #include <Math3D/Math3d.hpp>
 #include <Utilities/Utilities.hpp>
 #include <BaseClasses/BaseClasses.hpp>
@@ -103,5 +103,26 @@ namespace Learning
 
     for (auto& action : actionList_)
       action->Update();
+  }
+
+  void DefaultController::OnMouseMove(int x, int y, bool buttonPressed)
+  {
+    const int halfScreenWidth = settings_.viewportWidth / 2;
+    const int halfScreenHeight = settings_.viewportHeight / 2;
+
+    // x left->right
+    float localMPosX = x - halfScreenWidth;
+    // normalizing
+    localMPosX /= static_cast<float>(halfScreenWidth);
+
+    // y top->bottom THUS need to be inverted TO BE bottom->top
+    float localMPosY = ((static_cast<int32_t>(settings_.viewportHeight) - y) - halfScreenHeight);
+    // normalizing
+    localMPosY /= static_cast<float>(halfScreenHeight);
+
+    // TODO: реализовать инкремент
+    // TODO: решить, как правильно начать, от чего считать инкремент. По идее надо захватить
+    //       указатель и поставить его в центр окна, и от этого считать инкремент.
+    std::cout << "OnMouseMove(" << localMPosX << ", " << localMPosY << ")" << (buttonPressed ? " + button" : "") << "\n";
   }
 }

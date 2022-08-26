@@ -92,13 +92,15 @@ namespace Engine
 //    }
   }
 
-  void  Impl::MotionProc(int x, int y) {
-//    std::cout << "Mouse is MoViNg position(" << x << ", " << y << ")\n";
+  void  Impl::MotionProc(const int x, const int y) {
+    constexpr bool buttonPressed = true;
+    inputController_->OnMouseMove(x, y, buttonPressed);
   }
 
-  void  Impl::PassiveMotionProc(int x, int y)
+  void  Impl::PassiveMotionProc(const int x, const int y)
   {
-//    std::cout << "Mouse is mOvInG position(" << x << ", " << y << ")\n";
+    constexpr bool buttonPressed = false;
+    inputController_->OnMouseMove(x, y, buttonPressed);
   }
 
   void  Impl::EntryProc(GLUT::MOUSE_STATE state)

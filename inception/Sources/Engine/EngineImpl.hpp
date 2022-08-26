@@ -50,12 +50,12 @@ namespace Engine
     /**
      * @todo add description
      */
-    void  MotionProc(int x, int y);
+    void  MotionProc(const int x, const int y);
 
     /**
      * @todo add description
      */
-    void  PassiveMotionProc(int x, int y);
+    void  PassiveMotionProc(const int x, const int y);
 
     /**
      * @todo add description

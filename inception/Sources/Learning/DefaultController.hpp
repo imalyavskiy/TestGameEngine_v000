@@ -77,6 +77,11 @@ namespace Learning
      */
     void Update(float dt) override;
 
+    /*
+    * @brief Called if mouse move action occur.
+    */
+    void OnMouseMove(int x, int y, bool buttonPressed) override;
+
   protected:
     std::map<GLUT::KEY, std::shared_ptr<Button>> registeredKeys_;
     std::list<std::shared_ptr<PawnAction>> actionList_;

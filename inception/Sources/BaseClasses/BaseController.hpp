@@ -28,6 +28,11 @@ namespace Base
      */
     virtual void Update(float dt) = 0;
 
+    /*
+     * @brief Called if mouse move action occur.
+     */
+    virtual void OnMouseMove(int x, int y, bool buttonPressed) = 0;
+
   protected:
     /**
      *

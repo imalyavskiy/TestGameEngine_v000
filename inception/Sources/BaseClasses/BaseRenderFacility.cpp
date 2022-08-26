@@ -33,11 +33,6 @@ namespace Base
       const Math3D::Matrix4f camPos = 
         Math3D::Pipeline::Create(-pos); // camera position must be negated
 
-//      const auto cameraMat = camView * camPos;
-//      const Math3D::Vector4f _fwd   = cameraMat * Math3D::Vector4f(1.f, 0.f, 0.f, 0.f);
-//      const Math3D::Vector4f _up    = cameraMat * Math3D::Vector4f(0.f, 0.f, 1.f, 0.f);
-//      const Math3D::Vector4f _right = cameraMat * Math3D::Vector4f(0.f, 1.f, 0.f, 0.f);
-
       const auto matViewProjection = proj * camView * camPos;
       for (const auto& object : objectsList)
         object->Draw(matViewProjection);
