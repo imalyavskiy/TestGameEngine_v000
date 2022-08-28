@@ -60,7 +60,7 @@ namespace Learning
     const auto u = root_->GetWorldUpVector();
     const auto ulen = u.len();
 
-    // Translation is relative to object's forward, right and up vectors
+    // Translation is relative to object's_ forward, right and up vectors
     transform.position.x += 0.0005f * (forwardDelta_ * (f.x / flen) + rightDelta_ * (r.x / rlen) + upDelta_ * (u.x / ulen));
     transform.position.y += 0.0005f * (forwardDelta_ * (f.y / flen) + rightDelta_ * (r.y / rlen) + upDelta_ * (u.y / ulen));
     transform.position.z += 0.0005f * (forwardDelta_ * (f.z / flen) + rightDelta_ * (r.z / rlen) + upDelta_ * (u.z / ulen));

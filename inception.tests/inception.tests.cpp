@@ -303,3 +303,67 @@ TEST(Math3DTests, PipelineTraslate)
   Math3D::Vector4f result = translate * Math3D::Vector4f(Math3D::Position());
   EXPECT_TRUE(position == Math3D::Position(result.xyz()));
 }
+
+TEST(Math3DTests, HardcodedDirections)
+{
+  EXPECT_EQ(Math3D::Direction::Forward, Math3D::Vector3f( 1.f, 0.f, 0.f));
+  EXPECT_EQ(Math3D::Direction::Backward,Math3D::Vector3f(-1.f, 0.f, 0.f));
+  EXPECT_EQ(Math3D::Direction::Right,   Math3D::Vector3f( 0.f, 1.f, 0.f));
+  EXPECT_EQ(Math3D::Direction::Left,    Math3D::Vector3f( 0.f,-1.f, 0.f));
+  EXPECT_EQ(Math3D::Direction::Up,      Math3D::Vector3f( 0.f, 0.f, 1.f));
+  EXPECT_EQ(Math3D::Direction::Down,    Math3D::Vector3f( 0.f, 0.f,-1.f));
+}
+
+TEST(Math3DTests, PipelineTransform)
+{
+
+  // YAW
+  {
+    // Rotating in XOY, rotation must be CW if look in direction opposite to Z axis,
+    // or CCW if to look in the same direction, e.g left coordinate system.
+    Math3D::Transform transform;
+    transform.rotation.z = Math3D::DegToRad(90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Forward);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Right);
+  }
+  {
+    Math3D::Transform transform;
+    transform.rotation.z = Math3D::DegToRad(-90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Forward);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Left);
+  }
+
+  // PITCH
+  {
+    Math3D::Transform transform;
+    transform.rotation.y = Math3D::DegToRad(90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Forward);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Down);
+  }
+  {
+    Math3D::Transform transform;
+    transform.rotation.y = Math3D::DegToRad(-90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Forward);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Up);
+  }
+
+  // ROLL
+  {
+    Math3D::Transform transform;
+    transform.rotation.x = Math3D::DegToRad(90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Up);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Left);
+  }
+  {
+    Math3D::Transform transform;
+    transform.rotation.x = Math3D::DegToRad(-90.f);
+    const Math3D::Matrix4f model = Math3D::Pipeline::Create(transform);
+    const Math3D::Vector4f result = model * Math3D::Vector4f(Math3D::Direction::Up);
+    EXPECT_EQ(result.xyz(), Math3D::Direction::Right);
+  }
+}

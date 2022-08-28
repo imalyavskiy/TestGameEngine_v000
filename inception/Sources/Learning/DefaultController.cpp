@@ -107,16 +107,20 @@ namespace Learning
 
   void DefaultController::OnMouseMove(int x, int y, bool buttonPressed)
   {
-    const int halfScreenWidth = settings_.viewportWidth / 2;
-    const int halfScreenHeight = settings_.viewportHeight / 2;
+    const int halfScreenWidth = 
+      settings_.viewportWidth / 2;
+    const int halfScreenHeight = 
+      settings_.viewportHeight / 2;
 
-    // x left->right
-    float localMPosX = x - halfScreenWidth;
+    // x_ left->right
+    float localMPosX = 
+      static_cast<float>(x) - halfScreenWidth;
     // normalizing
     localMPosX /= static_cast<float>(halfScreenWidth);
 
-    // y top->bottom THUS need to be inverted TO BE bottom->top
-    float localMPosY = ((static_cast<int32_t>(settings_.viewportHeight) - y) - halfScreenHeight);
+    // y_ top->bottom THUS need to be inverted TO BE bottom->top
+    float localMPosY =
+      ((static_cast<int32_t>(settings_.viewportHeight) - y) - halfScreenHeight);
     // normalizing
     localMPosY /= static_cast<float>(halfScreenHeight);
 
@@ -124,5 +128,7 @@ namespace Learning
     // TODO: решить, как правильно начать, от чего считать инкремент. По идее надо захватить
     //       указатель и поставить его в центр окна, и от этого считать инкремент.
     std::cout << "OnMouseMove(" << localMPosX << ", " << localMPosY << ")" << (buttonPressed ? " + button" : "") << "\n";
+
+    GLUT::WarpPointer(halfScreenWidth, halfScreenHeight);
   }
 }

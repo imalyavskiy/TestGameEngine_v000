@@ -405,7 +405,17 @@ namespace GLUT
 		glutTabletButtonFunc(callback);
 	}
 
-	void TimerFunc(unsigned int time, void(*callback)(int), int value)
+  void WarpPointer(const int x, const int y)
+  {
+		glutWarpPointer(x, y);
+  }
+
+  void SetCursor(CURSOR cursor)
+  {
+		glutSetCursor(static_cast<int>(cursor));
+  }
+
+  void TimerFunc(unsigned int time, void(*callback)(int), int value)
 	{
 		glutTimerFunc(time, callback, value);
 	}

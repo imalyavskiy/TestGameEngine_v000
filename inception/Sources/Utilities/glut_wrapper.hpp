@@ -147,14 +147,14 @@ namespace GLUT {
 		SMALL_P        = 0x0070, // p
 		SMALL_Q        = 0x0071, // q
 		SMALL_R        = 0x0072, // r
-		SMALL_S        = 0x0073, // s
+		SMALL_S        = 0x0073, // s_
 		SMALL_T        = 0x0074, // t
 		SMALL_U        = 0x0075, // u
 		SMALL_V        = 0x0076, // v
-		SMALL_W        = 0x0077, // w
-		SMALL_X        = 0x0078, // x
-		SMALL_Y        = 0x0079, // y
-		SMALL_Z        = 0x007A, // z
+		SMALL_W        = 0x0077, // s_
+		SMALL_X        = 0x0078, // x_
+		SMALL_Y        = 0x0079, // y_
+		SMALL_Z        = 0x007A, // z_
 		LCURLYBRACE    = 0x007B, // {
 		PIPE           = 0x007C, // |
 		RCURLYBRACE    = 0x007D, // }
@@ -176,6 +176,33 @@ namespace GLUT {
   enum class MOUSE_STATE : int {
     LEFT    = 0x0000,
     ENTERED = 0x0001,
+  };
+
+  enum class CURSOR : uint16_t
+  {
+    RIGHT_ARROW          = 0x0000,// Arrow pointing upand to the right.
+    LEFT_ARROW           = 0x0001,// Arrow pointing upand to the left.
+    INFO                 = 0x0002,// Pointing hand.
+    DESTROY              = 0x0003,// Skull& cross bones.
+    HELP                 = 0x0004,// Question mark.
+    CYCLE                = 0x0005,// Arrows rotating in a circle.
+    SPRAY                = 0x0006,// Spray can.
+    WAIT                 = 0x0007,// Wrist watch.
+    TEXT                 = 0x0008,// Insertion point cursor for text.
+    CROSSHAIR            = 0x0009,// Simple cross - hair.
+    UP_DOWN              = 0x000A,// Bi - directional pointing up & down.
+    LEFT_RIGHT           = 0x000B,// Bi - directional pointing left & right.
+    TOP_SIDE             = 0x000C,// Arrow pointing to top side.
+    BOTTOM_SIDE          = 0x000D,// Arrow pointing to bottom side.
+    LEFT_SIDE            = 0x000E,// Arrow pointing to left side.
+    RIGHT_SIDE           = 0x000F,// Arrow pointing to right side.
+    TOP_LEFT_CORNER      = 0x0010,// Arrow pointing to top - left corner.
+    TOP_RIGHT_CORNER     = 0x0011,// Arrow pointing to top - right corner.
+    BOTTOM_RIGHT_CORNER  = 0x0012,// Arrow pointing to bottom - left corner.
+    BOTTOM_LEFT_CORNER   = 0x0013,// Arrow pointing to bottom - right corner.
+    INHERIT              = 0x0064,// Use parent's_ cursor.
+    NONE                 = 0x0065,// Invisible cursor.
+    FULL_CROSSHAIR       = 0x0066,// Full - screen cross - hair cursor(if possible, otherwise GLUT_CURSOR_CROSSHAIR).
   };
 
   std::string toString(KEY key);
@@ -275,6 +302,13 @@ namespace GLUT {
 	
 	/// Sets the special keyboard callback for the current window(https://www.opengl.org/resources/libraries/glut/spec3/node61.html#SECTION000816000000000000000).
 	void TabletButtonFunc(void (*callback)(int, int, int, int));
+
+	///
+	void WarpPointer(const int x, const int y);
+
+	/// https://www.opengl.org/resources/libraries/glut/spec3/node28.html
+	void SetCursor(CURSOR cursor);
+
 };
 #endif // __GLUT_WRAPPER_H__
 

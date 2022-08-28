@@ -81,13 +81,13 @@ namespace Engine
 //    switch(button)
 //    {
 //    case GLUT::MOUSE_BUTTON::LEFT:
-//      std::cout << "LMB " << ((bool)state == true ? "up" : "down") << " at ("<< x << ", " << y << ")\n";
+//      std::cout << "LMB " << ((bool)state == true ? "up" : "down") << " at ("<< x_ << ", " << y_ << ")\n";
 //      break;
 //    case GLUT::MOUSE_BUTTON::RIGHT:
-//      std::cout << "RMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+//      std::cout << "RMB " << ((bool)state == true ? "up" : "down") << " at (" << x_ << ", " << y_ << ")\n";
 //      break;
 //    case GLUT::MOUSE_BUTTON::MIDDLE:
-//      std::cout << "MMB " << ((bool)state == true ? "up" : "down") << " at (" << x << ", " << y << ")\n";
+//      std::cout << "MMB " << ((bool)state == true ? "up" : "down") << " at (" << x_ << ", " << y_ << ")\n";
 //      break;
 //    }
   }

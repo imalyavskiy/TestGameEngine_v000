@@ -5,7 +5,7 @@
 /// TODO: Document. Add link.
 namespace GL
 {
-    /// ID's of the buffers to act to
+    /// ID's_ of the buffers to act to
     enum class AttribMask : uint32_t
     {
         CURRENT_BIT               = 0x00000001,
@@ -184,7 +184,7 @@ namespace GL
     /// Binds a named buffer object(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBindBuffer.xhtml).
     void BindBuffer(BufferType bufferType, uint32_t bufferId);
 
-    /// Сreates and initializes a buffer object's data store(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml).
+    /// Сreates and initializes a buffer object's_ data store(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBufferData.xhtml).
     void BufferData(BufferType bufferType, uint32_t numElements, void* data, Action action);
 
     /// Enables a generic vertex attribute array(https://registry.khronos.org/OpenGL-Refpages/gl4/html/glEnableVertexAttribArray.xhtml).

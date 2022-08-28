@@ -19,6 +19,9 @@ namespace Engine
 
   bool Initialize(const Base::Settings& settings)
   {
+    GLUT::WarpPointer(settings.viewportWidth / 2, settings.viewportHeight / 2);
+    GLUT::SetCursor(GLUT::CURSOR::NONE);
+
     instance = new Impl(settings);
 
     return true; // @todo wrong! return value makes no sense
