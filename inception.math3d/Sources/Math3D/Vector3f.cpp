@@ -3,6 +3,8 @@
 
 namespace Math3D
 {
+  const Vector3f Vector3f::zero = { 0.f, 0.f, 0.f };
+
   const Direction Direction::Forward = { 1.f, 0.f, 0.f };
   const Direction Direction::Backward = { -1.f, 0.f, 0.f };
   const Direction Direction::Up = { 0.f, 0.f, 1.f };
@@ -14,6 +16,14 @@ namespace Math3D
     : x(_x)
     , y(_y)
     , z(_z)
+  {
+  }
+
+  // TODO: test this
+  Vector3f::Vector3f(const float v)
+    : x(v)
+    , y(v)
+    , z(v)
   {
   }
 

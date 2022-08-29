@@ -16,12 +16,22 @@ namespace Math3D
     /**
      *
      */
+    Quaternion(const float s);
+
+    /**
+     *
+     */
     Quaternion(const float s, const float x, const float y, const float z);
 
     /**
      *
      */
-    Quaternion(const float _w, const Vector3f& v);
+    Quaternion(const float s, const Vector3f& v);
+
+    /**
+     *
+     */
+    Quaternion(const Vector3f& v);
 
     /**
      *
@@ -29,37 +39,43 @@ namespace Math3D
     auto s() const -> float;
     void s(const float s);
 
+    /**
+     *
+     */
     auto x() const -> float;
     void x(const float x);
 
+    /**
+     *
+     */
     auto y() const -> float;
     void y(const float y);
 
+    /**
+     *
+     */
     auto z() const -> float;
     void z(const float z);
 
+    /**
+     *
+     */
     Vector3f xyz() const;
     void xyz(const Vector3f& v);
 
-    /**
-     * @brief normalizes current quaternion
-     */
-    const Quaternion& Normalize();
+    bool IsReal() const; // x_, y_, z_ are zeroes
+    bool IsPure() const; // s_ is zero
 
-    /**
-     * @brief return normalized version of the current quaternion
-     */
-    Quaternion Normalized() const;
+    Quaternion& operator=(const float s);
+    Quaternion& operator=(const Vector3f& v);
+    Quaternion& operator=(const Quaternion& other);
 
-    /**
-     * @brief turns current quaternion to its conjugation
-     */
-    const Quaternion& Conjugate();
-
-    /**
-     * @brief returns conjugation of the current quaternion
-     */
-    Quaternion Conjugated() const;
+    bool operator==(const float s) const;
+    bool operator!=(const float s) const;
+    bool operator==(const Vector3f v) const;
+    bool operator!=(const Vector3f v) const;
+    bool operator==(const Quaternion& q) const;
+    bool operator!=(const Quaternion& q) const;
 
     Quaternion operator*(const float f) const;
     Quaternion operator*=(const float f) const;
@@ -89,27 +105,57 @@ namespace Math3D
     Quaternion operator-(const Quaternion& q) const;
     const Quaternion& operator-=(const Quaternion& q);
 
-    bool operator==(const float v) const;
-    bool operator==(const Vector3f q) const;
-    bool operator==(const Quaternion& q) const;
-
-    Quaternion& operator=(const Quaternion& other);
-
-    bool isreal() const; // x_, y_, z_ are zeroes
-    bool ispure() const; // s_ is zero
-
+    /**
+     *
+     */
     Quaternion inverted() const;
+
+    /**
+     *
+     */
     void invert();
 
+    /**
+     * @brief normalizes current quaternion
+     */
+    const Quaternion& Normalize();
+
+    /**
+     * @brief return normalized version of the current quaternion
+     */
+    Quaternion Normalized() const;
+
+    /**
+     * @brief turns current quaternion to its conjugation
+     */
+    const Quaternion& Conjugate();
+
+    /**
+     * @brief returns conjugation of the current quaternion
+     */
+    Quaternion Conjugated() const;
+
+    /**
+     *
+     */
     Quaternion dot(const Quaternion& other);
+
+    /**
+     *
+     */
+    const static Quaternion zero;
 
   protected:
     float s_ = 0.f; // scalar
 
-    float x_ = 0.f; // imaginary i
-    float y_ = 0.f; // imaginary j
-    float z_ = 0.f; // imaginary k
+    float x_ = 0.f; // factor for imaginary i
+    float y_ = 0.f; // factor for imaginary j
+    float z_ = 0.f; // factor for imaginary k
   };
 
+  bool operator==(const float l, const Quaternion& r);
+  bool operator!=(const float l, const Quaternion& r);
+  bool operator==(const Vector3f& l, const Quaternion& r);
+  bool operator!=(const Vector3f& l, const Quaternion& r);
 }
 #endif // __QUATERNION_HPP__

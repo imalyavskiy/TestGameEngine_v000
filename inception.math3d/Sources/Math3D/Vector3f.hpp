@@ -17,6 +17,8 @@ namespace Math3D
 
     Vector3f(const float _x, const float _y, const float _z);
 
+    Vector3f(const float v);
+
     Vector3f& Normalize();
 
     Vector3f operator-() const;
@@ -30,6 +32,8 @@ namespace Math3D
     operator std::string() const;
 
     float len() const;
+
+    const static Vector3f zero;
   };
 
   /**

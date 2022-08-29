@@ -3,6 +3,13 @@
 
 namespace Math3D
 {
+  const Quaternion Quaternion::zero = { 0.f, 0.f, 0.f, 0.f };
+
+  Quaternion::Quaternion(const float s)
+    : s_(s)
+  {
+  }
+
   Quaternion::Quaternion(const float s, const float x, const float y, const float z)
     : s_(s)
     , x_(x)
@@ -11,9 +18,19 @@ namespace Math3D
   {
   }
 
-  Quaternion::Quaternion(const float _w, const Vector3f& v)
+  Quaternion::Quaternion(const float s, const Vector3f& v)
+    : s_(s)
+    , x_(v.x)
+    , y_(v.y)
+    , z_(v.z)
   {
-   throw std::logic_error("not implemented");
+  }
+
+  Quaternion::Quaternion(const Vector3f& v)
+    : x_(v.x)
+    , y_(v.y)
+    , z_(v.z)
+  {
   }
 
   auto Quaternion::s() const -> float
@@ -187,34 +204,80 @@ namespace Math3D
    throw std::logic_error("not implemented");
   }
 
-  bool Quaternion::operator==(const float v) const
+  bool Quaternion::operator==(const float s) const
   {
-   throw std::logic_error("not implemented");
+   return s_ == s && IsReal();
   }
 
-  bool Quaternion::operator==(const Vector3f q) const
+  bool Quaternion::operator!=(const float s) const
   {
-   throw std::logic_error("not implemented");
+    return !operator==(s);
+  }
+
+  bool Quaternion::operator==(const Vector3f v) const
+  {
+    const float dx = std::abs(x_ - v.x);
+    const float dy = std::abs(y_ - v.y);
+    const float dz = std::abs(z_ - v.z);
+
+    return IsPure() && dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  }
+
+  bool Quaternion::operator!=(const Vector3f v) const
+  {
+    return !operator==(v);
   }
 
   bool Quaternion::operator==(const Quaternion& q) const
   {
-   throw std::logic_error("not implemented");
+    const float ds = std::abs(s_ - q.s_);
+    const float dx = std::abs(x_ - q.x_);
+    const float dy = std::abs(y_ - q.y_);
+    const float dz = std::abs(z_ - q.z_);
+
+    return ds <= imprecision && dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  }
+
+  bool Quaternion::operator!=(const Quaternion& q) const
+  {
+    return !operator==(q);
+  }
+
+  bool Quaternion::IsReal() const
+  {
+    return std::abs(x_) <= imprecision && std::abs(y_) <= imprecision && std::abs(z_) <= imprecision;
+  }
+
+  bool Quaternion::IsPure() const
+  {
+    return std::abs(s_) <= imprecision && (std::abs(x_) > imprecision || std::abs(y_) > imprecision || std::abs(z_) > imprecision);
+  }
+
+  Quaternion& Quaternion::operator=(const float s)
+  {
+    s_ = s;
+
+    return (*this);
+  }
+
+  Quaternion& Quaternion::operator=(const Vector3f& v)
+  {
+    s_ = 0.f;
+    x_= v.x;
+    y_= v.y;
+    z_= v.z;
+
+    return (*this);
   }
 
   Quaternion& Quaternion::operator=(const Quaternion& other)
   {
-   throw std::logic_error("not implemented");
-  }
+    s_ = other.s_;
+    x_ = other.x_;
+    y_ = other.y_;
+    z_ = other.z_;
 
-  bool Quaternion::isreal() const
-  {
-   throw std::logic_error("not implemented");
-  }
-
-  bool Quaternion::ispure() const
-  {
-   throw std::logic_error("not implemented");
+    return (*this);
   }
 
   Quaternion Quaternion::inverted() const
@@ -230,5 +293,25 @@ namespace Math3D
   Quaternion Quaternion::dot(const Quaternion& other)
   {
    throw std::logic_error("not implemented");
+  }
+
+  bool operator==(const float l, const Quaternion& r)
+  {
+    return r == l;
+  }
+
+  bool operator!=(const float l, const Quaternion& r)
+  {
+    return !operator==(l, r);
+  }
+
+  bool operator==(const Vector3f& l, const Quaternion& r)
+  {
+    return r == l;
+  }
+
+  bool operator!=(const Vector3f& l, const Quaternion& r)
+  {
+    return !operator==(l, r);
   }
 }
