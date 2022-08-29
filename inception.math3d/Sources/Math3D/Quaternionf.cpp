@@ -116,97 +116,119 @@ namespace Math3D
 
   Quaternion Quaternion::operator*(const float f) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator*=(const float f) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator*(const Quaternion& r) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator*=(const Quaternion& r) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator*(const Vector3f& v) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator*=(const Vector3f& v) const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::operator+(const float f) const
   {
-   throw std::logic_error("not implemented");
+    return { s_ + f, x_, y_, z_};
   }
 
   const Quaternion& Quaternion::operator+=(const float f)
   {
-   throw std::logic_error("not implemented");
+    s_ += f;
+
+    return (*this);
   }
 
   Quaternion Quaternion::operator+(const Vector3f& v) const
   {
-   throw std::logic_error("not implemented");
+    return { s_, x_ + v.x, y_ + v.y, z_ + v.z };
   }
 
-  const Quaternion& Quaternion::operator+=(const Vector3f& v) const
+  const Quaternion& Quaternion::operator+=(const Vector3f& v)
   {
-   throw std::logic_error("not implemented");
+    x_ += v.x;
+    y_ += v.y;
+    z_ += v.z;
+
+    return (*this);
   }
 
   Quaternion Quaternion::operator+(const Quaternion& q) const
   {
-   throw std::logic_error("not implemented");
+    return { s_ + q.s_, x_ + q.x_, y_ + q.y_, z_ + q.z_ };
   }
 
   const Quaternion& Quaternion::operator+=(const Quaternion& q)
   {
-   throw std::logic_error("not implemented");
+    s_ += q.s_;
+    x_ += q.x_;
+    y_ += q.y_;
+    z_ += q.z_;
+
+    return (*this);
   }
 
   Quaternion Quaternion::operator-(const float f) const
   {
-   throw std::logic_error("not implemented");
+    return {s_ - f, x_, y_, z_};
   }
 
   const Quaternion& Quaternion::operator-=(const float f)
   {
-   throw std::logic_error("not implemented");
+    s_ -= f;
+
+    return (*this);
   }
 
   Quaternion Quaternion::operator-(const Vector3f& v) const
   {
-   throw std::logic_error("not implemented");
+    return { s_, x_ - v.x, y_ - v.y, z_ - v.z };
   }
 
   const Quaternion& Quaternion::operator-=(const Vector3f& v)
   {
-   throw std::logic_error("not implemented");
+    x_ -= v.x;
+    y_ -= v.y;
+    z_ -= v.z;
+
+    return (*this);
   }
 
   Quaternion Quaternion::operator-(const Quaternion& q) const
   {
-   throw std::logic_error("not implemented");
+    return { s_ - q.s(), x_ - q.x(), y_ - q.y(), z_ - q.z() };
   }
 
   const Quaternion& Quaternion::operator-=(const Quaternion& q)
   {
-   throw std::logic_error("not implemented");
+    s_ -= q.s();
+    x_ -= q.x();
+    y_ -= q.y();
+    z_ -= q.z();
+
+    return (*this);
   }
 
   bool Quaternion::operator==(const float s) const
   {
-   return s_ == s && IsReal();
+    return s_ == s && IsReal();
   }
 
   bool Quaternion::operator!=(const float s) const
@@ -263,9 +285,9 @@ namespace Math3D
   Quaternion& Quaternion::operator=(const Vector3f& v)
   {
     s_ = 0.f;
-    x_= v.x;
-    y_= v.y;
-    z_= v.z;
+    x_ = v.x;
+    y_ = v.y;
+    z_ = v.z;
 
     return (*this);
   }
@@ -282,17 +304,17 @@ namespace Math3D
 
   Quaternion Quaternion::inverted() const
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   void Quaternion::invert()
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   Quaternion Quaternion::dot(const Quaternion& other)
   {
-   throw std::logic_error("not implemented");
+    throw std::logic_error("not implemented");
   }
 
   bool operator==(const float l, const Quaternion& r)
@@ -314,4 +336,25 @@ namespace Math3D
   {
     return !operator==(l, r);
   }
+
+  Quaternion operator+(const Vector3f& l, const Quaternion& r)
+  {
+    return {r.s(), l.x + r.x(), l.y + r.y(), l.z + r.z()};
+  }
+
+  Quaternion operator+(const float l, const Quaternion& r)
+  {
+    return { l + r.s(), r.x(), r.y(), r.z() };
+  }
+
+  Quaternion operator-(const Vector3f& l, const Quaternion& r)
+  {
+    return {-r.s(), l.x - r.x(), l.y - r.y(), l.z - r.z()};
+  }
+
+  Quaternion operator-(const float l, const Quaternion& r)
+  {
+    return { l - r.s(), -r.x(), -r.y(), -r.z() };
+  }
+
 }

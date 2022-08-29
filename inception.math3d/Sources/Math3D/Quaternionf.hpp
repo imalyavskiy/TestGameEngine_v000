@@ -94,7 +94,7 @@ namespace Math3D
     Quaternion operator+(const float f) const;
     const Quaternion& operator+=(const float f);
     Quaternion operator+(const Vector3f& v) const;
-    const Quaternion& operator+=(const Vector3f& v) const;
+    const Quaternion& operator+=(const Vector3f& v);
     Quaternion operator+(const Quaternion& q) const;
     const Quaternion& operator+=(const Quaternion& q);
 
@@ -157,5 +157,11 @@ namespace Math3D
   bool operator!=(const float l, const Quaternion& r);
   bool operator==(const Vector3f& l, const Quaternion& r);
   bool operator!=(const Vector3f& l, const Quaternion& r);
+
+  Quaternion operator+(const Vector3f& l, const Quaternion& r);
+  Quaternion operator+(const float l, const Quaternion& r);
+
+  Quaternion operator-(const Vector3f& l, const Quaternion& r);
+  Quaternion operator-(const float l, const Quaternion& r);
 }
 #endif // __QUATERNION_HPP__
