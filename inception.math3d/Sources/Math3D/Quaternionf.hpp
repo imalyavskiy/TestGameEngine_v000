@@ -3,7 +3,7 @@
 namespace Math3D
 {
   /**
-   *
+* @brief Float base quaternion number representation. This code was written by theoretical bases written here https://habr.com/ru/post/426863/
    */
   class Quaternion
   {

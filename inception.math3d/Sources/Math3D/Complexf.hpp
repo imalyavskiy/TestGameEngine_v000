@@ -3,7 +3,7 @@
 namespace Math3D
 {
   /**
-   * @brief Float base complex number representation. The math has been taken here - https://habr.com/ru/post/426863/
+   * @brief Float base complex number representation. This code was written by theoretical bases written here https://habr.com/ru/post/426863/
    */
   class Complexf
   {
