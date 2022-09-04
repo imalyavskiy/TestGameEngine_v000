@@ -215,7 +215,84 @@ TEST(Quaternion, Subtraction)
 
 TEST(Quaternion, Multiplication)
 {
-  
+  {
+    const Quaternion qa{ 2,4,3,5 };
+    const Quaternion qb{ 3,2,4,3 };
+    const Quaternion qab{-29,5,15,31};
+    const Quaternion qba{-29, 27, 19, 11};
+
+    EXPECT_EQ(qa * qb, qab); 
+    EXPECT_NE(qb * qa, qab);
+
+    EXPECT_EQ(qb * qa, qba);
+    EXPECT_NE(qb * qa, qab);
+  }
+
+  {
+    const Quaternion qa{ 2,4,3,5 };
+    const Quaternion qb{ 3,2,4,3 };
+    {
+      Quaternion q = qa;
+      q *= qb;
+      EXPECT_EQ(q, qa * qb); 
+      EXPECT_NE(q, qb * qa);
+    }
+
+    {
+      Quaternion q = qb;
+      q *= qa;
+      EXPECT_EQ(q, qb * qa);
+      EXPECT_NE(q, qa * qb);
+    }
+  }
+
+  {
+    Quaternion qa{5, -4, 7, 1};
+    Vector3f vb{ 3, 7,-2 };
+    Quaternion qab{-35, -6, 30, -59};
+    Quaternion qba{-35, 36, 40, 39};
+
+    {
+      Quaternion q = qa * vb;
+      EXPECT_EQ(q, qab);
+      EXPECT_NE(q, qba);
+    }
+
+    {
+      Quaternion q = vb * qa;
+      EXPECT_EQ(q, qba);
+      EXPECT_NE(q, qab);
+    }
+
+    {
+      Quaternion q = qa;
+      q *= vb;
+
+      EXPECT_EQ(q, qab);
+      EXPECT_NE(q, qba);
+      EXPECT_EQ(q, qa * vb);
+      EXPECT_NE(q, vb * qa);
+    }
+  }
+
+  {
+    Quaternion qa{5, -4, 7, 1};
+    float fb = 7;
+    Quaternion qab {35, -28, 49, 7};
+    Quaternion qba {35, -28, 49, 7};
+
+    EXPECT_EQ(qa * fb, qab);
+    EXPECT_EQ(fb * qa, qba);
+    EXPECT_EQ(qa * fb, fb * qa);
+
+    {
+      Quaternion q = qa;
+      q *= fb;
+
+      EXPECT_EQ(q, qa * fb);
+      EXPECT_EQ(q, fb * qa);
+    }
+  }
 }
 
 TEST(Quaternion, Division)

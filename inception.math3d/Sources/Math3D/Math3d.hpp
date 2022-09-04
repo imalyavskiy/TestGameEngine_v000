@@ -2,6 +2,8 @@
 #define __MATH_3D_H__
 
 
+#define NOT_IMPLEMENTED_EXC std::string("not implemented ") + __FILE__ + "(" + std::to_string(__LINE__) + ")"
+
 #include "Common.hpp"
 #include "Vector3f.hpp"
 #include "Vector4f.hpp"

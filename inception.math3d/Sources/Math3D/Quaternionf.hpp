@@ -78,18 +78,18 @@ namespace Math3D
     bool operator!=(const Quaternion& q) const;
 
     Quaternion operator*(const float f) const;
-    Quaternion operator*=(const float f) const;
+    Quaternion operator*=(const float f);
     Quaternion operator*(const Vector3f& v) const;
-    Quaternion operator*=(const Vector3f& v) const;
+    Quaternion operator*=(const Vector3f& v);
     Quaternion operator*(const Quaternion& r) const;
-    Quaternion operator*=(const Quaternion& r) const;
+    const Quaternion& operator*=(const Quaternion& r);
 
-    Quaternion operator/(const float f) const;
-    Quaternion operator/=(const float f) const;
-    Quaternion operator/(const Vector3f& v) const;
-    Quaternion operator/=(const Vector3f& v) const;
-    Quaternion operator/(const Quaternion& r) const;
-    Quaternion operator/=(const Quaternion& r) const;
+    //Quaternion operator/(const float f) const;
+    //Quaternion operator/=(const float f) const;
+    //Quaternion operator/(const Vector3f& v) const;
+    //Quaternion operator/=(const Vector3f& v) const;
+    //Quaternion operator/(const Quaternion& r) const;
+    //Quaternion operator/=(const Quaternion& r) const;
 
     Quaternion operator+(const float f) const;
     const Quaternion& operator+=(const float f);
@@ -163,5 +163,8 @@ namespace Math3D
 
   Quaternion operator-(const Vector3f& l, const Quaternion& r);
   Quaternion operator-(const float l, const Quaternion& r);
+
+  Quaternion operator*(const Vector3f& l, const Quaternion& r);
+  Quaternion operator*(const float, const Quaternion& r);
 }
 #endif // __QUATERNION_HPP__
