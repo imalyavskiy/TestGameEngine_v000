@@ -1,4 +1,4 @@
-#ifndef __QUATERNION_HPP__
+﻿#ifndef __QUATERNION_HPP__
 #define __QUATERNION_HPP__
 namespace Math3D
 {
@@ -36,109 +36,181 @@ namespace Math3D
     /**
      *
      */
+    Quaternion(const Quaternion& q) = default;
+
+    /**
+     *
+     */
+    [[nodiscard]]
     auto s() const -> float;
     void s(const float s);
 
     /**
      *
      */
+    [[nodiscard]]
     auto x() const -> float;
     void x(const float x);
 
     /**
      *
      */
+    [[nodiscard]]
     auto y() const -> float;
     void y(const float y);
 
     /**
      *
      */
+    [[nodiscard]]
     auto z() const -> float;
     void z(const float z);
 
     /**
      *
      */
-    Vector3f xyz() const;
+    [[nodiscard]]
+    auto xyz() const -> Vector3f;
     void xyz(const Vector3f& v);
 
+    [[nodiscard]]
     bool IsReal() const; // x_, y_, z_ are zeroes
+    [[nodiscard]]
     bool IsPure() const; // s_ is zero
+    [[nodiscard]]
+    bool IsNull() const;
 
-    Quaternion& operator=(const float s);
-    Quaternion& operator=(const Vector3f& v);
-    Quaternion& operator=(const Quaternion& other);
+    auto operator=(const float s) -> Quaternion&;
+    auto operator=(const Vector3f& v) -> Quaternion&;
+    auto operator=(const Quaternion& other) -> Quaternion& = default;
 
-    bool operator==(const float s) const;
-    bool operator!=(const float s) const;
-    bool operator==(const Vector3f v) const;
-    bool operator!=(const Vector3f v) const;
-    bool operator==(const Quaternion& q) const;
-    bool operator!=(const Quaternion& q) const;
+    [[nodiscard]]
+    auto operator==(const float s) const -> bool;
+    [[nodiscard]]
+    auto operator!=(const float s) const -> bool;
+    [[nodiscard]]
+    auto operator==(const Vector3f v) const -> bool;
+    [[nodiscard]]
+    auto operator!=(const Vector3f v) const -> bool;
+    [[nodiscard]]
+    auto operator==(const Quaternion& q) const -> bool;
+    [[nodiscard]]
+    auto operator!=(const Quaternion& q) const -> bool;
 
-    Quaternion operator*(const float f) const;
-    Quaternion operator*=(const float f);
-    Quaternion operator*(const Vector3f& v) const;
-    Quaternion operator*=(const Vector3f& v);
-    Quaternion operator*(const Quaternion& r) const;
-    const Quaternion& operator*=(const Quaternion& r);
+    [[nodiscard]]
+    auto operator*(const float f) const -> Quaternion;
+    auto operator*=(const float f) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator*(const Vector3f& v) const -> Quaternion;
+    auto operator*=(const Vector3f& v) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator*(const Quaternion& r) const -> Quaternion;
+    auto operator*=(const Quaternion& r) -> const Quaternion&;
 
-    //Quaternion operator/(const float f) const;
-    //Quaternion operator/=(const float f) const;
-    //Quaternion operator/(const Vector3f& v) const;
-    //Quaternion operator/=(const Vector3f& v) const;
-    //Quaternion operator/(const Quaternion& r) const;
-    //Quaternion operator/=(const Quaternion& r) const;
+    [[nodiscard]]
+    auto operator/(const float f) const -> Quaternion;
+    auto operator/=(const float f) -> const Quaternion&;
 
-    Quaternion operator+(const float f) const;
-    const Quaternion& operator+=(const float f);
-    Quaternion operator+(const Vector3f& v) const;
-    const Quaternion& operator+=(const Vector3f& v);
-    Quaternion operator+(const Quaternion& q) const;
-    const Quaternion& operator+=(const Quaternion& q);
+    // Because multiplication of quaternions is not commutative, division of a quaternion is also
+    // not commutative (division is multiplication by a number to the power of -1). Writing a/b
+    // means a divided by b, but in our case there is also another notation b\a - left
+    // division - it is impossible to code such operation, so the operation of division by vector
+    // (pure imaginary quaternion) will not be implemented at all.
+    auto operator/(const Vector3f&) const -> Quaternion = delete;
 
-    Quaternion operator-(const float f) const;
-    const Quaternion& operator-=(const float f);
-    Quaternion operator-(const Vector3f& v) const;
-    const Quaternion& operator-=(const Vector3f& v);
-    Quaternion operator-(const Quaternion& q) const;
-    const Quaternion& operator-=(const Quaternion& q);
+    // Because multiplication of quaternions is not commutative, division of a quaternion is also
+    // not commutative (division is multiplication by a number to the power of -1). Writing a/b
+    // means a divided by b, but in our case there is also another notation b\a - left
+    // division - it is impossible to code such operation, so the operation of division by vector
+    // (pure imaginary quaternion) will not be implemented at all.
+    auto operator/=(const Vector3f&) -> const Quaternion& = delete;
+
+    // Because multiplication of quaternions is not commutative, division of a quaternion is also
+    // not commutative (division is multiplication by a number to the power of -1). Writing a/b
+    // means a divided by b, but in our case there is also another notation b\a - left
+    // division - it is impossible to code such operation, so the operation of division by quaternion
+    // we will not be implemented at all.
+    auto operator/(const Quaternion&) const -> Quaternion = delete;
+
+    // Because multiplication of quaternions is not commutative, division of a quaternion is also
+    // not commutative (division is multiplication by a number to the power of -1). Writing a/b
+    // means a divided by b, but in our case there is also another notation b\a - left
+    // division - it is impossible to code such operation, so the operation of division by quaternion
+    // we will not be implemented at all.
+    auto operator/=(const Quaternion&) -> const Quaternion& = delete;
+
+    [[nodiscard]]
+    auto operator+(const float f) const -> Quaternion;
+    auto operator+=(const float f) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator+(const Vector3f& v) const -> Quaternion;
+    auto operator+=(const Vector3f& v) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator+(const Quaternion& q) const -> Quaternion;
+    auto operator+=(const Quaternion& q) -> const Quaternion&;
+
+    [[nodiscard]]
+    auto operator-(const float f) const -> Quaternion;
+    auto operator-=(const float f) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator-(const Vector3f& v) const -> Quaternion;
+    auto operator-=(const Vector3f& v) -> const Quaternion&;
+    [[nodiscard]]
+    auto operator-(const Quaternion& q) const -> Quaternion;
+    auto operator-=(const Quaternion& q) -> const Quaternion&;
 
     /**
-     *
+     * @brief Returns inverse version of current instance:
+     *        q^(-1) == Conjugated(q)/N(q)
      */
-    Quaternion inverted() const;
+    [[nodiscard]]
+    auto Inversed() const -> Quaternion;
 
     /**
-     *
+     * @brief Inverses current instance:
+     *        q^(-1) == Conjugated(q)/N(q)
      */
-    void invert();
+    auto Inverse() -> const Quaternion&;
+
+    /**
+     * @brief s^2 + x^2 + y^2 + z^2
+     */
+    [[nodiscard]]
+    auto Norm() const -> float;
+
+    /**
+     * @brief √(Norm(q)) == √(s^2 + x^2 + y^2 + z^2)
+     */
+    [[nodiscard]]
+    auto Module() const -> float;
 
     /**
      * @brief normalizes current quaternion
      */
-    const Quaternion& Normalize();
+    auto Normalize() -> const Quaternion&;
 
     /**
      * @brief return normalized version of the current quaternion
      */
-    Quaternion Normalized() const;
+    [[nodiscard]]
+    auto Normalized() const -> Quaternion;
 
     /**
      * @brief turns current quaternion to its conjugation
      */
-    const Quaternion& Conjugate();
+    auto Conjugate() -> const Quaternion&;
 
     /**
      * @brief returns conjugation of the current quaternion
      */
-    Quaternion Conjugated() const;
+    [[nodiscard]]
+    auto Conjugated() const -> Quaternion;
 
     /**
      *
      */
-    Quaternion dot(const Quaternion& other);
+    [[nodiscard]]
+    auto dot(const Quaternion& r) const -> float;
 
     /**
      *
@@ -153,18 +225,20 @@ namespace Math3D
     float z_ = 0.f; // factor for imaginary k
   };
 
-  bool operator==(const float l, const Quaternion& r);
-  bool operator!=(const float l, const Quaternion& r);
-  bool operator==(const Vector3f& l, const Quaternion& r);
-  bool operator!=(const Vector3f& l, const Quaternion& r);
+  auto operator==(const float l, const Quaternion& r) -> bool;
+  auto operator!=(const float l, const Quaternion& r) -> bool;
+  auto operator==(const Vector3f& l, const Quaternion& r) -> bool;
+  auto operator!=(const Vector3f& l, const Quaternion& r) -> bool;
 
-  Quaternion operator+(const Vector3f& l, const Quaternion& r);
-  Quaternion operator+(const float l, const Quaternion& r);
+  auto operator+(const Vector3f& l, const Quaternion& r) -> Quaternion;
+  auto operator+(const float l, const Quaternion& r) -> Quaternion;
 
-  Quaternion operator-(const Vector3f& l, const Quaternion& r);
-  Quaternion operator-(const float l, const Quaternion& r);
+  auto operator-(const Vector3f& l, const Quaternion& r) -> Quaternion;
+  auto operator-(const float l, const Quaternion& r) -> Quaternion;
 
-  Quaternion operator*(const Vector3f& l, const Quaternion& r);
-  Quaternion operator*(const float, const Quaternion& r);
+  auto operator*(const Vector3f& l, const Quaternion& r) -> Quaternion;
+  auto operator*(const float, const Quaternion& r) -> Quaternion;
+
+  auto dot(const Quaternion& l, const Quaternion& r) -> float;
 }
 #endif // __QUATERNION_HPP__

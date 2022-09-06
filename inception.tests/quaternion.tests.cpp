@@ -295,7 +295,154 @@ TEST(Quaternion, Multiplication)
   }
 }
 
+TEST(Quaternion, Conjugation)
+{
+  {
+    const Quaternion qa{ 2,4,3,5 };
+    const Quaternion qb{ 3,2,4,3 };
+
+    EXPECT_EQ((qa * qb).Conjugated(), qb.Conjugated() * qa.Conjugated());
+  }
+
+  {
+    Quaternion q(9.f, -3.f, 4.f, 7.f);
+    Quaternion qc(9.f, 3.f, -4.f, -7.f);
+
+    EXPECT_EQ(q.Conjugated(), qc);
+
+    EXPECT_TRUE((q * q.Conjugated()).IsReal());
+
+    EXPECT_EQ(Quaternion(q).Conjugate(), qc);
+
+    EXPECT_EQ(q * qc, Quaternion(q.s() * q.s() + std::powf(std::sqrtf(q.x() * q.x() + q.y() * q.y() + q.z() * q.z()),2)));
+    EXPECT_EQ(qc * q, Quaternion(q.s() * q.s() + std::powf(std::sqrtf(q.x() * q.x() + q.y() * q.y() + q.z() * q.z()),2)));
+
+    EXPECT_EQ((q * q.Conjugated()).Conjugated(), q * q.Conjugated());
+
+    EXPECT_EQ(q * q.Conjugated(), q.Conjugated() * q);
+  }
+}
+TEST(Quaternion, Norm)
+{
+  constexpr float s = 2.f;
+  constexpr float x = 4.f;
+  constexpr float y = 3.f;
+  constexpr float z = 5.f;
+
+  const Quaternion qa{ s, x, y, z };
+  EXPECT_EQ(qa.Norm(), s * s + x * x + y * y + z * z);
+}
+
+TEST(Quaternion, Module)
+{
+  constexpr float s = 2.f;
+  constexpr float x = 4.f;
+  constexpr float y = 3.f;
+  constexpr float z = 5.f;
+
+  const Quaternion qa{ s, x, y, z };
+  EXPECT_EQ(qa.Module(), std::sqrt(s * s + x * x + y * y + z * z));
+}
+
+TEST(Quaternion, Null)
+{
+  EXPECT_EQ(Quaternion(1.f, 6.f, 9.f, 3.f).IsNull(), false);
+  EXPECT_EQ(Quaternion(Math3D::imprecision, Vector3f(Math3D::imprecision)).IsNull(), true);
+  EXPECT_EQ(Quaternion(2.f * Math3D::imprecision, Vector3f(Math3D::imprecision)).IsNull(), false);
+  EXPECT_EQ(Quaternion().IsNull(), true);
+
+  EXPECT_EQ(Quaternion(0.f, 0.f, 0.f, 0.f).IsNull(), true);
+  EXPECT_EQ(Quaternion(1.f, 0.f, 0.f, 0.f).IsNull(), false);
+  EXPECT_EQ(Quaternion(0.f, 1.f, 0.f, 0.f).IsNull(), false);
+  EXPECT_EQ(Quaternion(0.f, 0.f, 1.f, 0.f).IsNull(), false);
+  EXPECT_EQ(Quaternion(0.f, 0.f, 0.f, 1.f).IsNull(), false);
+}
+
+TEST(Quaternion, Normalization)
+{
+  const Quaternion q{ 5.f, 8.f, 3.f, 1.f };
+  const float norm = q.Norm();
+  const Quaternion qn{ q.s() / norm, q.x() / norm, q.y() / norm, q.z() / norm };
+
+  EXPECT_EQ(q.Normalized(), qn);
+  EXPECT_EQ(Quaternion(q).Normalize(), qn);
+}
+
+TEST(Quaternion, Inversion)
+{
+  constexpr float s = 5.f;
+  constexpr float x = 8.f;
+  constexpr float y = 3.f;
+  constexpr float z = 1.f;
+
+  const Quaternion q{ s, x, y, z};
+  const float q0norm = s * s + x * x + y * y + z * z;
+  const Quaternion qInversed{ s / q0norm, -x / q0norm, -y / q0norm , -z / q0norm };
+
+  EXPECT_EQ(q.Inversed(), qInversed);
+  EXPECT_EQ(Quaternion(q).Inverse(), qInversed);
+  EXPECT_EQ(q * q.Inversed(), 1.f);
+  EXPECT_EQ(q.Inversed() * q, 1.f);
+
+  const Quaternion q1{ 5.f, 1.f, -6.f, 0.5f };
+  EXPECT_NE(q.Inversed() * q1, q1 * q.Inversed());
+
+  EXPECT_EQ((q * q1).Inversed(), q1.Inversed() * q.Inversed());
+}
+
+// Because multiplication of quaternions is not commutative, division of a quaternion is also
+// not commutative (division is multiplication by a number to the power of -1). Writing a/b
+// means a divided by b, but in our case there is also another notation b\a - left
+// division - it is impossible to code such operation, so the operation of division by vector
+// (pure imaginary quaternion) and simply by quaternion we will not be implemented at all.
 TEST(Quaternion, Division)
 {
+  constexpr float s = 9.f;
+  constexpr float x =-3.f;
+  constexpr float y = 4.f;
+  constexpr float z = 7.f;
 
+  constexpr float f = 2.f;
+
+  const Quaternion q(s, x, y, z);
+  EXPECT_EQ(q / f, Quaternion(s / f, x / f, y / f, z / f));
+
+  Quaternion q1(q);
+  q1 /= f;
+  EXPECT_EQ(q1, Quaternion(s / f, x / f, y / f, z / f));
+}
+
+TEST(Quaternion, DotProduct)
+{
+  const Quaternion q0{ 4.f, 6.f, 1.f, 8.f };
+  const Quaternion q1{ 8.f, 3.f, 8.f, 5.f };
+
+  const float q0Module =
+    std::sqrt(q0.s() * q0.s() + q0.x() * q0.x() + q0.y() * q0.y() + q0.z() * q0.z());
+
+  const float q1Module =
+    std::sqrt(q1.s() * q1.s() + q1.x() * q1.x() + q1.y() * q1.y() + q1.z() * q1.z());
+
+  const float q1q2DotProduct =
+    (q0.s() * q1.s() + q0.x() * q1.x() + q0.y() * q1.y() + q0.z() * q1.z()) / (q0Module * q1Module);
+
+  EXPECT_EQ(q0.dot(q1), q1q2DotProduct);
+
+  EXPECT_EQ(q1.dot(q0), q1q2DotProduct);
+
+  EXPECT_LE(q0.dot(q1) - Math3D::dot(q0, q1), Math3D::imprecision);
+
+  EXPECT_EQ(q0.dot(q1), q1.dot(q0));
+
+  EXPECT_EQ(Math3D::dot(q0, q1), Math3D::dot(q1, q0));
+}
+
+TEST(Quaternion, Misc)
+{
+  Quaternion q0{ 4.f, 6.f, 1.f, 8.f };
+  Quaternion q1{ 8.f, 3.f, 8.f, 5.f };
+
+  EXPECT_EQ((q0 * q1).Norm(),(q0 * q1)* (q0 * q1).Conjugated());
+
+  EXPECT_EQ((q0 * q1).Norm(),q0.Norm() * q1.Norm());
 }

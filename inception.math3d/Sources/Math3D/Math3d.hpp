@@ -2,7 +2,11 @@
 #define __MATH_3D_H__
 
 
+/**
+ * @brief Example: `throw std::logic_error(NOT_IMPLEMENTED_EXC);`
+ */
 #define NOT_IMPLEMENTED_EXC std::string("not implemented ") + __FILE__ + "(" + std::to_string(__LINE__) + ")"
+
 
 #include "Common.hpp"
 #include "Vector3f.hpp"

@@ -81,45 +81,38 @@ namespace Math3D
     z_ = v.z;
   }
 
-  const Quaternion& Quaternion::Normalize()
+  auto Quaternion::Normalize() -> const Quaternion&
   {
-    const float Length = std::sqrtf(s_ * s_ + x_ * x_ + y_ * y_ + z_ * z_);
-
-    s_ /= Length;
-
-    x_ /= Length;
-    y_ /= Length;
-    z_ /= Length;
-
-    return (*this);
+    return operator/=(Norm());
   }
 
-  Quaternion Quaternion::Normalized() const
+  auto Quaternion::Normalized() const -> Quaternion
   {
-    const float Length = std::sqrtf(s_ * s_ + x_ * x_ + y_ * y_ + z_ * z_);
-    return { s_ / Length, x_ / Length, y_ / Length, z_ / Length };
+    return Quaternion{ s_, x_, y_, z_ }.Normalize();
   }
 
   const Quaternion& Quaternion::Conjugate()
   {
-    x_ *= -1;
-    y_ *= -1;
-    z_ *= -1;
+    x_ *= -1.f;
+    y_ *= -1.f;
+    z_ *= -1.f;
 
     return (*this);
   }
 
-  Quaternion Quaternion::Conjugated() const
+  [[nodiscard]]
+  auto Quaternion::Conjugated() const -> Quaternion
   {
-    return { -x_, -y_, -z_, s_ };
+    return { s_, (-1.f) * x_, (-1.f) * y_, (-1.f) * z_ };
   }
 
-  Quaternion Quaternion::operator*(const float f) const
+  [[nodiscard]]
+  auto Quaternion::operator*(const float f) const -> Quaternion
   {
     return { s_ * f, x_ * f, y_ * f, z_ * f };
   }
 
-  Quaternion Quaternion::operator*=(const float f)
+  auto Quaternion::operator*=(const float f) -> const Quaternion&
   {
     s_ *= f;
     x_ *= f;
@@ -129,7 +122,7 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator*(const Quaternion& r) const
+  auto Quaternion::operator*(const Quaternion& r) const -> Quaternion
   {
     return {
       s_ * r.s_ - x_ * r.x_ - y_ * r.y_ - z_ * r.z_,
@@ -139,7 +132,7 @@ namespace Math3D
     };
   }
 
-  const Quaternion& Quaternion::operator*=(const Quaternion& r)
+  auto Quaternion::operator*=(const Quaternion& r) -> const Quaternion&
   {
     const float s = s_ * r.s_ - x_ * r.x_ - y_ * r.y_ - z_ * r.z_;
     const float x = s_ * r.x_ + r.s_ * x_ + y_ * r.z_ - r.y_ * z_;
@@ -154,7 +147,22 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator*(const Vector3f& v) const
+  auto Quaternion::operator/(const float f) const -> Quaternion
+  {
+    return { s_ / f, x_ / f, y_ / f, z_ / f };
+  }
+
+  auto Quaternion::operator/=(const float f) -> const Quaternion&
+  {
+    s_ /= f;
+    x_ /= f;
+    y_ /= f;
+    z_ /= f;
+
+    return (*this);
+  }
+
+  auto Quaternion::operator*(const Vector3f& v) const -> Quaternion
   {
     return {
       (-1.f) * x_ * v.x - y_ * v.y - z_ * v.z
@@ -164,7 +172,7 @@ namespace Math3D
     };
   }
 
-  Quaternion Quaternion::operator*=(const Vector3f& v)
+  const Quaternion& Quaternion::operator*=(const Vector3f& v)
   {
     const float s = (-1.f) * x_ * v.x - y_ * v.y - z_ * v.z;
     const float x = s_ * v.x + y_ * v.z - z_ * v.y;
@@ -179,24 +187,24 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator+(const float f) const
+  auto Quaternion::operator+(const float f) const -> Quaternion
   {
     return { s_ + f, x_, y_, z_};
   }
 
-  const Quaternion& Quaternion::operator+=(const float f)
+  auto Quaternion::operator+=(const float f) -> const Quaternion&
   {
     s_ += f;
 
     return (*this);
   }
 
-  Quaternion Quaternion::operator+(const Vector3f& v) const
+  auto Quaternion::operator+(const Vector3f& v) const -> Quaternion
   {
     return { s_, x_ + v.x, y_ + v.y, z_ + v.z };
   }
 
-  const Quaternion& Quaternion::operator+=(const Vector3f& v)
+  auto Quaternion::operator+=(const Vector3f& v) -> const Quaternion&
   {
     x_ += v.x;
     y_ += v.y;
@@ -205,12 +213,12 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator+(const Quaternion& q) const
+  auto Quaternion::operator+(const Quaternion& q) const -> Quaternion
   {
     return { s_ + q.s_, x_ + q.x_, y_ + q.y_, z_ + q.z_ };
   }
 
-  const Quaternion& Quaternion::operator+=(const Quaternion& q)
+  auto Quaternion::operator+=(const Quaternion& q) -> const Quaternion&
   {
     s_ += q.s_;
     x_ += q.x_;
@@ -220,24 +228,24 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator-(const float f) const
+  auto Quaternion::operator-(const float f) const -> Quaternion
   {
     return {s_ - f, x_, y_, z_};
   }
 
-  const Quaternion& Quaternion::operator-=(const float f)
+  auto Quaternion::operator-=(const float f) -> const Quaternion&
   {
     s_ -= f;
 
     return (*this);
   }
 
-  Quaternion Quaternion::operator-(const Vector3f& v) const
+  auto Quaternion::operator-(const Vector3f& v) const -> Quaternion
   {
     return { s_, x_ - v.x, y_ - v.y, z_ - v.z };
   }
 
-  const Quaternion& Quaternion::operator-=(const Vector3f& v)
+  auto Quaternion::operator-=(const Vector3f& v) -> const Quaternion&
   {
     x_ -= v.x;
     y_ -= v.y;
@@ -246,12 +254,12 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion Quaternion::operator-(const Quaternion& q) const
+  auto Quaternion::operator-(const Quaternion& q) const -> Quaternion
   {
     return { s_ - q.s(), x_ - q.x(), y_ - q.y(), z_ - q.z() };
   }
 
-  const Quaternion& Quaternion::operator-=(const Quaternion& q)
+  auto Quaternion::operator-=(const Quaternion& q) -> const Quaternion&
   {
     s_ -= q.s();
     x_ -= q.x();
@@ -261,17 +269,17 @@ namespace Math3D
     return (*this);
   }
 
-  bool Quaternion::operator==(const float s) const
+  auto Quaternion::operator==(const float s) const -> bool
   {
     return s_ == s && IsReal();
   }
 
-  bool Quaternion::operator!=(const float s) const
+  auto Quaternion::operator!=(const float s) const -> bool
   {
     return !operator==(s);
   }
 
-  bool Quaternion::operator==(const Vector3f v) const
+  auto Quaternion::operator==(const Vector3f v) const -> bool
   {
     const float dx = std::abs(x_ - v.x);
     const float dy = std::abs(y_ - v.y);
@@ -280,12 +288,12 @@ namespace Math3D
     return IsPure() && dx <= imprecision && dy <= imprecision && dz <= imprecision;
   }
 
-  bool Quaternion::operator!=(const Vector3f v) const
+  auto Quaternion::operator!=(const Vector3f v) const -> bool
   {
     return !operator==(v);
   }
 
-  bool Quaternion::operator==(const Quaternion& q) const
+  auto Quaternion::operator==(const Quaternion& q) const -> bool
   {
     const float ds = std::abs(s_ - q.s_);
     const float dx = std::abs(x_ - q.x_);
@@ -295,29 +303,39 @@ namespace Math3D
     return ds <= imprecision && dx <= imprecision && dy <= imprecision && dz <= imprecision;
   }
 
-  bool Quaternion::operator!=(const Quaternion& q) const
+  auto Quaternion::operator!=(const Quaternion& q) const -> bool
   {
     return !operator==(q);
   }
 
-  bool Quaternion::IsReal() const
+  auto Quaternion::IsReal() const -> bool
   {
     return std::abs(x_) <= imprecision && std::abs(y_) <= imprecision && std::abs(z_) <= imprecision;
   }
 
-  bool Quaternion::IsPure() const
+  auto Quaternion::IsPure() const -> bool
   {
     return std::abs(s_) <= imprecision && (std::abs(x_) > imprecision || std::abs(y_) > imprecision || std::abs(z_) > imprecision);
   }
 
-  Quaternion& Quaternion::operator=(const float s)
+  auto Quaternion::IsNull() const -> bool
+  {
+    const float ds = std::abs(s_);
+    const float dx = std::abs(x_);
+    const float dy = std::abs(y_);
+    const float dz = std::abs(z_);
+
+    return ds <= imprecision && dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  }
+
+  auto Quaternion::operator=(const float s) -> Quaternion&
   {
     s_ = s;
 
     return (*this);
   }
 
-  Quaternion& Quaternion::operator=(const Vector3f& v)
+  auto Quaternion::operator=(const Vector3f& v) -> Quaternion&
   {
     s_ = 0.f;
     x_ = v.x;
@@ -327,72 +345,79 @@ namespace Math3D
     return (*this);
   }
 
-  Quaternion& Quaternion::operator=(const Quaternion& other)
+  auto Quaternion::Inversed() const -> Quaternion
   {
-    s_ = other.s_;
-    x_ = other.x_;
-    y_ = other.y_;
-    z_ = other.z_;
+    return Conjugated() / Norm();
+  }
+
+  const Quaternion& Quaternion::Inverse()
+  {
+    const float n = Norm();
+
+    s_ /=  n;
+    x_ /= -n;
+    y_ /= -n;
+    z_ /= -n;
 
     return (*this);
   }
 
-  Quaternion Quaternion::inverted() const
+  auto Quaternion::Norm() const -> float
   {
-    throw std::logic_error(NOT_IMPLEMENTED_EXC);
+    return s_ * s_ + x_ * x_ + y_ * y_ + z_ * z_;
   }
 
-  void Quaternion::invert()
+  auto Quaternion::Module() const -> float
   {
-    throw std::logic_error(NOT_IMPLEMENTED_EXC);
+    return std::sqrt(Norm());
   }
 
-  Quaternion Quaternion::dot(const Quaternion& other)
+  auto Quaternion::dot(const Quaternion& r) const -> float
   {
-    throw std::logic_error(NOT_IMPLEMENTED_EXC);
+    return (s_ * r.s_ + x_ * r.x_ + y_ * r.y_ + z_ * r.z_) / (Module() * r.Module());
   }
 
-  bool operator==(const float l, const Quaternion& r)
-  {
-    return r == l;
-  }
-
-  bool operator!=(const float l, const Quaternion& r)
-  {
-    return !operator==(l, r);
-  }
-
-  bool operator==(const Vector3f& l, const Quaternion& r)
+  auto operator==(const float l, const Quaternion& r) -> bool
   {
     return r == l;
   }
 
-  bool operator!=(const Vector3f& l, const Quaternion& r)
+  auto operator!=(const float l, const Quaternion& r) -> bool
   {
     return !operator==(l, r);
   }
 
-  Quaternion operator+(const Vector3f& l, const Quaternion& r)
+  auto operator==(const Vector3f& l, const Quaternion& r) -> bool
+  {
+    return r == l;
+  }
+
+  auto operator!=(const Vector3f& l, const Quaternion& r) -> bool
+  {
+    return !operator==(l, r);
+  }
+
+  auto operator+(const Vector3f& l, const Quaternion& r) -> Quaternion
   {
     return {r.s(), l.x + r.x(), l.y + r.y(), l.z + r.z()};
   }
 
-  Quaternion operator+(const float l, const Quaternion& r)
+  auto operator+(const float l, const Quaternion& r) -> Quaternion
   {
     return { l + r.s(), r.x(), r.y(), r.z() };
   }
 
-  Quaternion operator-(const Vector3f& l, const Quaternion& r)
+  auto operator-(const Vector3f& l, const Quaternion& r) -> Quaternion
   {
     return {-r.s(), l.x - r.x(), l.y - r.y(), l.z - r.z()};
   }
 
-  Quaternion operator-(const float l, const Quaternion& r)
+  auto operator-(const float l, const Quaternion& r) -> Quaternion
   {
     return { l - r.s(), -r.x(), -r.y(), -r.z() };
   }
 
-  Quaternion operator*(const Vector3f& l, const Quaternion& r)
+  auto operator*(const Vector3f& l, const Quaternion& r) -> Quaternion
   {
     return {
       (-1.f) * l.x * r.x() - l.y * r.y() - l.z * r.z()
@@ -402,8 +427,13 @@ namespace Math3D
     };
   }
 
-  Quaternion operator*(const float f, const Quaternion& r)
+  auto operator*(const float f, const Quaternion& r) -> Quaternion
   {
     return {f * r.s(), f* r.x(), f * r.y(), f * r.z()};
+  }
+
+  auto dot(const Quaternion& l, const Quaternion& r) -> float
+  {
+    return (l.s() * r.s() + l.x() * r.x() + l.y() * r.y() + l.z() * r.z()) / (l.Module() * r.Module());
   }
 }
