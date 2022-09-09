@@ -127,5 +127,7 @@ namespace Math3D
   bool operator==(const Position& l, const Vector3f& r);
 
   bool operator==(const Vector3f& l, const Vector3f& r);
+
+  auto operator*(const float l, const Vector3f& r) -> Vector3f;
 }
 #endif // __VECTOR3F_HPP__

@@ -8,5 +8,6 @@
     &lt;TestId&gt;GTest::B8A2A2FD-796C-47C7-9B36-68C3E0D03337::Windows,Version=v10.0.19041::Quaternion.Construction&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;GTest::B8A2A2FD-796C-47C7-9B36-68C3E0D03337::Windows,Version=v10.0.19041::Quaternion.Addition&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;GTest::B8A2A2FD-796C-47C7-9B36-68C3E0D03337::Windows,Version=v10.0.19041::Quaternion.Substraction&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;GTest::B8A2A2FD-796C-47C7-9B36-68C3E0D03337::Windows,Version=v10.0.19041::Quaternion.RotationComplex&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

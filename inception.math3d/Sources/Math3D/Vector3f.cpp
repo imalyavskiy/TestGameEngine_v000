@@ -245,4 +245,9 @@ namespace Math3D
 
     return dx <= imprecision && dy <= imprecision && dz <= imprecision;
   }
+
+  Vector3f operator*(const float l, const Vector3f& r)
+  {
+    return { l * r.x, l * r.y, l * r.z };
+  }
 }

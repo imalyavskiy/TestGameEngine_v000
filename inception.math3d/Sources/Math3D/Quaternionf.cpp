@@ -377,6 +377,25 @@ namespace Math3D
     return (s_ * r.s_ + x_ * r.x_ + y_ * r.y_ + z_ * r.z_) / (Module() * r.Module());
   }
 
+  Matrix4f Quaternion::toMatrix() const
+  {
+    float s = 2.0f / Norm();  // 4 mul 3 add 1 div
+
+    Quaternion q = Conjugated();
+    float x2 = q.x() *  s;   float y2 = q.y() * s;   float z2 = q.z() * s;
+    float xx = q.x() * x2;   float xy = q.x() * y2;   float xz = q.x() * z2;
+    float yy = q.y() * y2;   float yz = q.y() * z2;   float zz = q.z() * z2;
+    float wx = q.s() * x2;   float wy = q.s() * y2;   float wz = q.s() * z2;
+
+    return
+    {
+      1.0f - (yy + zz),       xy + wz,          xz - wy,      0.f,
+          xy - wz,       1.0f - (xx + zz),      yz + wx,      0.f,
+          xz + wy,            yz - wx,      1.0f - (xx + yy), 0.f,
+             0.f,                0.f,              0.f,       1.f
+    };
+  }
+
   auto operator==(const float l, const Quaternion& r) -> bool
   {
     return r == l;

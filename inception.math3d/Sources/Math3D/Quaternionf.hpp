@@ -213,6 +213,11 @@ namespace Math3D
     auto dot(const Quaternion& r) const -> float;
 
     /**
+     * @brief Taken from here - https://gamedev.ru/code/articles/?id=4215&page=2.
+     */
+    Matrix4f toMatrix() const;
+
+    /**
      *
      */
     const static Quaternion zero;

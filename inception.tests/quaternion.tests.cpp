@@ -322,6 +322,7 @@ TEST(Quaternion, Conjugation)
     EXPECT_EQ(q * q.Conjugated(), q.Conjugated() * q);
   }
 }
+
 TEST(Quaternion, Norm)
 {
   constexpr float s = 2.f;
@@ -445,4 +446,94 @@ TEST(Quaternion, Misc)
   EXPECT_EQ((q0 * q1).Norm(),(q0 * q1)* (q0 * q1).Conjugated());
 
   EXPECT_EQ((q0 * q1).Norm(),q0.Norm() * q1.Norm());
+}
+
+TEST(Quaternion, RotationElementary)
+{
+  { // `forward` for 90 deg about `up` -> must be `right`
+    const float angle = Math3D::DegToRad(90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Up };
+    const Quaternion res = rotation * Math3D::Direction::Forward * rotation.Conjugated();
+
+    EXPECT_EQ(res.xyz(), Math3D::Direction::Right);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Forward, Math3D::Direction::Right);
+  }
+
+  { // `right` for 90 deg about `forward` -> must be `up`
+    const float angle = Math3D::DegToRad(90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Forward };
+    const Vector3f res = (rotation * Math3D::Direction::Right * rotation.Conjugated()).xyz();
+
+    EXPECT_EQ(res, Math3D::Direction::Up);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Right, Math3D::Direction::Up);
+  }
+
+  { // `Up` for 90 deg about `right` -> must be `forward`
+    const float angle = Math3D::DegToRad(90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Right };
+    const Vector3f res = (rotation * Math3D::Direction::Up * rotation.Conjugated()).xyz();
+
+    EXPECT_EQ(res, Math3D::Direction::Forward);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Up, Math3D::Direction::Forward);
+  }
+
+  { // `forward` for -90 deg about `up` -> must be `left`
+    const float angle = Math3D::DegToRad(-90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Up };
+    const Vector3f res = (rotation * Math3D::Direction::Forward * rotation.Conjugated()).xyz();
+
+    EXPECT_EQ(res, Math3D::Direction::Left);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Forward, Math3D::Direction::Left);
+  }
+
+  { // `right` for -90 deg about `forward` -> must be `down`
+    const float angle = Math3D::DegToRad(-90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Forward };
+    const Vector3f res = (rotation * Math3D::Direction::Right * rotation.Conjugated()).xyz();
+
+    EXPECT_EQ(res, Math3D::Direction::Down);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Right, Math3D::Direction::Down);
+  }
+
+  { // `Up` for -90 deg about `right` -> must be `Backward`
+    const float angle = Math3D::DegToRad(-90.f);
+    const Quaternion rotation{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Right };
+    const Vector3f res = (rotation * Math3D::Direction::Up * rotation.Conjugated()).xyz();
+
+    EXPECT_EQ(res, Math3D::Direction::Backward);
+    EXPECT_EQ(rotation.toMatrix() * Math3D::Direction::Up, Math3D::Direction::Backward);
+  }
+}
+
+TEST(Quaternion, RotationComplex)
+{
+    const float angle = Math3D::DegToRad(90.f);
+  
+    const Quaternion rotationUp{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Up };
+    const Quaternion rotationFw{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Forward };
+    const Quaternion rotationRt{ std::cosf(angle / 2), std::sinf(angle / 2) * Math3D::Direction::Right };
+  
+    Quaternion rotationStepByStep = Math3D::Direction::Forward;
+    rotationStepByStep = rotationUp * rotationStepByStep * rotationUp.Conjugated();
+    rotationStepByStep = rotationFw * rotationStepByStep * rotationFw.Conjugated();
+    rotationStepByStep = rotationRt * rotationStepByStep * rotationRt.Conjugated();
+
+    const Quaternion rotationCombined =
+      rotationRt * 
+        rotationFw * 
+          rotationUp * 
+      Math3D::Direction::Forward * 
+      rotationUp.Conjugated() * 
+        rotationFw.Conjugated() * 
+          rotationRt.Conjugated();
+
+    const Quaternion rotationCombinedSimplified = 
+      rotationRt * rotationFw * rotationUp;
+
+    EXPECT_EQ(rotationStepByStep, rotationCombined);
+    EXPECT_EQ(rotationStepByStep, rotationCombinedSimplified * Math3D::Direction::Forward * rotationCombinedSimplified.Conjugated());
+
+    EXPECT_EQ(rotationStepByStep.xyz(), Math3D::Direction::Forward);
+    EXPECT_EQ(rotationCombined.xyz(), Math3D::Direction::Forward);
+    EXPECT_EQ(rotationCombinedSimplified.toMatrix() * Math3D::Direction::Forward, Math3D::Direction::Forward);
 }
