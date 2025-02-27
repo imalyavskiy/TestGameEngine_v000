@@ -165,14 +165,14 @@ namespace Math3D
     return { factor * x, factor * y, factor * z };
   }
 
-  bool Direction::operator==(const Direction& r) const
-  {
-    const float dx = std::abs(x - r.x);
-    const float dy = std::abs(y - r.y);
-    const float dz = std::abs(z - r.z);
+  //bool Direction::operator==(const Direction& r) const
+  //{
+  //  const float dx = std::abs(x - r.x);
+  //  const float dy = std::abs(y - r.y);
+  //  const float dz = std::abs(z - r.z);
 
-    return dx <= imprecision && dy <= imprecision && dz <= imprecision;
-  }
+  //  return dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  //}
 
   bool Direction::operator==(const Vector3f& r) const
   {
@@ -183,23 +183,23 @@ namespace Math3D
     return dx <= imprecision && dy <= imprecision && dz <= imprecision;
   }
 
-  bool operator==(const Vector3f& l, const Direction& r)
-  {
-    const float dx = std::abs(l.x - r.x); 
-    const float dy = std::abs(l.y - r.y);
-    const float dz = std::abs(l.z - r.z);
+  //bool operator==(const Vector3f& l, const Direction& r)
+  //{
+  //  const float dx = std::abs(l.x - r.x); 
+  //  const float dy = std::abs(l.y - r.y);
+  //  const float dz = std::abs(l.z - r.z);
 
-    return dx <= imprecision && dy <= imprecision && dz <= imprecision;
-  }
+  //  return dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  //}
 
-  bool operator==(const Direction& l, const Vector3f& r)
-  {
-    const float dx = std::abs(l.x - r.x);
-    const float dy = std::abs(l.y - r.y);
-    const float dz = std::abs(l.z - r.z);
+  //bool operator==(const Direction& l, const Vector3f& r)
+  //{
+  //  const float dx = std::abs(l.x - r.x);
+  //  const float dy = std::abs(l.y - r.y);
+  //  const float dz = std::abs(l.z - r.z);
 
-    return dx <= imprecision && dy <= imprecision && dz <= imprecision;
-  }
+  //  return dx <= imprecision && dy <= imprecision && dz <= imprecision;
+  //}
 
   bool operator==(const Vector3f& l, const Scale& r)
   {

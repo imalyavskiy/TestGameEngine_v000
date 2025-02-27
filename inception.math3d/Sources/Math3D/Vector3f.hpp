@@ -105,7 +105,7 @@ namespace Math3D
 
     Direction operator*(const float factor) const;
 
-    bool operator==(const Direction& r) const;
+    //bool operator==(const Direction& r) const;
 
     bool operator==(const Vector3f& r) const;
 
@@ -117,8 +117,8 @@ namespace Math3D
     static const Direction Left;
   };
 
-  bool operator==(const Vector3f& l, const Direction& r);
-  bool operator==(const Direction& l, const Vector3f& r);
+  //bool operator==(const Vector3f& l, const Direction& r);
+  //bool operator==(const Direction& l, const Vector3f& r);
 
   bool operator==(const Vector3f& l, const Scale& r);
   bool operator==(const Scale& l, const Vector3f& r);
